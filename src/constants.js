@@ -18,3 +18,5 @@ export const Stage = {
   Performance: 'Performance', 
   Next: 'Next'
 }
+
+export const OPTION_SELECT = "option-selection"

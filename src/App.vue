@@ -87,7 +87,7 @@ body, html {
 /* button */
 .base-btn {
   background-color: #ebebeb;
-  border: 1px solid #8e8d8d;
+  border: 1px solid #000000;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
@@ -149,14 +149,14 @@ body, html {
 
 /* text */
 .default-font {
-  font-size: clamp(0.875rem, 1.5vw, 1.5rem);
+  font-size: clamp(0.875rem, 4vw, 1.5rem);
   line-height: 1.6;
   letter-spacing: 0.5px;
   font-weight: normal;
 }
 
 .serif-font {
-  font-size: clamp(0.875rem, 1.3vw, 1.5rem);
+  font-size: clamp(0.875rem, 4vw, 1.5rem);
   line-height: 1.6;
   font-family: 'Times New Roman', serif;
   letter-spacing: 2px;
@@ -164,15 +164,16 @@ body, html {
   font-weight: normal;
 }
 
-.title-tw {
-  font-size: 1.1rem;
+.title {
   font-weight: bold;
+  font-size: clamp(1rem, 5vw, 2.5rem);
+}
+
+.title-tw {
   letter-spacing: 3px;
   margin: 0 0 8px 0;
 }
 .title-en {
-  font-size: 1.05rem;
-  font-weight: bold;
   letter-spacing: 1px;
   margin: 0;
 }

@@ -14,14 +14,42 @@ export const SongData = {
         [LANG.EN]: "Jasmine in June fills the hills with fragrance,\nA single maiden guards her empty room.\nThe beautiful flowers bloom fully for picking,\nWho knows the eighteen-year-old maiden?\n\nJasmine in June scents the sky,\nThe single maiden gazes at the stars.\nJasmine in June fills the hills with fragrance,\nA single maiden guards her empty room.\nThe beautiful flowers bloom fully for picking,\nWho knows the eighteen-year-old maiden?\n\nJasmine in June scents the sky,\nThe single maiden gazes at the stars."
     }, 
     characterLink: "/src/assets/images/character.png", // 或圖片網址
-    question: "", 
-    voteTime: 0, 
+    question: {
+        [LANG.TW]: "劇情與題目——劇情與題目——劇情與題目——劇情與題目——劇情與題目——\n劇情與題目——劇情與題目——劇情與題目——劇情與題目——劇情與題目——\n劇情與題目——劇情與題目——劇情與題目——劇情與題目——劇情與題目——\n劇情與題目——劇情與題目——劇情與題目——劇情與題目——劇情與題目——\n劇情與題目——劇情與題目——劇情與題目——劇情與題目——劇情與題目——\n劇情與題目——劇情與題目——劇情與題目——劇情與題目——劇情與題目——",
+        [LANG.EN]: "question——question——question——question——question——\nquestion——question——question——question——question——\nquestion——question——question——question——question——"
+    }, 
+    voteTime: 60, 
     options: [
         {
-            title: { [LANG.TW]: "選項一", [LANG.EN]: "Option 1" }, 
-            description: { [LANG.TW]: "描述...", [LANG.EN]: "Desc..." }
+            id: "1-1", 
+            title: {
+                [LANG.TW]: "【 選項一 】", 
+                [LANG.EN]: "【 Option 1 】"
+            }, 
+            description: {
+                [LANG.TW]: "描述...\n描述...\n描述...", 
+                [LANG.EN]: "Desc...\nDesc...\nDesc..."
+            }, 
+            regretText: {
+                [LANG.TW]: "一走了之的我好自私、不夠理性...\n留學好花錢...好想家...\n我愛的人，他們需要我", 
+                [LANG.EN]: "Desc...\nDesc...\nDesc..."
+            }
         }, 
-        // ...
+        {
+            id: "1-2",  
+            title: {
+                [LANG.TW]: "【 選項二 】", 
+                [LANG.EN]: "【 Option 2 】"
+            }, 
+            description: {
+                [LANG.TW]: "描述...\n描述...\n描述...", 
+                [LANG.EN]: "Desc...\nDesc...\nDesc..."
+            }, 
+            regretText: {
+                [LANG.TW]: "regretText", 
+                [LANG.EN]: "Desc...\nDesc...\nDesc..."
+            }
+        }
     ], 
-    canRegret: false
+    canRegret: true
 }

@@ -23,7 +23,10 @@
     </div>
   
     <div v-if="role === ROLE.AUDIENCE" class="header-pill-wrapper">
-      <div class="header-icon-restrict base-btn pill-btn" style="cursor: none;">
+      <div v-if="time" class="base-btn pill-btn time-display" style="cursor: default;">
+        {{ time }}
+      </div>
+      <div v-else class="header-icon-restrict base-btn pill-btn" style="cursor: default;">
         <img src="@/assets/images/logo.png" alt="logo" />
       </div>
     </div>
@@ -38,7 +41,8 @@ import { LANG, ROLE, LANG_SELECT } from '@/constants.js';
 const props = defineProps({
   role: { type: String, required: true },
   lang: { type: String, default: LANG.TW },
-  title: { type: String, default: '' }
+  title: { type: String, default: '' }, 
+  time: { type: String, default: null }
 });
 
 const emit = defineEmits([LANG_SELECT]);
@@ -68,10 +72,10 @@ onUnmounted(() => document.removeEventListener('click', closeMenu));
   position: relative;
 }
 .app-header.audience {
-  height: 6hv;
+  height: 6vh;
   max-width: 500px;
   justify-content: space-between;
-  gap: 3vw;
+  flex: 1;
   margin: 0 auto 3vh auto;
 }
 .app-header.projector {
@@ -94,9 +98,10 @@ onUnmounted(() => document.removeEventListener('click', closeMenu));
   width: 20%;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 .header-title-wrapper {
-  width: 50%;
+  /* width: 50%; */
   display: flex;
   justify-content: center;
 }
@@ -106,5 +111,9 @@ onUnmounted(() => document.removeEventListener('click', closeMenu));
   width: 100%;
   object-fit: scale-down;
   overflow: hidden;
+}
+.time-display {
+  color: #d9534f; 
+  font-weight: bold;
 }
 </style>
