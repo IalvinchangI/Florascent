@@ -9,11 +9,6 @@ body, html {
   width: 100%;
   height: 100%;
   background: radial-gradient(circle at center, #f5efca 0%, #cfbb8e 100%);
-  /* background-image: url('@/assets/bg-texture.webp'); */
-  /* background-image: url('https://www.transparenttextures.com/patterns/dark-wood.png'); */
-  background-repeat: repeat;
-  background-attachment: fixed;
-  background-position: center top;
   color: #000000;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   overflow: hidden;
@@ -39,7 +34,20 @@ body, html {
   margin: 0;
   width: 100%;
   height: 100%;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
   overflow: hidden;
+}
+@media (orientation: portrait) {
+  .template-view {
+    background-image: url('@/assets/images/background_vertical.png');
+  }
+}
+@media (orientation: landscape) {
+  .template-view {
+    background-image: url('@/assets/images/background_horizontal.png');
+  }
 }
 
 /* image */
