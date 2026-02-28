@@ -1,11 +1,172 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <router-view class="template-view" />
 </template>
 
-<style scoped></style>
+<style>
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #f5efca 0%, #cfbb8e 100%);
+  /* background-image: url('@/assets/bg-texture.webp'); */
+  /* background-image: url('https://www.transparenttextures.com/patterns/dark-wood.png'); */
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-position: center top;
+  color: #000000;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+  /* border: 1px solid red; */
+}
+
+/*****************
+ * General Style
+ *****************/
+
+#app {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.template-view {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* image */
+.img-box {
+  background-color: #fdfbf7;
+  border-radius: 20px;
+  border: 1px solid #8e8d8d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.img-box-square {
+  width: 100%;
+  /* max-width: 180px; */
+  aspect-ratio: 1 / 1; 
+}
+.img-box-vertical {
+  width: 100%;
+  /* max-width: 180px; */
+  aspect-ratio: 3 / 4;
+}
+.img-box-horizontal {
+  width: 100%;
+  /* max-width: 240px; */
+  aspect-ratio: 4 / 3;
+}
+
+.img-restrict img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: scale-down;
+}
+
+/* button */
+.base-btn {
+  background-color: #ebebeb;
+  border: 1px solid #8e8d8d;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.default-btn {
+  padding: 15px 0;
+  border-radius: 12px;
+  font-weight: bold;
+  color: #333;
+}
+.animate-btn:active {
+  transition: all 0.2s ease;
+  background-color: #bbb;
+}
+
+.pill-btn {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  border-radius: 20px;
+  line-height: 1;
+  letter-spacing: 1px;
+  font-size: clamp(0.5rem, 2.1vw, 0.9rem);
+  overflow: hidden;
+
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-menu {
+  position: absolute;
+  background-color: #fdfbf7; /* 配合你的背景色 */
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
+  min-width: 100px;
+  z-index: 1000;
+  
+  /* 預設位置，可被個別樣式覆寫 */
+  top: 100%;
+  left: 0;
+  margin-top: 5px;
+}
+.dropdown-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s;
+  color: #333;
+}
+.dropdown-item:hover {
+  background-color: #eee;
+}
+.dropdown-item.active {
+  font-weight: bold;
+  background-color: #e6e6e6;
+}
+
+/* text */
+.default-font {
+  font-size: clamp(0.875rem, 1.5vw, 1.5rem);
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+  font-weight: normal;
+}
+
+.serif-font {
+  font-size: clamp(0.875rem, 1.3vw, 1.5rem);
+  line-height: 1.6;
+  font-family: 'Times New Roman', serif;
+  letter-spacing: 2px;
+  color: #000000;
+  font-weight: normal;
+}
+
+.title-tw {
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin: 0 0 8px 0;
+}
+.title-en {
+  font-size: 1.05rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+</style>
