@@ -10,7 +10,9 @@
       <div v-if="isLoading" />
 
       <template v-else>
-        <Waiting v-if="currentStage === Stage.Waiting" :role="role" :lang="userLang" />
+        <Waiting v-if="currentStage === Stage.Waiting || (currentStage === Stage.Next && role === ROLE.AUDIENCE)" 
+          :role="role" :lang="userLang" 
+        />
         <Intro v-else-if="currentStage === Stage.Intro" 
           :role="role" :lang="userLang" :songData="songData" 
           @[LANG_SELECT]="setLang" 
@@ -22,8 +24,12 @@
         <Result v-else-if="currentStage === Stage.Result" 
           :role="role" :lang="userLang" :songData="songData" :voteResult="voteResult"
         />
-        <Performance v-else-if="currentStage === Stage.Performance" :role="role" :lang="userLang" />
-        <!-- <Next v-else-if="currentStage === 'Next'" :role="role" :lang="userLang" /> -->
+        <Performance v-else-if="currentStage === Stage.Performance" 
+          :role="role" :lang="userLang" 
+        />
+        <Next v-else-if="currentStage === Stage.Next && role === ROLE.PROJECTOR" 
+          :role="role" :lang="userLang" 
+        />
       </template>
     </template>
 
@@ -46,7 +52,7 @@ import Intro from '@/components/stage/Intro.vue';
 import Vote from '@/components/stage/Vote.vue';
 import Result from '@/components/stage/Result.vue';
 import Performance from '@/components/stage/Performance.vue';
-// import Next from '@/components/stage/Next.vue';
+import Next from '@/components/stage/Next.vue';
 
 const route = useRoute();
 // const role = ref(ROLE.PROJECTOR);
@@ -60,7 +66,8 @@ const setLang = (lang) => {
   // localStorage.setItem('slido_lang', lang); // 存進瀏覽器，防重新整理
 };
 
-const currentStage = ref(Stage.Performance);
+const currentStage = ref(Stage.Next);
+// const currentStage = ref(Stage.Performance);
 // const currentStage = ref(Stage.Result);
 // const currentStage = ref(Stage.Intro);
 // const currentStage = ref(Stage.Waiting);
