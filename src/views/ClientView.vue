@@ -19,7 +19,9 @@
           :role="role" :lang="userLang" :songData="songData" :time="displayTime" 
           @[LANG_SELECT]="setLang" @[OPTION_SELECT]="uploadVote" 
         />
-        <!-- <Result v-else-if="currentStage === 'Result'" :role="role" :lang="userLang" :songData="songData" /> -->
+        <Result v-else-if="currentStage === Stage.Result" 
+          :role="role" :lang="userLang" :songData="songData" :voteResult="voteResult"
+        />
         <!-- <Performance v-else-if="currentStage === 'Performance'" :role="role" :lang="userLang" /> -->
         <!-- <Next v-else-if="currentStage === 'Next'" :role="role" :lang="userLang" /> -->
       </template>
@@ -42,7 +44,7 @@ import Lobby from '@/components/Lobby.vue';
 import Waiting from '@/components/stage/Waiting.vue';
 import Intro from '@/components/stage/Intro.vue';
 import Vote from '@/components/stage/Vote.vue';
-// import Result from '@/components/stage/Result.vue';
+import Result from '@/components/stage/Result.vue';
 // import Performance from '@/components/stage/Performance.vue';
 // import Next from '@/components/stage/Next.vue';
 
@@ -58,7 +60,7 @@ const setLang = (lang) => {
   // localStorage.setItem('slido_lang', lang); // 存進瀏覽器，防重新整理
 };
 
-const currentStage = ref(Stage.Vote);
+const currentStage = ref(Stage.Result);
 // const currentStage = ref(Stage.Intro);
 // const currentStage = ref(Stage.Waiting);
 // const currentSongId = ref('song1');
@@ -69,6 +71,12 @@ const uploadVote = (option) => {
   console.log("Vote ID:", option.id);
   // localStorage.setItem('slido_lang', lang); // 存進瀏覽器，防重新整理
 };
+
+const voteResult = [
+  {winner: true , percent: 50}, 
+  {winner: false, percent: 50}
+]
+console.log(voteResult);
 
 onMounted(() => {
   if (route.query.role === ROLE.PROJECTOR) {
