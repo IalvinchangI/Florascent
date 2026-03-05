@@ -1,13 +1,11 @@
 <template>
   <div class="client-container">
-    <!-- <LandscapeGuard v-if="role === ROLE.AUDIENCE" /> -->
-    <div v-if="role === ROLE.AUDIENCE" />
+    <LandscapeGuard v-if="role === ROLE.AUDIENCE" />
 
     <Lobby v-if="role === ROLE.AUDIENCE && !userLang" @[LANG_SELECT]="setLang" />
 
     <template v-else>
-      <!-- <Loading v-if="isLoading" /> -->
-      <div v-if="isLoading" />
+      <Loading v-if="isLoading" />
 
       <template v-else>
         <Waiting v-if="currentStage === Stage.Waiting || (currentStage === Stage.Next && role === ROLE.AUDIENCE)" 
@@ -46,7 +44,7 @@ import {SongData, } from '@/song_data.js';
 
 import LandscapeGuard from '@/components/LandscapeGuard.vue';
 import Lobby from '@/components/Lobby.vue';
-// import Loading from '@/components/Loading.vue';
+import Loading from '@/components/Loading.vue';
 import Waiting from '@/components/stage/Waiting.vue';
 import Intro from '@/components/stage/Intro.vue';
 import Vote from '@/components/stage/Vote.vue';
@@ -58,6 +56,7 @@ const route = useRoute();
 // const role = ref(ROLE.PROJECTOR);
 const role = ref(ROLE.AUDIENCE);
 const isLoading = ref(false);  // ########################################### should be true
+// const isLoading = ref(true);  // ########################################### should be true
 
 // const userLang = ref(localStorage.getItem('slido_lang') || null);
 const userLang = ref(null);
@@ -66,11 +65,11 @@ const setLang = (lang) => {
   // localStorage.setItem('slido_lang', lang); // 存進瀏覽器，防重新整理
 };
 
-const currentStage = ref(Stage.Next);
+// const currentStage = ref(Stage.Next);
 // const currentStage = ref(Stage.Performance);
 // const currentStage = ref(Stage.Result);
 // const currentStage = ref(Stage.Intro);
-// const currentStage = ref(Stage.Waiting);
+const currentStage = ref(Stage.Waiting);
 // const currentSongId = ref('song1');
 console.log(SongData);
 const songData = SongData;
