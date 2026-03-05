@@ -4,7 +4,7 @@
     <Header 
       :role="role" 
       :lang="lang" 
-      :title="`《${currentTitle}》`" 
+      :title="(currentPhase === 'WAITING') ? null : `《${currentTitle}》`" 
       :time="displayTime"
       @[LANG_SELECT]="handleLangUpdate" 
     />
