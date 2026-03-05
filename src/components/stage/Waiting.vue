@@ -108,7 +108,7 @@ VoteRules.set(LANG.EN, [
    ========================================= */
 .waiting-page.audience {
   align-items: flex-start;
-  padding-top: 15%; 
+  padding-top: 25%; 
   padding-bottom: 10%;
   padding-left: 10%;
   padding-right: 10%;
