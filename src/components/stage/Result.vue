@@ -1,7 +1,7 @@
 <template>
   <div class="result-page" :class="role">
     
-    <div v-if="role === ROLE.AUDIENCE" class="audience-layout layout-container">
+    <div v-if="role === ROLE.AUDIENCE" class="audience-layout">
       <div class="text-row">
         <h2 class="serif-font title" style="margin: 0;">{{ uiText.musicStarting }}</h2>
         <p class="default-font" style="margin: 5px;">{{ uiText.silenceDevices }}</p>
