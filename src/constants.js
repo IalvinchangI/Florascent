@@ -27,3 +27,4 @@ export const Admin = {
 }
 
 export const ADMIN_START = "start-control"
+export const ADMIN_LOGIN = "log-in"
