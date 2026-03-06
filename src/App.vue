@@ -86,7 +86,7 @@ body, html {
 
 /* button */
 .base-btn {
-  background-color: #ebebeb;
+  background-color: #fdfbf7;
   border: 1px solid #000000;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
@@ -178,4 +178,8 @@ body, html {
   margin: 0;
 }
 
+::selection {
+  background: #333333; /* 深灰色背景 */
+  color: #fdfbf7;      /* 米白色文字 */
+}
 </style>

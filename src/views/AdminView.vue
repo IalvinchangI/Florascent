@@ -4,7 +4,9 @@
       <Loading v-if="isLoading" />
 
       <template v-else>
-        <Start v-if="currentPage === Admin.Start" />
+        <Start v-if="currentPage === Admin.Start" 
+          @[ADMIN_START]="startControl"
+        />
         <!-- <SlideControl v-else-if="currentPage === Admin.SlideControl" 
           :songData="songData" :time="displayTime" 
           @[OPTION_SELECT]="uploadVote" 
@@ -19,7 +21,7 @@ import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 // import { db } from '../firebase'; 
 // import { ref as dbRef, onValue } from 'firebase/database';
-import { Stage, Admin } from '@/constants.js';
+import { Stage, Admin, ADMIN_START } from '@/constants.js';
 import {SongData, } from '@/song_data.js';
 
 import Loading from '@/components/Loading.vue';
@@ -31,7 +33,6 @@ const isLoading = ref(false);  // ########################################### sh
 // const isLoading = ref(true);  // ########################################### should be true
 
 // const currentPage = ref(Admin.SlideControl);
-// const currentPage = ref(Admin.Start);
 const currentPage = ref(Admin.Start);
 // TODO localStorage.setItem('currentPage', currentPage); // 存進瀏覽器，防重新整理
 // const currentSongId = ref('song1');
@@ -52,4 +53,9 @@ const songData = SongData;
 onMounted(() => {
   // TODO check sign in 
 });
+
+const startControl = () => {
+  // currentPage = ref(Admin.SlideControl);
+  console.log("startControl");
+}
 </script>
