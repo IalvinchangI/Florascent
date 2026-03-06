@@ -20,3 +20,10 @@ export const Stage = {
 }
 
 export const OPTION_SELECT = "option-selection"
+
+export const Admin = {
+  Start: 'Start', 
+  SlideControl: 'SlideControl'
+}
+
+export const ADMIN_START = "start-control"
