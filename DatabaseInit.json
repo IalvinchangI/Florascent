@@ -1,0 +1,210 @@
+{
+  "controlSignal": {
+    "currentSongIndex": 0,
+    "currentStage": "Waiting"
+  },
+  "displayTime": "01:00",
+  "songData": [
+    {
+      "canRegret": false,
+      "characterLink": "/src/assets/images/character.png",
+      "description": {
+        "en": "Spring has arrived, and a hundred flowers bloom. Red roses, white jasmines.\nA few bushes here, a few branches there,\nBlooming so abundantly, truly beautiful.",
+        "zh-TW": "春天到，百花開，紅薔薇，白茉莉，\n這屏幾欉、那屏幾枝，\n開得真濟、真正媠"
+      },
+      "index": 0,
+      "options": [
+        {
+          "description": {
+            "en": "Option Description",
+            "zh-TW": "選項說明"
+          },
+          "id": "0-1",
+          "title": {
+            "en": "【 Stay 】",
+            "zh-TW": "【 停留 】"
+          }
+        },
+        {
+          "description": {
+            "en": "Option Description",
+            "zh-TW": "選項說明"
+          },
+          "id": "0-2",
+          "title": {
+            "en": "【 Leave 】",
+            "zh-TW": "【 遠走 】"
+          }
+        }
+      ],
+      "question": {
+        "en": "Story and Question——Story and Question——Story and Question——Story and Question——\nStory and Question——Story and Question——Story and Question——Story and Question——\nStory and Question——Story and Question——Story and Question——Story and Question——",
+        "zh-TW": "劇情與題目——劇情與題目——劇情與題目——劇情與題目——劇情與題目——\n劇情與題目——劇情與題目——劇情與題目——劇情與題目——劇情與題目——\n劇情與題目——劇情與題目——劇情與題目——劇情與題目——劇情與題目——\n劇情與題目——劇情與題目——劇情與題目——劇情與題目——劇情與題目——\n劇情與題目——劇情與題目——劇情與題目——劇情與題目——劇情與題目——\n劇情與題目——劇情與題目——劇情與題目——劇情與題目——劇情與題目——"
+      },
+      "title": {
+        "en": "Spring",
+        "zh-TW": "春天"
+      },
+      "voteTime": 60
+    },
+    {
+      "canRegret": true,
+      "description": {
+        "en": "June jasmine scents the whole mountain, a single maiden guards an empty room.\nThe beautiful flowers bloom fully for picking, but who knows the eighteen-year-old maiden?\n\nJune jasmine scents the sky, the single maiden gazes at the stars.\nEven beautiful flowers need good pots; when will the maiden meet her beloved?\n\nJune jasmine scents the night, the single maiden sleeps in an empty room.\nIf the flowers wither, they lose their fragrance; the maiden's heart is anxious all night long.\n\nJune jasmine is truly fragrant, the single maiden is prone to dreaming.\nThe flowers have bloomed, waiting for the next season; when will the maiden's engagement be set?\n\nJune jasmine scents the whole mountain; when picking flowers, one must cherish the bush.\nLike a butterfly without affection, picking from one bush to another.\n\nA jasmine bush is planted in the soil, watched over with wide-open eyes.\nIt is you who are foolish and stuck in your ways, not knowing how to jump the wall to embrace me.\n\nJune jasmine divides into six paths, the most beautiful bush is moved into a pot.\nIn the daytime, someone guards it from being picked; at night, it is left alone.",
+        "zh-TW": "六月茉莉滿山香 單身娘仔守空房、\n好花開透人來採 娘仔十八誰人知。\n六月茉莉香透天 單身娘仔看天星、\n好花也著好花盆 娘仔何時見親君。\n六月茉莉透暝香 單身娘仔困空房、\n好花若射會無芳 娘仔歸暝心忙忙。\n六月茉莉真正香 單身娘仔賢眠夢、\n好花開了等下冬 娘仔親戚何時放。\n六月茉莉滿山香 挽花也著惜花欉、\n親像蝴蝶無情義 採過一欉過一欉。\n一欉茉莉栽落土 目睭金金人在顧、\n是你憨獃無變步 沒曉跳牆過來抱。\n六月茉莉分六路 一欉較美搬落壺、\n日時卜挽人在顧 暝時卜挽人放鈷。"
+      },
+      "index": 1,
+      "options": [
+        {
+          "description": {
+            "en": "Don't separate from my lover, stay in Taiwan.\nPut down roots for future marriage and family.",
+            "zh-TW": "不和愛人分開、留在臺灣\n為未來的婚姻與家庭扎根"
+          },
+          "id": "1-1",
+          "regretText": {
+            "en": "Is this all there is to life?\nIt wasn't easy to get the chance to study abroad...\nI really want to see a different world.\nMy dreams are right there...\nThe people who love me will support me.",
+            "zh-TW": "人生就只能是這樣了嗎？\n好不容易能去留學...\n好想去看看不一樣的世界\n夢想就在那裡...\n愛我的人們，會支持我的"
+          },
+          "title": {
+            "en": "Stay in my hometown, stay by my lover's side",
+            "zh-TW": "停留在家鄉、留在愛人身邊"
+          }
+        },
+        {
+          "description": {
+            "en": "Study abroad, research my favorite field.\nContinue pursuing my dreams.",
+            "zh-TW": "出國留學、研讀自己最愛的領域\n繼續追尋夢想"
+          },
+          "id": "1-2",
+          "regretText": {
+            "en": "Walking away like this, I'm so selfish and irrational...\nStudying abroad costs so much money... I miss home so much...\nLearning so much seems useless...\nAre dreams really that important...\nThe people I love, they need me.",
+            "zh-TW": "一走了之的我好自私、不夠理性...\n留學好花錢...好想家...\n學那麼多，好像也沒有用...\n夢想有這麼重要嗎...\n我愛的人，他們需要我"
+          },
+          "title": {
+            "en": "Head towards dreams and the vast, distant unknown",
+            "zh-TW": "走向夢想和遙遠茫茫的遠方"
+          }
+        }
+      ],
+      "question": {
+        "en": "After graduating from university, I possess the knowledge and abilities learned over many years, along with the diligence and passion of youth.\nBut facing a blank future, what I hold in my hands seems to be nothing at all.\nI need to quickly find something to rely on so I can find a foothold in this world...",
+        "zh-TW": "大學畢業後，我擁有學習多年的知識和能力、年輕人的勤奮和熱血。\n但面對空白的未來，我手中握住的似乎什麼都不是，\n需要趕快找到可以依靠的事物，才能在這個世界找到立足點..."
+      },
+      "title": {
+        "en": "June Jasmine",
+        "zh-TW": "六月茉莉"
+      },
+      "voteTime": 60
+    },
+    {
+      "canRegret": true,
+      "characterLink": "/src/assets/images/character.png",
+      "description": {
+        "en": "Description for Track 3",
+        "zh-TW": "曲目三 說明"
+      },
+      "index": 2,
+      "options": [
+        {
+          "description": {
+            "en": "Track 3 Description for Option 1",
+            "zh-TW": "曲目三 選項一 說明"
+          },
+          "id": "2-1",
+          "regretText": {
+            "en": "Track 3 Regret text for Option 1",
+            "zh-TW": "曲目三 選項一 反悔"
+          },
+          "title": {
+            "en": "Track 3 Option 1",
+            "zh-TW": "曲目三 選項一"
+          }
+        },
+        {
+          "description": {
+            "en": "Track 3 Description for Option 2",
+            "zh-TW": "曲目三 選項二 說明"
+          },
+          "id": "2-2",
+          "regretText": {
+            "en": "Track 3 Regret text for Option 2",
+            "zh-TW": "曲目三 選項二 反悔"
+          },
+          "title": {
+            "en": "Track 3 Option 2",
+            "zh-TW": "曲目三 選項二"
+          }
+        }
+      ],
+      "question": {
+        "en": "Story and Question for Track 3",
+        "zh-TW": "曲目三 劇情與題目"
+      },
+      "title": {
+        "en": "Track 3",
+        "zh-TW": "曲目三"
+      },
+      "voteTime": 60
+    },
+    {
+      "canRegret": false,
+      "description": {
+        "en": "Description for Track 4",
+        "zh-TW": "曲目四 說明"
+      },
+      "index": 3,
+      "options": [
+        {
+          "description": {
+            "en": "Track 4 Description for Option 1",
+            "zh-TW": "曲目四 選項一 說明"
+          },
+          "id": "3-1",
+          "regretText": {
+            "en": "Track 4 Regret text for Option 1",
+            "zh-TW": "曲目四 選項一 反悔"
+          },
+          "title": {
+            "en": "Track 4 Option 1",
+            "zh-TW": "曲目四 選項一"
+          }
+        },
+        {
+          "description": {
+            "en": "Track 4 Description for Option 2",
+            "zh-TW": "曲目四 選項二 說明"
+          },
+          "id": "3-2",
+          "regretText": {
+            "en": "Track 4 Regret text for Option 2",
+            "zh-TW": "曲目四 選項二 反悔"
+          },
+          "title": {
+            "en": "Track 4 Option 2",
+            "zh-TW": "曲目四 選項二"
+          }
+        }
+      ],
+      "question": {
+        "en": "Story and Question for Track 4",
+        "zh-TW": "曲目四 劇情與題目"
+      },
+      "title": {
+        "en": "Track 4",
+        "zh-TW": "曲目四"
+      },
+      "voteTime": 60
+    }
+  ],
+  "voteResult": [
+    {
+      "percent": 50,
+      "winner": false
+    },
+    {
+      "percent": 50,
+      "winner": false
+    }
+  ],
+  "voteStatistic": ""
+}
