@@ -359,11 +359,11 @@ const uiText = computed(() => {
 
 /* 全黑遮罩 */
 .blackout-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: #000;
   opacity: 0;
   pointer-events: none;
