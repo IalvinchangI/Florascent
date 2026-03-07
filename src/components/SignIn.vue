@@ -1,5 +1,6 @@
 <template>
-  <div class="sign-in-page">
+  <Loading v-if="isLoading === true" />
+  <div v-else class="sign-in-page">
     <div class="layout-container">
 
       <div v-if="!isError" class="login-box base-btn default-btn ">
@@ -56,13 +57,19 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-import { ADMIN_LOGIN } from '@/constants';
+import { useRoute } from 'vue-router';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
-const emit = defineEmits([ADMIN_LOGIN]);
+import Loading from './Loading.vue';
+import router from '@/router';
+import { auth } from '@/firebase';
+
+const route = useRoute();
 
 // 狀態管理
 const isError = ref(false); 
-const showPassword = ref(false); // 控制密碼顯示
+const showPassword = ref(false);
+const isLoading = ref(false);
 
 const form = reactive({
   account: '',
@@ -73,13 +80,27 @@ const togglePassword = () => {
   showPassword.value = !showPassword.value;
 };
 
-const handleLogin = () => {
-  // 假設密碼是 admin / 1234
-  if (form.account === 'admin' && form.password === '1234') {
-    emit(ADMIN_LOGIN);
-  } else {
+const handleLogin = async () => {
+  if (!form.account || !form.password) {
+    return;
+  }
+
+  isLoading.value = true;
+  try {
+    await signInWithEmailAndPassword(auth, form.account, form.password);
+    
+    // success
+    const redirectPath = route.query.redirect || '/admin';
+    router.push(redirectPath);
+
+  } catch (error) {
+    // failed
+    console.error("Login failed:", error);
+    
     isError.value = true;
     form.password = ''; 
+  } finally {
+    isLoading.value = false;
   }
 };
 

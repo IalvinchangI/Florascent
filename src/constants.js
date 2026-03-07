@@ -27,6 +27,5 @@ export const Admin = {
 }
 
 export const ADMIN_START = "start-control"
-export const ADMIN_LOGIN = "log-in"
 export const ADMIN_PREV_SLIDE = "previous-slide"
 export const ADMIN_NEXT_SLIDE = "next-slide"
