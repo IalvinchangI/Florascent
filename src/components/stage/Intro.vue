@@ -137,14 +137,14 @@ const handleLangUpdate = (lang) => {
   flex-direction: row;
   justify-content: space-between; 
   align-items: center;
-  height: 80%; 
+  height: 65vh; 
   width: 90%;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   gap: 4vw;
 }
 
 .projector .media-section {
-  height: 100%;
+  max-height: 100%;
   display: flex;
   justify-content: center;
 }
