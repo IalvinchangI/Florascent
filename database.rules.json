@@ -1,6 +1,16 @@
 {
   "rules": {
-    ".read": "now < 1773763200000",  // 2026-3-18
-    ".write": "now < 1773763200000",  // 2026-3-18
+    // audience & admin can read all data
+    ".read": true, 
+    // only admin can write all data
+    ".write": "auth != null", 
+		
+    // the block audience can write
+    "voteStatistic": {
+      // audience can add new vote
+      "$vote_id": {
+        ".write": "!data.exists()"
+      }
+    }
   }
 }
