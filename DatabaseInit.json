@@ -1,9 +1,19 @@
 {
   "controlSignal": {
     "currentSongIndex": 0,
-    "currentStage": "Waiting"
+    "currentStage": "Waiting",
+    "endTime": 0,
+    "voteResult": [
+      {
+        "percent": 50,
+        "winner": true
+      },
+      {
+        "percent": 50,
+        "winner": false
+      }
+    ]
   },
-  "displayTime": "01:00",
   "songData": [
     {
       "canRegret": false,
@@ -196,15 +206,5 @@
       "voteTime": 60
     }
   ],
-  "voteResult": [
-    {
-      "percent": 50,
-      "winner": false
-    },
-    {
-      "percent": 50,
-      "winner": false
-    }
-  ],
-  "voteStatistic": ""
+  "voteStatistic": []
 }
