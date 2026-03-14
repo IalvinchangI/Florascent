@@ -8,7 +8,7 @@
           @[ADMIN_START]="startControl"
         />
         <SlideControl v-else-if="currentPage === Admin.SlideControl" 
-          :songData="songData" :voteResult="voteResult" :time="displayTime" :currentStage="currentStage" :autoAdvance="autoAdvance"
+          :songData="songData[currentSongId]" :voteResult="voteResult" :time="displayTime" :currentStage="currentStage" :autoAdvance="autoAdvance"
           @[ADMIN_PREV_SLIDE]="prevSlide" @[ADMIN_NEXT_SLIDE]="nextSlide" 
         />
       </template>
@@ -19,29 +19,24 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-// import { db } from '../firebase'; 
-// import { ref as dbRef, onValue } from 'firebase/database';
-import { Stage, Admin, ADMIN_START, ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE } from '@/constants.js';
-import {SongData, } from '@/song_data.js';
+import { Stage, Admin, ADMIN_START, ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE, QUERY_NOCACHE } from '@/constants.js';
+import { GetSongData } from '@/utils/song_data_logic';
 
 import Loading from '@/components/Loading.vue';
 import Start from '@/components/admin/Start.vue';
 import SlideControl from '@/components/admin/SlideControl.vue';
 
 const route = useRoute();
-const isLoading = ref(false);  // ########################################### should be true
-// const isLoading = ref(true);  // ########################################### should be true
+const isLoading = ref(false);
 
 // const currentStage = ref(Stage.Waiting);
 const currentStage = ref(Stage.Result);
 const autoAdvance = ref(true);
 
-// const currentPage = ref(Admin.SlideControl);
 const currentPage = ref(Admin.Start);
 // TODO localStorage.setItem('currentPage', currentPage); // 存進瀏覽器，防重新整理
-// const currentSongId = ref('song1');
-console.log(SongData);
-const songData = SongData;
+const currentSongId = ref(0);
+const songData = ref([]);
 const displayTime = ref("00:15")
 // const uploadVote = (option) => {
 //   console.log("Vote ID:", option.id);
@@ -55,12 +50,19 @@ const voteResult = [
 // console.log(voteResult);
 
 onMounted(() => {
-  // TODO check sign in 
+  // EMPTY
 });
 
 const startControl = () => {
+  isLoading.value = true;
   currentPage.value = Admin.SlideControl;
   // console.log("startControl");
+
+  // get songData
+  GetSongData(songData, !(QUERY_NOCACHE in route.query)).then(() => {
+    isLoading.value = false;
+    console.log(songData);
+  });
 }
 const prevSlide = () => {
   currentStage.value = Stage.Waiting;

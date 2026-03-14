@@ -2,7 +2,7 @@
   <div class="client-container">
     <LandscapeGuard v-if="role === ROLE.AUDIENCE" />
 
-    <Lobby v-if="role === ROLE.AUDIENCE && !userLang" @[LANG_SELECT]="setLang" />
+    <Lobby v-if="role === ROLE.AUDIENCE && !userLang" @[LANG_SELECT]="start" />
 
     <template v-else>
       <Loading v-if="isLoading" />
@@ -12,15 +12,15 @@
           :role="role" :lang="userLang" 
         />
         <Intro v-else-if="currentStage === Stage.Intro" 
-          :role="role" :lang="userLang" :songData="songData" 
+          :role="role" :lang="userLang" :songData="songData[currentSongId]" 
           @[LANG_SELECT]="setLang" 
         />
         <Vote v-else-if="currentStage === Stage.Vote" 
-          :role="role" :lang="userLang" :songData="songData" :time="displayTime" 
+          :role="role" :lang="userLang" :songData="songData[currentSongId]" :time="displayTime" 
           @[LANG_SELECT]="setLang" @[OPTION_SELECT]="uploadVote" 
         />
         <Result v-else-if="currentStage === Stage.Result" 
-          :role="role" :lang="userLang" :songData="songData" :voteResult="voteResult"
+          :role="role" :lang="userLang" :songData="songData[currentSongId]" :voteResult="voteResult"
         />
         <Performance v-else-if="currentStage === Stage.Performance" 
           :role="role" :lang="userLang" 
@@ -39,8 +39,8 @@ import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 // import { db } from '../firebase'; 
 // import { ref as dbRef, onValue } from 'firebase/database';
-import { LANG, ROLE, LANG_SELECT, OPTION_SELECT, Stage } from '@/constants.js';
-import {SongData, } from '@/song_data.js';
+import { GetSongData } from '@/utils/song_data_logic';
+import { LANG, ROLE, LANG_SELECT, OPTION_SELECT, Stage, QUERY_NOCACHE } from '@/constants.js';
 
 import LandscapeGuard from '@/components/LandscapeGuard.vue';
 import Lobby from '@/components/Lobby.vue';
@@ -70,10 +70,23 @@ const setLang = (lang) => {
 // const currentStage = ref(Stage.Result);
 // const currentStage = ref(Stage.Intro);
 const currentStage = ref(Stage.Waiting);
-// const currentSongId = ref('song1');
-console.log(SongData);
-const songData = SongData;
+const currentSongId = ref(0);
+const songData = ref([]);
 const displayTime = ref("00:15")
+
+const start = (lang) => {
+  isLoading.value = true;
+
+  // set language
+  setLang(lang);
+
+  // get songData
+  GetSongData(songData, !(QUERY_NOCACHE in route.query)).then(() => {
+    isLoading.value = false;
+    console.log(songData);
+  });
+}
+
 const uploadVote = (option) => {
   console.log("Vote ID:", option.id);
   // localStorage.setItem('slido_lang', lang); // 存進瀏覽器，防重新整理
@@ -88,6 +101,7 @@ console.log(voteResult);
 onMounted(() => {
   if (route.query.role === ROLE.PROJECTOR) {
     role.value = ROLE.PROJECTOR;
+    start(LANG.TW);
   }
 });
 </script>
