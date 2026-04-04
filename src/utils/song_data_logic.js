@@ -1,6 +1,6 @@
 import { db } from '@/firebase';
 import { ref as dbRef, get } from 'firebase/database';
-import { CACHE_KEY, CACHE_TIME_KEY, CACHE_TTL } from '@/constants';
+import { SONGDATA_CACHE_KEY, SONGDATA_CACHE_TIME_KEY, CACHE_TTL } from '@/constants';
 
 /**
  * 取得歌曲資料
@@ -9,13 +9,13 @@ import { CACHE_KEY, CACHE_TIME_KEY, CACHE_TTL } from '@/constants';
  */
 export async function GetSongData(output, useCache = true) {
   // check cache
-  if (useCache == false) {
+  if (useCache === false) {
     console.log("[songData] Do not use cache");
-    sessionStorage.removeItem(CACHE_KEY);
-    sessionStorage.removeItem(CACHE_TIME_KEY);
+    sessionStorage.removeItem(SONGDATA_CACHE_KEY);
+    sessionStorage.removeItem(SONGDATA_CACHE_TIME_KEY);
   } else {
-    const cachedData = sessionStorage.getItem(CACHE_KEY);
-    const cacheTimestamp = sessionStorage.getItem(CACHE_TIME_KEY);
+    const cachedData = sessionStorage.getItem(SONGDATA_CACHE_KEY);
+    const cacheTimestamp = sessionStorage.getItem(SONGDATA_CACHE_TIME_KEY);
 
     if (cachedData && cacheTimestamp) {
       const isExpired = (Date.now() - parseInt(cacheTimestamp, 10)) > CACHE_TTL;
@@ -38,8 +38,8 @@ export async function GetSongData(output, useCache = true) {
       output.value = Array.isArray(data) ? data : Object.values(data);
       
       // 成功抓到新資料後，重新寫入 sessionStorage
-      sessionStorage.setItem(CACHE_KEY, JSON.stringify(output.value));
-      sessionStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
+      sessionStorage.setItem(SONGDATA_CACHE_KEY, JSON.stringify(output.value));
+      sessionStorage.setItem(SONGDATA_CACHE_TIME_KEY, Date.now().toString());
       console.log("[songData] load data from database");
     } else {
       console.warn("[songData] 資料庫中找不到 songData 節點");
@@ -48,7 +48,7 @@ export async function GetSongData(output, useCache = true) {
   } catch (error) {
     console.error("[songData] 抓取失敗:", error);
 
-    const fallbackData = sessionStorage.getItem(CACHE_KEY);
+    const fallbackData = sessionStorage.getItem(SONGDATA_CACHE_KEY);
     if (fallbackData) {
       console.warn("[songData] 啟動 Fallback：使用舊版快取資料");
       output.value = JSON.parse(fallbackData);
