@@ -14,6 +14,45 @@
       }
     ]
   },
+  "stageList": [
+    {
+      "index": 0,
+      "list": [
+        "Waiting", 
+        "Intro", 
+        "Vote", 
+        "Result", 
+        "Performance", 
+        "Next"
+      ]
+    }, 
+    {
+      "index": 1,
+      "list": [
+        "Intro", 
+        "Vote", 
+        "Result", 
+        "Performance", 
+        "Next"
+      ]
+    }, 
+    {
+      "index": 2,
+      "list": [
+        "Intro", 
+        "Vote", 
+        "Result", 
+        "Performance", 
+        "Next"
+      ]
+    }, 
+    {
+      "index": 3,
+      "list": [
+        "Vote"
+      ]
+    }
+  ],
   "songData": [
     {
       "canRegret": false,
