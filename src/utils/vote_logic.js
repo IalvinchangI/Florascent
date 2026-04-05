@@ -1,5 +1,6 @@
-import { db } from '@/firebase';
+import { db, ResetNode } from '@/firebase';
 import { ref as dbRef, push, get } from 'firebase/database';
+import { ORIGINAL_VOTE_STATISTIC } from '@/constants';
 
 // upload vote data
 // "voteStatistic": [
@@ -160,4 +161,11 @@ export function CalculateVoteData(rawVotes, songOptions) {
   });
 
   return finalResult;
+}
+
+export async function ResetVoteData() {
+  await ResetNode(
+    'voteStatistic', 
+    ORIGINAL_VOTE_STATISTIC
+  );
 }

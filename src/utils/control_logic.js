@@ -1,7 +1,7 @@
-import { db } from '@/firebase';
+import { db, ResetNode } from '@/firebase';
 import { ref as dbRef, onValue, off, set } from 'firebase/database';
 import { watch, onUnmounted } from 'vue';
-import { Stage } from '@/constants';
+import { Stage, ORIGINAL_CONTORL_SIGNAL } from '@/constants';
 
 /**
  * 1. 綁定控制訊號 (自動同步 DB)
@@ -181,4 +181,11 @@ export async function SetControlSignal({
   } catch (error) {
     console.error("Firebase 更新失敗：", error);
   }
+}
+
+export async function ResetControlSignal() {
+  await ResetNode(
+    'controlSignal', 
+    ORIGINAL_CONTORL_SIGNAL
+  );
 }

@@ -27,14 +27,18 @@ import {
   ConfigOnControlSignalChange, DisableOnControlSignalChange, 
   ConfigCurrentStage, ConfigCurrentSongIndex, 
   ConfigDisplayTime, ConfigVoteResult, DisableDisplayTime, 
-  SetControlSignal
+  SetControlSignal, 
+  ResetControlSignal
 } from '@/utils/control_logic';
 import {
   GetStageList, 
   GetIndexAndStage, 
   GetEndTimeFromData
 } from '@/utils/stage_logic';
-import { DownloadVoteData, CalculateVoteData } from '@/utils/vote_logic';
+import {
+  DownloadVoteData, CalculateVoteData, 
+  ResetVoteData
+} from '@/utils/vote_logic';
 
 import Loading from '@/components/Loading.vue';
 import Start from '@/components/admin/Start.vue';
@@ -57,8 +61,12 @@ const currentStage = ref(Stage.Waiting);
 const displayTime = ref("00:00");
 const voteResult = ref([]);
 const stageList = ref([]);
-const startControl = () => {
+const startControl = async () => {
   isLoading.value = true;
+  
+  await ResetControlSignal();
+  await ResetVoteData();
+
   currentPage.value = Admin.SlideControl;
 
   // get songData & controlSignal

@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+import { ref as dbRef, set } from 'firebase/database';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,5 +21,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
+
+/**
+ * 重置任意 Firebase 節點
+ * @param {string} path - 節點路徑 (例如 'controlSignal/voteResult')
+ * @param {any} defaultValue - 重置後的預設值 (如果不傳，預設為 null，即刪除節點)
+ */
+export async function ResetNode(path, defaultValue = null) {
+  const nodeRef = dbRef(db, path);
+  
+  try {
+    await set(nodeRef, defaultValue);
+    console.log(`[ResetNode] 節點 '${path}' 已成功重置！`);
+  } catch (error) {
+    console.error(`[ResetNode] 重置節點 '${path}' 失敗:`, error);
+  }
+}
 
 export { auth, db }
