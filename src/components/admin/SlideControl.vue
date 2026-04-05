@@ -35,13 +35,18 @@
             <span class="page-name default-font">{{ pageName }}</span>
           </div>
 
-          <div v-if="IsAutoAdvanceStage(currentStage)" class="nav-btn base-btn auto-mode cursor-default"  @click="emit(ADMIN_NEXT_SLIDE)">
+          <button v-if="IsAutoAdvanceStage(currentStage)" class="nav-btn base-btn auto-mode animate-btn" @click="emit(ADMIN_NEXT_SLIDE)">
             <div class="timer-box">
               <span class="time-text serif-font">{{ time }}</span>
               <span class="auto-label default-font">自動跳轉</span>
             </div>
-            <!-- <div class="progress-bar"></div> -->
-          </div>
+
+            <div class="hover-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </div>
+          </button>
 
           <button v-else class="nav-btn base-btn animate-btn" @click="emit(ADMIN_NEXT_SLIDE)">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -330,10 +335,14 @@ const nextScaleStyle = computed(() => ({
   color: #d9534f;
   border-color: #ccc;
   width: 100px;
+  cursor: pointer; /* 確保游標是小手 */
+  transition: all 0.2s ease; /* 讓 Hover 變色更順暢 */
 }
 
-.cursor-default {
-  cursor: default;
+/* Hover 時的狀態：變回一般按鈕的外觀 */
+.auto-mode:hover {
+  background-color: #fff;
+  border-color: #000;
 }
 
 .timer-box {
@@ -342,7 +351,27 @@ const nextScaleStyle = computed(() => ({
   align-items: center;
   justify-content: center;
   line-height: 1.1;
-  z-index: 2;
+  transition: opacity 0.2s ease; /* 漸變消失 */
+}
+
+/* 隱藏的箭頭 */
+.hover-arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #333;
+  opacity: 0; /* 預設完全透明 */
+  transition: opacity 0.2s ease; /* 漸變出現 */
+}
+
+/* 當滑鼠移入 .auto-mode 時，切換兩者的透明度 */
+.auto-mode:hover .timer-box {
+  opacity: 0; /* 計時器隱藏 */
+}
+
+.auto-mode:hover .hover-arrow {
+  opacity: 1; /* 箭頭浮現 */
 }
 
 .time-text {
