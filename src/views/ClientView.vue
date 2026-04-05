@@ -35,14 +35,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { GetSongData } from '@/utils/song_data_logic';
 import { 
-  ConfigOnControlSignalChange, 
+  ConfigOnControlSignalChange, DisableOnControlSignalChange, 
   ConfigCurrentStage, ConfigCurrentSongIndex, 
-  ConfigDisplayTime, ConfigVoteResult
+  ConfigDisplayTime, ConfigVoteResult, DisableDisplayTime, 
 } from '@/utils/control_logic';
+import { IsAutoAdvanceStage } from '@/utils/stage_logic';
+import { UploadVoteData } from '@/utils/vote_logic';
 import { LANG, ROLE, LANG_SELECT, OPTION_SELECT, Stage, QUERY_NOCACHE } from '@/constants.js';
 
 import LandscapeGuard from '@/components/LandscapeGuard.vue';
@@ -54,13 +56,13 @@ import Vote from '@/components/stage/Vote.vue';
 import Result from '@/components/stage/Result.vue';
 import Performance from '@/components/stage/Performance.vue';
 import Next from '@/components/stage/Next.vue';
-import { IsAutoAdvanceStage } from '@/utils/stage_logic';
 
 const route = useRoute();
-// const role = ref(ROLE.PROJECTOR);
 const role = ref(ROLE.AUDIENCE);
-const isLoading = ref(false);  // ########################################### should be true
-// const isLoading = ref(true);  // ########################################### should be true
+const isLoading = ref(false);
+const disableControlSignalDetail = ref(null);
+const disableDisplayTimeDetail = ref(null);
+
 
 // const userLang = ref(localStorage.getItem('slido_lang') || null);
 const userLang = ref(null);
@@ -87,12 +89,12 @@ const start = (lang) => {
   // get songData & controlSignal
   GetSongData(songData, !(QUERY_NOCACHE in route.query)).then(() => {
     console.log(songData);
-    ConfigOnControlSignalChange(controlSignal, () => { isLoading.value = false })
+    disableControlSignalDetail.value = ConfigOnControlSignalChange(controlSignal, () => { isLoading.value = false })
   }).then(() => {
     console.log(controlSignal);
     ConfigCurrentSongIndex(controlSignal, currentSongIndex);
     ConfigCurrentStage(controlSignal, currentStage);
-    ConfigDisplayTime(controlSignal, displayTime, () => {
+    disableDisplayTimeDetail.value = ConfigDisplayTime(controlSignal, displayTime, () => {
       if (role === ROLE.PROJECTOR && currentStage === Stage.Result) return;
       if (IsAutoAdvanceStage(currentStage.value) === true) {
         isLoading.value = true;
@@ -105,6 +107,7 @@ const start = (lang) => {
 }
 
 const uploadVote = (option) => {
+  UploadVoteData(option);
   console.log("Vote ID:", option.id);
   // localStorage.setItem('slido_lang', lang); // 存進瀏覽器，防重新整理
 };
@@ -113,6 +116,14 @@ onMounted(() => {
   if (route.query.role === ROLE.PROJECTOR) {
     role.value = ROLE.PROJECTOR;
     start(LANG.TW);
+  }
+});
+onUnmounted(() => {
+  if (disableControlSignalDetail.value != null) {
+    DisableOnControlSignalChange(disableControlSignalDetail);
+  }
+  if (disableDisplayTimeDetail.value != null) {
+    DisableDisplayTime(disableDisplayTimeDetail);
   }
 });
 </script>

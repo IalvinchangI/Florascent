@@ -34,6 +34,7 @@ import {
   GetIndexAndStage, 
   GetEndTimeFromData
 } from '@/utils/stage_logic';
+import { DownloadVoteData, CalculateVoteData } from '@/utils/vote_logic';
 
 import Loading from '@/components/Loading.vue';
 import Start from '@/components/admin/Start.vue';
@@ -80,36 +81,43 @@ const startControl = () => {
   });
 }
 
-const prevSlide = async () => {
-  ({ newIndex: currentSongIndex.value, newStage: currentStage.value } = GetIndexAndStage(
+
+const changeSlide = async (offset) => {
+  const { newIndex, newStage } = GetIndexAndStage(
     stageList.value, 
     currentSongIndex.value, 
     currentStage.value, 
-    -1
-  ));
+    offset
+  );
+  
+  let voteResult = null;
+  const currentSongData = songData.value[currentSongIndex.value];
+  if (newStage === Stage.Result) {
+    await DownloadVoteData().then((votes) => {
+      console.log("votes", votes);
+      voteResult = CalculateVoteData(
+        votes, 
+        Object.values(currentSongData.options)
+      );
+      console.log("voteResult", voteResult);
+    });
+  }
 
   await SetControlSignal({
-    currentSongIndex: currentSongIndex.value, 
-    currentStage: currentStage.value, 
-    endTime: GetEndTimeFromData(songData.value[currentSongIndex.value], currentStage.value)
-  })
+    currentSongIndex: newIndex, 
+    currentStage: newStage, 
+    endTime: GetEndTimeFromData(songData.value[newIndex], newStage), 
+    voteResult: voteResult
+  });
 }
-const nextSlide = async () => {
-  ({ newIndex: currentSongIndex.value, newStage: currentStage.value } = GetIndexAndStage(
-    stageList.value, 
-    currentSongIndex.value, 
-    currentStage.value, 
-    1
-  ));
-
-  await SetControlSignal({
-    currentSongIndex: currentSongIndex.value, 
-    currentStage: currentStage.value, 
-    endTime: GetEndTimeFromData(songData.value[currentSongIndex.value], currentStage.value)
-  })
+const prevSlide = () => {
+  changeSlide(-1);
+}
+const nextSlide = () => {
+  changeSlide(1);
 }
 
-onMounted(() => {
+onUnmounted(() => {
   if (disableControlSignalDetail.value != null) {
     DisableOnControlSignalChange(disableControlSignalDetail);
   }
