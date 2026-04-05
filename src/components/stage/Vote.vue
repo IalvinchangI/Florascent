@@ -5,7 +5,7 @@
       :role="role" 
       :lang="lang" 
       :title="(currentPhase === 'WAITING') ? null : `《${currentTitle}》`" 
-      :time="displayTime"
+      :time="props.time"
       @[LANG_SELECT]="handleLangUpdate" 
     />
 
@@ -123,7 +123,6 @@ const emit = defineEmits([LANG_SELECT, OPTION_SELECT]);
 const currentPhase = ref('VOTING');
 const selectedOption = ref(null);
 const selectedOptionIndex = ref(null);
-const displayTime = ref(props.time);
 
 // Computed
 const currentTitle = computed(() => {

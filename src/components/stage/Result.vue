@@ -62,7 +62,7 @@
 
 <script setup>
 import { ref, computed, onMounted, reactive } from 'vue';
-import { LANG, ROLE } from '@/constants.js';
+import { LANG, ROLE, RESULT_TRANSITION_TIMING } from '@/constants.js';
 
 const props = defineProps({
   role: String,
@@ -79,12 +79,6 @@ const props = defineProps({
 });
 
 /* CONST */
-const TRANSITION_TIMING = {
-  INITIAL_HOLD: 1500,     
-  REVEAL_DURATION: 3000,  
-  WINNER_HOLD: 4000,      
-  FADE_TO_BLACK: 2000     
-};
 const FONT_CONFIG = {
   TITLE_BASE: 2.5, 
   PERCENT_BASE: 3.0, 
@@ -141,9 +135,9 @@ const runProjectorAnimationSequence = () => {
       
       setTimeout(() => {  // Phase 3: BLACKOUT
         currentPhase.value = 'BLACKOUT';
-      }, TRANSITION_TIMING.WINNER_HOLD);
-    }, TRANSITION_TIMING.REVEAL_DURATION);
-  }, TRANSITION_TIMING.INITIAL_HOLD);
+      }, RESULT_TRANSITION_TIMING.WINNER_HOLD);
+    }, RESULT_TRANSITION_TIMING.REVEAL_DURATION);
+  }, RESULT_TRANSITION_TIMING.INITIAL_HOLD);
 };
 
 /* UI size */

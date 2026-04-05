@@ -8,7 +8,9 @@
           @[ADMIN_START]="startControl"
         />
         <SlideControl v-else-if="currentPage === Admin.SlideControl" 
-          :songData="songData[currentSongId]" :voteResult="voteResult" :time="displayTime" :currentStage="currentStage" :autoAdvance="autoAdvance"
+          :songData="songData[currentSongIndex]" :stageList="stageList"
+          :voteResult="voteResult" :time="displayTime"
+          :currentSongIndex="currentSongIndex" :currentStage="currentStage"
           @[ADMIN_PREV_SLIDE]="prevSlide" @[ADMIN_NEXT_SLIDE]="nextSlide" 
         />
       </template>
@@ -17,10 +19,21 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { Stage, Admin, ADMIN_START, ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE, QUERY_NOCACHE } from '@/constants.js';
 import { GetSongData } from '@/utils/song_data_logic';
+import { 
+  ConfigOnControlSignalChange, DisableOnControlSignalChange, 
+  ConfigCurrentStage, ConfigCurrentSongIndex, 
+  ConfigDisplayTime, ConfigVoteResult, DisableDisplayTime, 
+  SetControlSignal
+} from '@/utils/control_logic';
+import {
+  GetStageList, 
+  GetIndexAndStage, 
+  GetEndTimeFromData
+} from '@/utils/stage_logic';
 
 import Loading from '@/components/Loading.vue';
 import Start from '@/components/admin/Start.vue';
@@ -28,48 +41,80 @@ import SlideControl from '@/components/admin/SlideControl.vue';
 
 const route = useRoute();
 const isLoading = ref(false);
-
-// const currentStage = ref(Stage.Waiting);
-const currentStage = ref(Stage.Result);
-const autoAdvance = ref(true);
-
 const currentPage = ref(Admin.Start);
-// TODO localStorage.setItem('currentPage', currentPage); // 存進瀏覽器，防重新整理
-const currentSongId = ref(0);
+// sessionStorage.setItem('Admin_page?', lang);
+const disableControlSignalDetail = ref(null);
+const disableDisplayTimeDetail = ref(null);
+
+
+// ----- Start Control & Config ----- //
+
 const songData = ref([]);
-const displayTime = ref("00:15")
-// const uploadVote = (option) => {
-//   console.log("Vote ID:", option.id);
-//   // localStorage.setItem('slido_lang', lang); // 存進瀏覽器，防重新整理
-// };
-
-const voteResult = [
-  {winner: true , percent: 50}, 
-  {winner: false, percent: 50}
-]
-// console.log(voteResult);
-
-onMounted(() => {
-  // EMPTY
-});
-
+const controlSignal = ref(null);
+const currentSongIndex = ref(0);
+const currentStage = ref(Stage.Waiting);
+const displayTime = ref("00:00");
+const voteResult = ref([]);
+const stageList = ref([]);
 const startControl = () => {
   isLoading.value = true;
   currentPage.value = Admin.SlideControl;
-  // console.log("startControl");
 
-  // get songData
+  // get songData & controlSignal
   GetSongData(songData, !(QUERY_NOCACHE in route.query)).then(() => {
-    isLoading.value = false;
-    console.log(songData);
+    console.log("songData", songData);
+    disableControlSignalDetail.value = ConfigOnControlSignalChange(controlSignal, () => { isLoading.value = false })
+  }).then(() => {
+    console.log("controlSignal", controlSignal);
+    ConfigCurrentSongIndex(controlSignal, currentSongIndex);
+    ConfigCurrentStage(controlSignal, currentStage);
+    disableDisplayTimeDetail.value = ConfigDisplayTime(controlSignal, displayTime, () => { nextSlide() });
+    ConfigVoteResult(controlSignal, voteResult);
+  }).then(() => {
+    console.log(currentSongIndex, currentStage, displayTime, voteResult);
+  });
+
+  // get stage list
+  GetStageList(stageList, !(QUERY_NOCACHE in route.query)).then(() => {
+    console.log("stageList", stageList);
   });
 }
-const prevSlide = () => {
-  currentStage.value = Stage.Waiting;
-  // console.log("startControl");
+
+const prevSlide = async () => {
+  ({ newIndex: currentSongIndex.value, newStage: currentStage.value } = GetIndexAndStage(
+    stageList.value, 
+    currentSongIndex.value, 
+    currentStage.value, 
+    -1
+  ));
+
+  await SetControlSignal({
+    currentSongIndex: currentSongIndex.value, 
+    currentStage: currentStage.value, 
+    endTime: GetEndTimeFromData(songData.value[currentSongIndex.value], currentStage.value)
+  })
 }
-const nextSlide = () => {
-  currentStage.value = Stage.Intro;
-  // console.log("startControl");
+const nextSlide = async () => {
+  ({ newIndex: currentSongIndex.value, newStage: currentStage.value } = GetIndexAndStage(
+    stageList.value, 
+    currentSongIndex.value, 
+    currentStage.value, 
+    1
+  ));
+
+  await SetControlSignal({
+    currentSongIndex: currentSongIndex.value, 
+    currentStage: currentStage.value, 
+    endTime: GetEndTimeFromData(songData.value[currentSongIndex.value], currentStage.value)
+  })
 }
+
+onMounted(() => {
+  if (disableControlSignalDetail.value != null) {
+    DisableOnControlSignalChange(disableControlSignalDetail);
+  }
+  if (disableDisplayTimeDetail.value != null) {
+    DisableDisplayTime(disableDisplayTimeDetail);
+  }
+});
 </script>

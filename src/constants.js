@@ -36,4 +36,12 @@ export const STAGELIST_CACHE_KEY = 'Florascent_stageList';
 export const STAGELIST_CACHE_TIME_KEY = 'Florascent_stageList_timestamp';
 export const CACHE_TTL = 4 * 60 * 60 * 1000;  // 4 hr
 
-export const QUERY_NOCACHE = "preview"
+export const QUERY_NOCACHE = "preview";
+
+export const RESULT_TRANSITION_TIMING = {
+  INITIAL_HOLD: 1500,     
+  REVEAL_DURATION: 3000,  
+  WINNER_HOLD: 4000,      
+  FADE_TO_BLACK: 2000     
+};
+export const RESULT_TOTAL_TIMING = Object.values(RESULT_TRANSITION_TIMING).reduce((sum, value) => sum + value, 0);

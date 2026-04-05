@@ -35,7 +35,7 @@
             <span class="page-name default-font">{{ pageName }}</span>
           </div>
 
-          <div v-if="autoAdvance" class="nav-btn base-btn auto-mode cursor-default">
+          <div v-if="IsAutoAdvanceStage(currentStage)" class="nav-btn base-btn auto-mode cursor-default"  @click="emit(ADMIN_NEXT_SLIDE)">
             <div class="timer-box">
               <span class="time-text serif-font">{{ time }}</span>
               <span class="auto-label default-font">自動跳轉</span>
@@ -85,6 +85,7 @@
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from 'vue';
 import { LANG, Stage, ROLE, ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE } from '@/constants.js';
+import { IsAutoAdvanceStage, GetIndexAndStage } from '@/utils/stage_logic';
 
 // Components
 import LinkBox from '@/components/LinkBox.vue';
@@ -97,24 +98,16 @@ import Next from '@/components/stage/Next.vue';
 
 const props = defineProps({
   songData: { type: Object, required: true },
-  voteResult: { type: Array, default: () => [] },
-  time: { type: String, default: "00:00" },
+  stageList: { type: Array, required: true },
+  currentSongIndex: { type: Number, required: true },
   currentStage: { type: String, required: true },
-  autoAdvance: { type: Boolean, default: false }
+  voteResult: { type: Array, default: () => [] },
+  time: { type: String, default: "00:00" }
 });
 
 const emit = defineEmits([ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE]);
 
 // --- 舞台順序 ---
-const STAGE_ORDER = [
-  Stage.Waiting,
-  Stage.Intro,
-  Stage.Vote,
-  Stage.Result,
-  Stage.Performance,
-  Stage.Next
-];
-
 const getComponentByStage = (stage) => {
   switch (stage) {
     case Stage.Waiting:     return Waiting;
@@ -130,11 +123,12 @@ const getComponentByStage = (stage) => {
 const currentComponent = computed(() => getComponentByStage(props.currentStage));
 
 const nextComponent = computed(() => {
-  const currentIndex = STAGE_ORDER.indexOf(props.currentStage);
-  if (currentIndex === -1 || currentIndex === STAGE_ORDER.length - 1) {
-    return Waiting; 
-  }
-  return getComponentByStage(STAGE_ORDER[currentIndex + 1]);
+  const { newIndex: index, newStage: stage } = GetIndexAndStage(
+    props.stageList, 
+    props.currentSongIndex, props.currentStage, 
+    1
+  );
+  return getComponentByStage(stage);
 });
 
 // --- 資訊顯示 ---
