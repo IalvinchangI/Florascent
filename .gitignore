@@ -1,7 +1,3 @@
-__temp/
-
-
-
 # Logs
 logs
 *.log
@@ -41,3 +37,9 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+
+
+# Else
+__temp/
+.firebase/*.cache
