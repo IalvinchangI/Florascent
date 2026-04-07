@@ -1,12 +1,34 @@
 {
   "rules": {
-    // audience & admin can read all data
-    ".read": true, 
-    // only admin can write all data
-    ".write": "auth != null", 
-		
+    // audience & admin can read controlSignal
+    // but only admin can write it
+    "controlSignal": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    
+    // audience & admin can read songData
+    // but no one can write
+    "songData": {
+      ".read": true,
+      ".write": false
+    },
+
+    // only admin can read stageList
+    // and no one can write
+    "stageList": {
+      ".read": "auth != null",
+      ".write": false
+    },
+
     // the block audience can write
     "voteStatistic": {
+      // audience can not read voteStatistic
+      ".read": "auth != null",
+      
+      // only admin can remove voteStatistic
+      ".write": "auth != null",
+      
       // audience can add new vote
       "$vote_id": {
         ".write": "!data.exists()"
