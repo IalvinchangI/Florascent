@@ -61,7 +61,7 @@
         <!-- LOADING animation -->
         <div class="waiting-animation-row">
           <div class="img-box img-box-vertical img-restrict full-size">
-            <img src="@/assets/images/character.png" alt="LOADING..." />
+            <img :src=LOADING_URL alt="LOADING..." />
           </div>
         </div>
 
@@ -98,6 +98,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { LANG, ROLE, LANG_SELECT, OPTION_SELECT } from '@/constants.js';
+import { LOADING_URL } from '@/assets_url';
 import Header from '@/components/Header.vue';
 
 const props = defineProps({

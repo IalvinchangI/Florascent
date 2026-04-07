@@ -56,7 +56,7 @@
   "songData": [
     {
       "canRegret": true,
-      "characterLink": "/src/assets/images/character.png",
+      "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/character_kcffna.png",
       "description": {
         "en": "Spring has arrived, and a hundred flowers bloom. Red roses, white jasmines.\nA few bushes here, a few branches there,\nBlooming so abundantly, truly beautiful.",
         "zh-TW": "紅薔薇，白茉莉。\n這屏幾欉，彼屏幾蕊，\n開得真齊，真正美。"
@@ -155,7 +155,7 @@
     },
     {
       "canRegret": true,
-      "characterLink": "/src/assets/images/character.png",
+      "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/character_kcffna.png",
       "description": {
         "en": "Description for Track 3",
         "zh-TW": "雨夜花雨夜花，\n受風雨吹落地，\n無人看見暝日怨嗟，\n花謝落土不再回。"

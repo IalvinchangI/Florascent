@@ -4,7 +4,7 @@
       
       <div class="logo-wrapper">
         <div class="img-box img-box-square img-restrict">
-          <img src="/src/assets/images/logo.png" alt="Logo"/>
+          <img :src=LOGO_URL alt="Logo"/>
         </div>
       </div>
 
@@ -24,6 +24,7 @@
 
 <script setup>
 import { LANG, LANG_SELECT } from '@/constants.js';
+import { LOGO_URL } from '@/assets_url';
 
 const emit = defineEmits([LANG_SELECT]);
 

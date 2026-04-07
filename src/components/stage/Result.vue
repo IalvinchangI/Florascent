@@ -9,7 +9,7 @@
 
       <div class="animation-row">
         <div class="img-box img-box-vertical img-restrict">
-          <img src="@/assets/images/character.png" alt="LOADING..." />
+          <img :src=LOADING_URL alt="LOADING..." />
         </div>
       </div>
 
@@ -63,6 +63,7 @@
 <script setup>
 import { ref, computed, onMounted, reactive } from 'vue';
 import { LANG, ROLE, RESULT_TRANSITION_TIMING } from '@/constants.js';
+import { LOADING_URL } from '@/assets_url';
 
 const props = defineProps({
   role: String,

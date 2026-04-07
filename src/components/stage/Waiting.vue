@@ -4,10 +4,10 @@
       
       <div class="media-section">
         <div class="img-box img-box-square img-restrict">
-          <img src="/src/assets/images/logo.png" alt="Logo"/>
+          <img :src=LOGO_URL alt="Logo"/>
         </div>
         <div v-if="role === ROLE.PROJECTOR" class="img-box img-box-square img-restrict">
-          <img src="/src/assets/images/qrcode.png" alt="QR Code"/>
+          <img :src=QRCODE_URL alt="QR Code"/>
         </div>
       </div>
 
@@ -38,6 +38,7 @@
 
 <script setup>
 import {LANG, ROLE} from '@/constants.js';
+import { LOGO_URL, QRCODE_URL } from '@/assets_url';
 
 const props = defineProps({
   role: String,

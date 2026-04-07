@@ -1,6 +1,18 @@
 <template>
-  <router-view class="template-view" />
+  <router-view 
+    class="template-view" 
+    :style="{
+      '--bg-horizontal': `url(${BACKGROUND_HORIZONTAL_URL})`,
+      '--bg-vertical': `url(${BACKGROUND_VERTICAL_URL})`
+    }"
+  />
 </template>
+
+<script setup>
+import {
+  BACKGROUND_HORIZONTAL_URL, BACKGROUND_VERTICAL_URL
+} from './assets_url';
+</script>
 
 <style>
 body, html {
@@ -41,12 +53,12 @@ body, html {
 }
 @media (orientation: portrait) {
   .template-view {
-    background-image: url('@/assets/images/background_vertical.png');
+    background-image: var(--bg-vertical);
   }
 }
 @media (orientation: landscape) {
   .template-view {
-    background-image: url('@/assets/images/background_horizontal.png');
+    background-image: var(--bg-horizontal);
   }
 }
 

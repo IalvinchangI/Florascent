@@ -9,7 +9,7 @@
       </div>
 
       <div class="icon-box">
-        <img src="@/assets/images/phone_icon.png" alt="Check Phone" />
+        <img :src=PHONE_ICON_URL alt="Check Phone" />
       </div>
 
     </div>
@@ -22,6 +22,7 @@
 
 <script setup>
 import { ROLE } from '@/constants.js';
+import { PHONE_ICON_URL } from '@/assets_url';
 
 const props = defineProps({
   role: String,
