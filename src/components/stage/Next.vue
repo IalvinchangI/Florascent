@@ -9,7 +9,7 @@
       </div>
 
       <div class="icon-box">
-        <img :src=PHONE_ICON_URL alt="Check Phone" />
+        <div class="phone-icon"></div>
       </div>
 
     </div>
@@ -22,7 +22,6 @@
 
 <script setup>
 import { ROLE } from '@/constants.js';
-import { PHONE_ICON_URL } from '@/assets_url';
 
 const props = defineProps({
   role: String,
@@ -48,7 +47,7 @@ const props = defineProps({
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8vh;
+  gap: 6vh;
   text-align: center;
 }
 
@@ -56,7 +55,7 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* gap: 2vh; */
+  gap: 1.5vh;
 }
 .main-text {
   font-size: 2.5rem;
@@ -73,15 +72,50 @@ const props = defineProps({
   color: #000;
 }
 
-
 .icon-box {
-  max-height: 60%;
-  max-width: 60%;
-  opacity: 0.8; /* 稍微讓線條柔和一點，配合背景 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.9;
+  padding: 20px;
 }
-.icon-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+
+/* =========================================
+   CSS Phone Icon & Animation
+   ========================================= */
+.phone-icon {
+  width: 230px;
+  height: 350px;
+  border: 12px solid #000;
+  border-radius: 24px;
+  position: relative;
+  animation: vibrate-phone 5s infinite ease-in-out;
+}
+
+.phone-icon::before {
+  content: '';
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: #000;
+  border-radius: 50%;
+}
+
+/* 手機偶爾震動的 Keyframes */
+@keyframes vibrate-phone {
+  /* 0% 到 85% 保持靜止 (約 4.25 秒) */
+  0%, 85% { transform: translate(0) rotate(0deg); }
+  
+  /* 85% 到 95% 進行快速震動 */
+  87% { transform: translate(-4px, 0) rotate(-4deg); }
+  89% { transform: translate(4px, 0) rotate(4deg); }
+  91% { transform: translate(-4px, 0) rotate(-4deg); }
+  93% { transform: translate(4px, 0) rotate(4deg); }
+  
+  /* 95% 到 100% 回歸靜止 */
+  95%, 100% { transform: translate(0) rotate(0deg); }
 }
 </style>
