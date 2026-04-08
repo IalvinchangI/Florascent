@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "florascent",
     "public": "dist",
     "ignore": [
       "firebase.json",
