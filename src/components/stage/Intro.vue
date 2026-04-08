@@ -1,5 +1,5 @@
 <template>
-  <div class="intro-page" :class="[role, { 'has-image': songData.characterLink != null }]">
+  <div class="intro-page" :class="[role, { 'has-image': currentCharacterLink != null }]">
     
     <Header 
       :role="role" 
@@ -9,12 +9,12 @@
     />
 
     <div class="layout-container">
-      <div v-if="songData.characterLink != null" class="media-section">
+      <div v-if="currentCharacterLink != null" class="media-section">
         <div v-if="role === ROLE.AUDIENCE" class="img-box img-box-vertical img-restrict">
-          <img :src="songData.characterLink" alt="Character Animation" />
+          <img :src="currentCharacterLink" alt="Character Animation" />
         </div>
         <div v-else-if="role === ROLE.PROJECTOR" class="img-box img-box-horizontal img-restrict">
-          <img :src="songData.characterLink" alt="Character Animation" />
+          <img :src="currentCharacterLink" alt="Character Animation" />
         </div>
       </div>
 
@@ -28,8 +28,9 @@
 
 <script setup>
 import { computed } from 'vue';
-import { LANG, ROLE, LANG_SELECT } from '@/constants.js';
-import Header from '@/components/Header.vue'
+import { ROLE, LANG_SELECT } from '@/constants.js';
+import Header from '@/components/Header.vue';
+import { GetTitle, GetDescription, GetCharacterLink } from '@/utils/song_data_logic'; 
 
 const props = defineProps({
   role: String,
@@ -39,19 +40,20 @@ const props = defineProps({
     required: true
   }
 });
+
+// 使用 GetTitle 取得標題
 const currentTitle = computed(() => {
-  if (!props.songData || !props.songData.title) {
-    return '';
-  }
-  return props.songData.title[props.lang] || props.songData.title[LANG.TW];
+  return GetTitle(props.songData, props.lang);
 });
 
+// 使用 GetDescription 取得介紹文字 (已經是處理好的陣列)
 const currentDescriptionLines = computed(() => {
-  if (!props.songData || !props.songData.description) {
-    return [];
-  }
-  const text = props.songData.description[props.lang] || props.songData.description[LANG.TW];
-  return text ? text.split('\n') : [];
+  return GetDescription(props.songData, props.lang);
+});
+
+// 使用 GetCharacterLink 取得角色圖片連結
+const currentCharacterLink = computed(() => {
+  return GetCharacterLink(props.songData);
 });
 
 const emit = defineEmits([LANG_SELECT]);

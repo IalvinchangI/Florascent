@@ -37,7 +37,7 @@
               class="serif-font title" 
               :style="{ fontSize: getDynamicFontSize(option.id, 'title') }"
             >
-              {{ getOptionTitle(option) }}
+              {{ option.title }}
             </h3>
             
             <div 
@@ -64,18 +64,12 @@
 import { ref, computed, onMounted, reactive } from 'vue';
 import { LANG, ROLE, RESULT_TRANSITION_TIMING } from '@/constants.js';
 import { LOADING_URL } from '@/assets_url';
+import { GetOptions } from '@/utils/song_data_logic';
 
 const props = defineProps({
   role: String,
   lang: String,
   songData: { type: Object, required: true },
-  /**
-   * voteResult 結構範例 (陣列):
-   * [
-   * { winner: false, percent: 40 },
-   * { winner: true , percent: 60 }
-   * ]
-   */
   voteResult: { type: Array, required: true }
 });
 
@@ -90,13 +84,13 @@ const animatedDisplayMap = reactive({});
 
 /* DATA */
 const processedOptions = computed(() => {
-  if (!props.songData || !props.songData.options) return [];
+  const baseOptions = GetOptions(props.songData, props.lang);
   
-  return props.songData.options.map((option, index) => {
+  return baseOptions.map((option, index) => {
     const result = props.voteResult[index] || { winner: false, percent: 50 }; 
     return { 
       ...option, 
-      id: index, 
+      id: index,
       percentage: result.percent,
       isWinner: result.winner
     };
@@ -109,7 +103,7 @@ processedOptions.value.forEach(opt => {
 
 const winnerId = computed(() => {
   const winnerOption = processedOptions.value.find(opt => opt.isWinner);
-  return winnerOption ? winnerOption.id : null;  // 如果資料有誤沒有 winner，回傳 null (或可預設一個)
+  return winnerOption ? winnerOption.id : null;  
 });
 const isTie = computed(() => {
   const [opt1, opt2] = processedOptions.value;
@@ -192,7 +186,6 @@ const animateNumbers = () => {
   };
   requestAnimationFrame(step);
 };
-const getOptionTitle = (option) => option.title[props.lang] || option.title[LANG.TW];
 
 const uiLabels = {
   musicStarting: { [LANG.TW]: '音樂即將開始', [LANG.EN]: 'Music Starting Soon' },

@@ -51,14 +51,17 @@ export const RESULT_TOTAL_TIMING = Object.values(RESULT_TRANSITION_TIMING).reduc
 
 export const ORIGINAL_CONTORL_SIGNAL = {
   "currentSongIndex": 0,
+  "currentRoute": 0,
   "currentStage": "Waiting",
   "endTime": 0,
   "voteResult": [
     {
+      "id": "0-1",
       "percent": 50,
       "winner": true
     },
     {
+      "id": "0-2",
       "percent": 50,
       "winner": false
     }

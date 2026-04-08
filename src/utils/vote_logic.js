@@ -163,6 +163,35 @@ export function CalculateVoteData(rawVotes, songOptions) {
   return finalResult;
 }
 
+/**
+ * 從 voteResult 中取得獲勝選項的索引值 (即 id 後面的數字)
+ * @param {Array} voteResult - 計算完畢的投票結果陣列
+ * @returns {number|null} 回傳獲勝者的數字索引，若找不到則回傳 null
+ */
+export function GetWinnerIndex(voteResult) {
+  // 防呆：確保傳入的是有效的陣列
+  if (!voteResult || !Array.isArray(voteResult)) {
+    return null;
+  }
+
+  // 1. 找出 winner 是 true 的那個物件
+  const winnerOption = voteResult.find(option => option.winner === true);
+
+  // 2. 確保有找到贏家，且贏家有 id 屬性
+  if (winnerOption && winnerOption.id) {
+    // 將 id (例如 "0-1") 用 '-' 切割，並取陣列的第二個元素 [1]
+    const extractedStr = winnerOption.id.split('-')[1]; 
+    
+    // 轉成數字型態
+    const winnerIndex = parseInt(extractedStr, 10); 
+    
+    // 如果轉換成功不是 NaN，就回傳該數字
+    return isNaN(winnerIndex) ? null : winnerIndex;
+  }
+
+  return null;
+}
+
 export async function ResetVoteData() {
   await ResetNode(
     'voteStatistic', 

@@ -154,18 +154,36 @@ export function ConfigCurrentSongIndex(controlSignal, output) {
 }
 
 /**
- * 6. 設定並發送控制訊號到 Firebase (完全覆寫 controlSignal 節點)
+ * 6. 取得當前路線索引 (currentRoute)
+ * @param {import('vue').Ref} controlSignal - 監聽的訊號來源
+ * @param {import('vue').Ref} output - 輸出的變數
+ */
+export function ConfigCurrentRoute(controlSignal, output) {
+  watch(controlSignal, (newVal) => {
+    if (newVal && newVal.currentRoute != null) {
+      output.value = newVal.currentRoute;
+    } else {
+      output.value = 0; // 預設路線為 0
+    }
+  }, { immediate: true, deep: true });
+}
+
+
+/**
+ * 7. 設定並發送控制訊號到 Firebase (完全覆寫 controlSignal 節點)
  * @param {Object} payload - 包含所有控制訊號的物件
  * @param {number} [payload.endTime=0] - 倒數結束時間 (預設為 0)
  * @param {Array|null} [payload.voteResult=null] - 投票結果 (預設為 null)
  * @param {string} payload.currentStage - 當前階段
  * @param {number} payload.currentSongIndex - 當前歌曲索引
+ * @param {number} [payload.currentRoute=0] - 當前路線索引 (預設為 0)
  */
 export async function SetControlSignal({
   endTime = 0,
   voteResult = null,
   currentStage,
-  currentSongIndex
+  currentSongIndex,
+  currentRoute = 0
 }) {
   const signalRef = dbRef(db, 'controlSignal');
   
@@ -174,6 +192,7 @@ export async function SetControlSignal({
     await set(signalRef, {
       currentSongIndex, 
       currentStage, 
+      currentRoute, 
       endTime, 
       voteResult
     });

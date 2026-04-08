@@ -19,17 +19,17 @@
           </p>
         </div>
         <div v-else-if="currentPhase === 'REGRET'" class="text-row default-font">
-          <p v-for="(line, index) in getOptionRegretText(selectedOption)" :key="index" class="text-content italic-text">
+          <p v-for="(line, index) in selectedOption?.regretText" :key="index" class="text-content italic-text">
             {{ line }}
           </p>
         </div>
 
         <!-- slots -->
-        <div v-for="(option, index) in songData.options" :key="index" class="slot-row">
+        <div v-for="(option, index) in processedOptions" :key="index" class="slot-row">
           <!-- VOTING || selected -->
           <div v-if="currentPhase === 'VOTING'" class="base-btn default-btn animate-btn img-box-horizontal option-button-wrapper full-size" @click="handleOptionSelect(option, index)">
-            <h3 class="option-title serif-font title">{{ getOptionTitle(option) }}</h3>
-            <p class="option-desc default-font" v-for="(line, i) in getOptionDescriptoin(option)" :key="i">{{ line }}</p>
+            <h3 class="option-title serif-font title">{{ option.title }}</h3>
+            <p class="option-desc default-font" v-for="(line, i) in option.description" :key="i">{{ line }}</p>
           </div>
           <div v-else-if="currentPhase === 'REGRET' && selectedOptionIndex !== index" class="regret-buttons-wrapper full-size">
             <div class="base-btn default-btn animate-btn img-box-horizontal option-button-wrapper half-card" @click="cancelChoice">
@@ -43,8 +43,8 @@
           </div>
           <!-- REGRET && selected -->
           <div v-else class="base-btn default-btn img-box-horizontal option-button-wrapper full-size disable">
-            <h3 class="option-title serif-font title">{{ getOptionTitle(option) }}</h3>
-            <p class="option-desc default-font" v-for="(line, i) in getOptionDescriptoin(option)" :key="i">{{ line }}</p>
+            <h3 class="option-title serif-font title">{{ option.title }}</h3>
+            <p class="option-desc default-font" v-for="(line, i) in option.description" :key="i">{{ line }}</p>
           </div>
         </div>
 
@@ -53,8 +53,8 @@
         <!-- slot -->
         <div class="waiting-slot-row">
           <div class="base-btn default-btn img-box-horizontal option-button-wrapper full-size disable">
-            <h3 class="option-title serif-font title">{{ getOptionTitle(selectedOption) }}</h3>
-            <p class="option-desc default-font" v-for="(line, i) in getOptionDescriptoin(selectedOption)" :key="i">{{ line }}</p>
+            <h3 class="option-title serif-font title">{{ selectedOption?.title }}</h3>
+            <p class="option-desc default-font" v-for="(line, i) in selectedOption?.description" :key="i">{{ line }}</p>
           </div>
         </div>
         
@@ -80,9 +80,9 @@
 
         <!-- slots -->
         <div class="slot-row">
-          <div v-for="(option, index) in songData.options" :key="index" class="base-btn default-btn option-button-wrapper full-size" style="cursor: default;">
-            <h3 class="option-title serif-font title">{{ getOptionTitle(option) }}</h3>
-            <p v-for="(line, idx) in getOptionDescriptoin(option)" :key="idx" class="option-desc default-font">{{ line }}</p>
+          <div v-for="(option, index) in processedOptions" :key="index" class="base-btn default-btn option-button-wrapper full-size" style="cursor: default;">
+            <h3 class="option-title serif-font title">{{ option.title }}</h3>
+            <p v-for="(line, idx) in option.description" :key="idx" class="option-desc default-font">{{ line }}</p>
           </div>
         </div>
       </div>
@@ -100,13 +100,16 @@ import { ref, computed } from 'vue';
 import { LANG, ROLE, LANG_SELECT, OPTION_SELECT } from '@/constants.js';
 import { LOADING_URL } from '@/assets_url';
 import Header from '@/components/Header.vue';
+import { GetTitle, GetQuestion, GetOptions, GetCanRegret } from '@/utils/song_data_logic'; 
 
 const props = defineProps({
   role: String,
   lang: String,
   songData: { type: Object, required: true }, 
+  currentRoute: { type: Number, default: 0 },
   time: String
 });
+
 const uiLabels = {
   continue: {
     title: { [LANG.TW]: '繼續', [LANG.EN]: 'Continue' },
@@ -127,27 +130,17 @@ const selectedOptionIndex = ref(null);
 
 // Computed
 const currentTitle = computed(() => {
-  if (!props.songData?.title) return '';
-  return props.songData.title[props.lang] || props.songData.title[LANG.TW];
+  return GetTitle(props.songData, props.lang);
 });
 
 const currentQuestion = computed(() => {
-  if (!props.songData?.question) return [];
-  const text = props.songData.question[props.lang] || props.songData.question[LANG.TW];
-  return text ? text.split('\n') : [];
+  return GetQuestion(props.songData, props.lang, props.currentRoute);
 });
 
-const getOptionMultiText = (option, field) => {
-  if (!option || !option[field]) return [];
-  const text = option[field][props.lang] || option[field][LANG.TW];
-  return text ? text.split('\n') : [];
-};
-const getOptionTitle = (option) => {
-  if (!option || !option.title) return '';
-  return option.title[props.lang] || option.title[LANG.TW];
-}
-const getOptionDescriptoin = (option) => getOptionMultiText(option, 'description');
-const getOptionRegretText = (option) => getOptionMultiText(option, 'regretText');
+const processedOptions = computed(() => {
+  return GetOptions(props.songData, props.lang);
+});
+
 const getUIText = (key, field) => {
   return uiLabels[key][field][props.lang] || uiLabels[key][field][LANG.TW];
 };
@@ -157,7 +150,7 @@ const handleOptionSelect = (option, index) => {
   selectedOption.value = option;
   selectedOptionIndex.value = index; 
   
-  if (props.songData.canRegret) {
+  if (GetCanRegret(props.songData)) {
     currentPhase.value = 'REGRET';
   } else {
     confirmChoice();

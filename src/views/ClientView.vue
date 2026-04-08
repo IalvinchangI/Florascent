@@ -16,7 +16,7 @@
           @[LANG_SELECT]="setLang" 
         />
         <Vote v-else-if="currentStage === Stage.Vote" 
-          :role="role" :lang="userLang" :songData="songData[currentSongIndex]" :time="displayTime" 
+          :role="role" :lang="userLang" :songData="songData[currentSongIndex]" :time="displayTime" :currentRoute="currentRoute"
           @[LANG_SELECT]="setLang" @[OPTION_SELECT]="uploadVote" 
         />
         <Result v-else-if="currentStage === Stage.Result || (currentStage === Stage.Performance && role === ROLE.AUDIENCE)" 
@@ -40,7 +40,7 @@ import { useRoute } from 'vue-router';
 import { GetSongData } from '@/utils/song_data_logic';
 import { 
   ConfigOnControlSignalChange, DisableOnControlSignalChange, 
-  ConfigCurrentStage, ConfigCurrentSongIndex, 
+  ConfigCurrentStage, ConfigCurrentSongIndex, ConfigCurrentRoute, 
   ConfigDisplayTime, ConfigVoteResult, DisableDisplayTime, 
 } from '@/utils/control_logic';
 import { IsAutoAdvanceStage } from '@/utils/stage_logic';
@@ -78,6 +78,7 @@ const songData = ref([]);
 const controlSignal = ref(null);
 const currentSongIndex = ref(0);
 const currentStage = ref(Stage.Waiting);
+const currentRoute = ref(0);
 const displayTime = ref("00:00");
 const voteResult = ref([]);
 const start = (lang) => {
@@ -94,6 +95,7 @@ const start = (lang) => {
     console.log(controlSignal);
     ConfigCurrentSongIndex(controlSignal, currentSongIndex);
     ConfigCurrentStage(controlSignal, currentStage);
+    ConfigCurrentRoute(controlSignal, currentRoute);
     disableDisplayTimeDetail.value = ConfigDisplayTime(controlSignal, displayTime, () => {
       if (role === ROLE.PROJECTOR && currentStage === Stage.Result) return;
       if (IsAutoAdvanceStage(currentStage.value) === true) {
@@ -102,7 +104,7 @@ const start = (lang) => {
     });
     ConfigVoteResult(controlSignal, voteResult);
   }).then(() => {
-    console.log(currentSongIndex, currentStage, displayTime, voteResult);
+    console.log(currentSongIndex, currentStage, currentRoute, displayTime, voteResult);
   });
 }
 

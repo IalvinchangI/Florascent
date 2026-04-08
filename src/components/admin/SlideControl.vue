@@ -11,6 +11,7 @@
                 :role="ROLE.PROJECTOR"
                 :lang="LANG.TW" 
                 :songData="songData"
+                :currentRoute="currentRoute"
                 :voteResult="voteResult" 
                 :time="time"
                 :currentStage="currentStage"
@@ -67,6 +68,7 @@
                 :role="ROLE.PROJECTOR"
                 :lang="LANG.TW" 
                 :songData="songData"
+                :currentRoute="currentRoute"
                 :voteResult="voteResult" 
                 :time="time"
               />
@@ -113,6 +115,7 @@ const props = defineProps({
   stageList: { type: Array, required: true },
   currentSongIndex: { type: Number, required: true },
   currentStage: { type: String, required: true },
+  currentRoute: { type: Number, default: 0 },
   voteResult: { type: Array, default: () => [] },
   time: { type: String, default: "00:00" }
 });
