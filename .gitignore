@@ -43,3 +43,4 @@ __screenshots__/
 # Else
 __temp/
 .firebase/*.cache
+assets/
