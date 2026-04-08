@@ -11,7 +11,7 @@
           :songData="songData[currentSongIndex]" :stageList="stageList"
           :voteResult="voteResult" :time="displayTime"
           :currentSongIndex="currentSongIndex" :currentStage="currentStage"
-          @[ADMIN_PREV_SLIDE]="prevSlide" @[ADMIN_NEXT_SLIDE]="nextSlide" 
+          @[ADMIN_PREV_SLIDE]="prevSlide" @[ADMIN_NEXT_SLIDE]="nextSlide" @[ADMIN_RESTART]="handleRestart"
         />
       </template>
 
@@ -19,9 +19,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { Stage, Admin, ADMIN_START, ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE, QUERY_NOCACHE } from '@/constants.js';
+import {
+  Stage, Admin, 
+  ADMIN_START, ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE, ADMIN_RESTART, 
+  ADMIN_CURRENT_PAGE_KEY, 
+  QUERY_NOCACHE
+} from '@/constants.js';
 import { GetSongData } from '@/utils/song_data_logic';
 import { 
   ConfigOnControlSignalChange, DisableOnControlSignalChange, 
@@ -45,9 +50,8 @@ import Start from '@/components/admin/Start.vue';
 import SlideControl from '@/components/admin/SlideControl.vue';
 
 const route = useRoute();
-const isLoading = ref(false);
-const currentPage = ref(Admin.Start);
-// sessionStorage.setItem('Admin_page?', lang);
+const currentPage = ref(sessionStorage.getItem(ADMIN_CURRENT_PAGE_KEY) || Admin.Start);
+const isLoading = ref(currentPage.value !== Admin.Start);
 const disableControlSignalDetail = ref(null);
 const disableDisplayTimeDetail = ref(null);
 
@@ -61,14 +65,9 @@ const currentStage = ref(Stage.Waiting);
 const displayTime = ref("00:00");
 const voteResult = ref([]);
 const stageList = ref([]);
-const startControl = async () => {
+const loadControlData = () => {
   isLoading.value = true;
   
-  await ResetControlSignal();
-  await ResetVoteData();
-
-  currentPage.value = Admin.SlideControl;
-
   // get songData & controlSignal
   GetSongData(songData, !(QUERY_NOCACHE in route.query)).then(() => {
     console.log("songData", songData);
@@ -82,12 +81,45 @@ const startControl = async () => {
   }).then(() => {
     console.log(currentSongIndex, currentStage, displayTime, voteResult);
   });
-
+  
   // get stage list
   GetStageList(stageList, !(QUERY_NOCACHE in route.query)).then(() => {
     console.log("stageList", stageList);
   });
+};
+const leaveControl = async () => {
+  await ResetControlSignal();
+  await ResetVoteData();
+  
+  if (disableControlSignalDetail.value != null) {
+    DisableOnControlSignalChange(disableControlSignalDetail.value);
+  }
+  if (disableDisplayTimeDetail.value != null) {
+    DisableDisplayTime(disableDisplayTimeDetail.value);
+  }
 }
+
+const startControl = async () => {
+  isLoading.value = true;
+  
+  await ResetControlSignal();
+  await ResetVoteData();
+
+  currentPage.value = Admin.SlideControl;
+
+  loadControlData();
+}
+
+const handleRestart = async () => {
+  if (confirm("確定要重新開始活動嗎？目前所有的進度與投票結果將會被重置。")) {
+    isLoading.value = true;
+    
+    await leaveControl();
+    
+    currentPage.value = Admin.Start; 
+    isLoading.value = false;
+  }
+};
 
 
 const changeSlide = async (offset) => {
@@ -125,12 +157,20 @@ const nextSlide = () => {
   changeSlide(1);
 }
 
+
+onMounted(() => {
+  isLoading.value = true;
+  if (currentPage.value === Admin.SlideControl) {
+    loadControlData();
+  }
+  else {
+    isLoading.value = false;
+  }
+});
+watch(currentPage, (newPage) => {
+  sessionStorage.setItem(ADMIN_CURRENT_PAGE_KEY, newPage);
+});
 onUnmounted(() => {
-  if (disableControlSignalDetail.value != null) {
-    DisableOnControlSignalChange(disableControlSignalDetail);
-  }
-  if (disableDisplayTimeDetail.value != null) {
-    DisableDisplayTime(disableDisplayTimeDetail);
-  }
+  leaveControl();
 });
 </script>

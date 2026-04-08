@@ -35,7 +35,7 @@
             <span class="page-name default-font">{{ pageName }}</span>
           </div>
 
-          <button v-if="IsAutoAdvanceStage(currentStage)" class="nav-btn base-btn auto-mode animate-btn" @click="emit(ADMIN_NEXT_SLIDE)">
+          <button v-if="IsAutoAdvanceStage(currentStage)" class="nav-btn base-btn auto-mode animate-btn" @click="nextSlideWithConfirm">
             <div class="timer-box">
               <span class="time-text serif-font">{{ time }}</span>
               <span class="auto-label default-font">自動跳轉</span>
@@ -79,6 +79,13 @@
         <div class="link-panel img-box default-btn white-bg">
           <LinkBox />
           <div class="panel-body"></div>
+          <button class="base-btn animate-btn default-btn restart-btn" @click="emit(ADMIN_RESTART)" title="重新開始活動">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+            <span>重新開始活動</span>
+          </button>
         </div>
 
       </div>
@@ -89,7 +96,7 @@
 
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from 'vue';
-import { LANG, Stage, ROLE, ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE } from '@/constants.js';
+import { LANG, Stage, ROLE, ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE, ADMIN_RESTART } from '@/constants.js';
 import { IsAutoAdvanceStage, GetIndexAndStage } from '@/utils/stage_logic';
 
 // Components
@@ -110,7 +117,13 @@ const props = defineProps({
   time: { type: String, default: "00:00" }
 });
 
-const emit = defineEmits([ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE]);
+const emit = defineEmits([ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE, ADMIN_RESTART]);
+
+const nextSlideWithConfirm = () => {
+  if (confirm("確定要跳過倒數、強制切換下一頁嗎？")) {
+    emit(ADMIN_NEXT_SLIDE);
+  }
+}
 
 // --- 舞台順序 ---
 const getComponentByStage = (stage) => {
@@ -422,6 +435,18 @@ const nextScaleStyle = computed(() => ({
 
 .panel-body {
   flex: 1;
+}
+
+.restart-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 55px; 
+  width: 80%;
+  gap: 10px;
+  border-color: #d9534f;
+  border-width: 5px;
 }
 
 .light-bg { background-color: #fdfbf7; }

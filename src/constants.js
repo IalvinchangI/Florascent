@@ -29,12 +29,15 @@ export const Admin = {
 export const ADMIN_START = "start-control"
 export const ADMIN_PREV_SLIDE = "previous-slide"
 export const ADMIN_NEXT_SLIDE = "next-slide"
+export const ADMIN_RESTART = "restart-control"
 
 export const SONGDATA_CACHE_KEY = 'Florascent_songData';
 export const SONGDATA_CACHE_TIME_KEY = 'Florascent_songData_timestamp';
 export const STAGELIST_CACHE_KEY = 'Florascent_stageList';
 export const STAGELIST_CACHE_TIME_KEY = 'Florascent_stageList_timestamp';
 export const CACHE_TTL = 4 * 60 * 60 * 1000;  // 4 hr
+
+export const ADMIN_CURRENT_PAGE_KEY = 'Florascent_adminCurrentPage';
 
 export const QUERY_NOCACHE = "preview";
 
