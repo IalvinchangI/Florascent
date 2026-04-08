@@ -19,10 +19,10 @@
           :role="role" :lang="userLang" :songData="songData[currentSongIndex]" :time="displayTime" 
           @[LANG_SELECT]="setLang" @[OPTION_SELECT]="uploadVote" 
         />
-        <Result v-else-if="currentStage === Stage.Result" 
+        <Result v-else-if="currentStage === Stage.Result || (currentStage === Stage.Performance && role === ROLE.AUDIENCE)" 
           :role="role" :lang="userLang" :songData="songData[currentSongIndex]" :voteResult="voteResult"
         />
-        <Performance v-else-if="currentStage === Stage.Performance" 
+        <Performance v-else-if="currentStage === Stage.Performance && role === ROLE.PROJECTOR" 
           :role="role" :lang="userLang" 
         />
         <Next v-else-if="currentStage === Stage.Next && role === ROLE.PROJECTOR" 
