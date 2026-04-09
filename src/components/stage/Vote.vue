@@ -27,7 +27,9 @@
         <!-- slots -->
         <div v-for="(option, index) in processedOptions" :key="index" class="slot-row">
           <!-- VOTING || selected -->
-          <div v-if="currentPhase === 'VOTING'" class="base-btn default-btn animate-btn img-box-horizontal option-button-wrapper full-size" @click="handleOptionSelect(option, index)">
+          <div v-if="currentPhase === 'VOTING'" 
+               class="base-btn default-btn img-box-horizontal animate-btn option-button-wrapper full-size"
+               @click="!isBroken && handleOptionSelect(option, index)">
             <h3 class="option-title serif-font title">{{ option.title }}</h3>
             <p class="option-desc default-font" v-for="(line, i) in option.description" :key="i">{{ line }}</p>
           </div>
@@ -61,7 +63,7 @@
         <!-- LOADING animation -->
         <div v-if="waitingURL !== null" class="waiting-animation-row">
           <div class="img-box img-box-vertical img-restrict full-size">
-            <img :src=waitingURL alt="LOADING..." />
+            <img :src="waitingURL" alt="LOADING..." />
           </div>
         </div>
 
@@ -87,7 +89,21 @@
         </div>
       </div>
 
-      <div class="video-overlay">
+      <div v-if="isBroken" class="broken-overlay">
+        <div 
+          v-for="i in 15" 
+          :key="i" 
+          class="broken-bar white" 
+          :style="getRandomBarStyle()"
+        ></div>
+        <div 
+          v-for="i in 25" 
+          :key="i" 
+          class="broken-bar black" 
+          :style="getRandomBarStyle()"
+        ></div>
+      </div>
+      <div v-else class="video-overlay">
         <!-- TODO video -->
       </div>
     </div>
@@ -99,7 +115,7 @@
 import { ref, computed } from 'vue';
 import { LANG, ROLE, LANG_SELECT, OPTION_SELECT } from '@/constants.js';
 import Header from '@/components/Header.vue';
-import { GetWaitingLink, GetTitle, GetQuestion, GetOptions, GetCanRegret } from '@/utils/song_data_logic'; 
+import { GetWaitingLink, GetTitle, GetQuestion, GetOptions, GetCanRegret, GetIsBroken } from '@/utils/song_data_logic'; 
 
 const props = defineProps({
   role: String,
@@ -144,8 +160,33 @@ const waitingURL = computed(() => {
   return GetWaitingLink(props.songData);
 });
 
+const isBroken = computed(() => {
+  return GetIsBroken(props.songData);
+});
+
 const getUIText = (key, field) => {
   return uiLabels[key][field][props.lang] || uiLabels[key][field][LANG.TW];
+};
+
+const getRandomBarStyle = () => {
+  // Positions (0% to 100%)
+  const top = Math.random() * 100 + '%';
+  const left = Math.random() * 100 + '%';
+  
+  // Size: 黑色長方形，我們讓 width 隨機，height 較細
+  const width = Math.random() * 500 + 200 + 'px'; // 隨機長度 (200px to 400px)
+  const height = Math.random() * 5 + 30 + 'px';  // 較細的水平線 (50px to 55px)
+  
+  // Animation Delay: 負的 delay 可以讓動畫 stagger 開來，看起來像隨機閃爍
+  const delay = Math.random() * -3 + 's'; 
+
+  return {
+    top,
+    left,
+    '--base-width': width,
+    height,
+    animationDelay: delay, // Staggered start
+  };
 };
 
 // Actions
@@ -346,5 +387,59 @@ const handleLangUpdate = (lang) => {
   height: 100%;
   z-index: 10;
   pointer-events: none;
+}
+
+/* =========================================
+   Broken Overlay Style & Animation
+   ========================================= */
+
+.broken-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* 使用者無法操作 */
+  overflow: hidden;    /* 黑色方塊變長時不會溢出螢幕 */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* z-index: 9999; */
+}
+
+.broken-bar {
+  position: absolute;
+  opacity: 0; /* 預設為全透明 */
+
+  width: var(--base-width);
+  
+  /* 在同位置閃爍，閃爍時鐘建有幾幀長方形會變長 */
+  /* 動畫名稱 | 時長 | 無限循環 | 線性 */
+  animation: broken-bar-flicker 1.5s infinite linear;
+}
+.broken-bar.white {
+  background-color: rgb(140, 140, 140);
+}
+.broken-bar.black {
+  background-color: rgb(31, 31, 31);
+}
+
+@keyframes broken-bar-flicker {
+  /* 隨機閃爍效果，利用快速切換透明度 */
+  0%   { opacity: 0; }
+  5%   { opacity: 0.5; }
+  10%  { opacity: 0; }
+  15%  { opacity: 1; }
+  20%  { opacity: 0; }
+  25%  { opacity: 0.7; }
+  30%  { opacity: 0; }
+  35%  { opacity: 1; }
+
+  /* 瞬間變為滿版長度 */
+  39%  { opacity: 0.7; width: var(--base-width); }
+  40%  { opacity: 1; width: calc(var(--base-width) + 300px); }
+  42%  { opacity: 0.7; width: calc(var(--base-width) + 300px); }
+  43%  { opacity: 1; width: var(--base-width); }
+  
+  50%  { opacity: 0; }
+  100% { opacity: 0; } /* 長時間的黑暗，模擬Sporadic閃爍 */
 }
 </style>
