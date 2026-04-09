@@ -1,5 +1,5 @@
 <template>
-  <div class="client-container">
+  <div class="client-container" :style="currentBackgroundStyle">
     <LandscapeGuard v-if="role === ROLE.AUDIENCE" />
 
     <Lobby v-if="role === ROLE.AUDIENCE && !userLang" @[LANG_SELECT]="start" />
@@ -35,9 +35,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import { GetSongData } from '@/utils/song_data_logic';
+import { GetSongData, GetBackgroundLink } from '@/utils/song_data_logic';
 import { 
   ConfigOnControlSignalChange, DisableOnControlSignalChange, 
   ConfigCurrentStage, ConfigCurrentSongIndex, ConfigCurrentRoute, 
@@ -45,7 +45,12 @@ import {
 } from '@/utils/control_logic';
 import { IsAutoAdvanceStage } from '@/utils/stage_logic';
 import { UploadVoteData } from '@/utils/vote_logic';
-import { LANG, ROLE, LANG_SELECT, OPTION_SELECT, Stage, QUERY_NOCACHE } from '@/constants.js';
+import { 
+  LANG, Stage, ROLE, 
+  LANG_SELECT, OPTION_SELECT, 
+  QUERY_NOCACHE, 
+  SHOW_BACKGROUND_STAGE
+} from '@/constants.js';
 
 import LandscapeGuard from '@/components/LandscapeGuard.vue';
 import Lobby from '@/components/Lobby.vue';
@@ -113,6 +118,31 @@ const uploadVote = (option) => {
   console.log("Vote ID:", option.id);
   // localStorage.setItem('slido_lang', lang); // 存進瀏覽器，防重新整理
 };
+
+
+const currentBackgroundStyle = computed(() => {
+  // 如果還沒載入資料，或是沒有選中歌曲，就不顯示背景
+  if (!songData.value || songData.value.length === 0 || currentSongIndex.value == null) {
+    return {};
+  }
+
+  // 判斷是否在需要顯示背景的四個階段中
+  if (SHOW_BACKGROUND_STAGE.includes(currentStage.value)) {
+    const bgUrl = GetBackgroundLink(songData.value[currentSongIndex.value]);
+    if (bgUrl) {
+      return {
+        backgroundImage: `url('${bgUrl}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+    }
+  }
+  
+  // 否則回傳空物件，不顯示背景
+  return {};
+});
+
 
 onMounted(() => {
   if (route.query.role === ROLE.PROJECTOR) {

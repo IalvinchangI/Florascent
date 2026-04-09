@@ -9,7 +9,7 @@
 
       <div class="animation-row">
         <div class="img-box img-box-vertical img-restrict">
-          <img :src=LOADING_URL alt="LOADING..." />
+          <img v-if="waitingURL !== null" :src=waitingURL alt="LOADING..." />
         </div>
       </div>
 
@@ -63,8 +63,7 @@
 <script setup>
 import { ref, computed, onMounted, reactive } from 'vue';
 import { LANG, ROLE, RESULT_TRANSITION_TIMING } from '@/constants.js';
-import { LOADING_URL } from '@/assets_url';
-import { GetOptions } from '@/utils/song_data_logic';
+import { GetWaitingLink, GetOptions } from '@/utils/song_data_logic';
 
 const props = defineProps({
   role: String,
@@ -99,6 +98,10 @@ const processedOptions = computed(() => {
 
 processedOptions.value.forEach(opt => {
   animatedDisplayMap[opt.id] = 50;
+});
+
+const waitingURL = computed(() => {
+  return GetWaitingLink(props.songData);
 });
 
 const winnerId = computed(() => {

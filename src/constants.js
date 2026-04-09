@@ -41,6 +41,13 @@ export const ADMIN_CURRENT_PAGE_KEY = 'Florascent_adminCurrentPage';
 
 export const QUERY_NOCACHE = "preview";
 
+export const SHOW_BACKGROUND_STAGE = [
+  Stage.Intro, 
+  Stage.Vote, 
+  Stage.Result, 
+  Stage.Performance
+];
+
 export const RESULT_TRANSITION_TIMING = {
   INITIAL_HOLD: 1500,     
   REVEAL_DURATION: 3000,  

@@ -59,9 +59,9 @@
         </div>
         
         <!-- LOADING animation -->
-        <div class="waiting-animation-row">
+        <div v-if="waitingURL !== null" class="waiting-animation-row">
           <div class="img-box img-box-vertical img-restrict full-size">
-            <img :src=LOADING_URL alt="LOADING..." />
+            <img :src=waitingURL alt="LOADING..." />
           </div>
         </div>
 
@@ -98,9 +98,8 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { LANG, ROLE, LANG_SELECT, OPTION_SELECT } from '@/constants.js';
-import { LOADING_URL } from '@/assets_url';
 import Header from '@/components/Header.vue';
-import { GetTitle, GetQuestion, GetOptions, GetCanRegret } from '@/utils/song_data_logic'; 
+import { GetWaitingLink, GetTitle, GetQuestion, GetOptions, GetCanRegret } from '@/utils/song_data_logic'; 
 
 const props = defineProps({
   role: String,
@@ -139,6 +138,10 @@ const currentQuestion = computed(() => {
 
 const processedOptions = computed(() => {
   return GetOptions(props.songData, props.lang);
+});
+
+const waitingURL = computed(() => {
+  return GetWaitingLink(props.songData);
 });
 
 const getUIText = (key, field) => {

@@ -4,5 +4,3 @@ export const BACKGROUND_VERTICAL_URL = "https://res.cloudinary.com/dhbxvo9za/ima
 
 export const LOGO_URL = "/assets/images/logo.png"
 export const QRCODE_URL = "/assets/images/qrcode.png"
-export const PHONE_ICON_URL = "/assets/images/phone_icon.png"
-export const LOADING_URL = "/assets/images/phone_icon.png"

@@ -98,7 +98,11 @@
 
 <script setup>
 import { computed, ref, onMounted, onUnmounted } from 'vue';
-import { LANG, Stage, ROLE, ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE, ADMIN_RESTART } from '@/constants.js';
+import {
+  LANG, Stage, ROLE, 
+  ADMIN_PREV_SLIDE, ADMIN_NEXT_SLIDE, ADMIN_RESTART, 
+  SHOW_BACKGROUND_STAGE
+} from '@/constants.js';
 import { IsAutoAdvanceStage, GetIndexAndStage } from '@/utils/stage_logic';
 
 // Components
@@ -151,6 +155,30 @@ const nextComponent = computed(() => {
   );
   return getComponentByStage(stage);
 });
+
+const currentBackgroundStyle = computed(() => {
+  // 如果還沒載入資料，或是沒有選中歌曲，就不顯示背景
+  if (!songData) {
+    return {};
+  }
+
+  // 判斷是否在需要顯示背景的四個階段中
+  if (SHOW_BACKGROUND_STAGE.includes(currentStage)) {
+    const bgUrl = GetBackgroundLink(songData);
+    if (bgUrl) {
+      return {
+        backgroundImage: `url('${bgUrl}')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      };
+    }
+  }
+  
+  // 否則回傳空物件，不顯示背景
+  return {};
+});
+
 
 // --- 資訊顯示 ---
 const currentSongTitle = computed(() => props.songData?.title?.[LANG.TW] || '');
