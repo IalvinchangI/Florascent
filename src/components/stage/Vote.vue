@@ -91,13 +91,13 @@
 
       <div v-if="isBroken" class="broken-overlay">
         <div 
-          v-for="i in 15" 
+          v-for="i in 60" 
           :key="i" 
           class="broken-bar white" 
           :style="getRandomBarStyle()"
         ></div>
         <div 
-          v-for="i in 25" 
+          v-for="i in 60" 
           :key="i" 
           class="broken-bar black" 
           :style="getRandomBarStyle()"
@@ -178,8 +178,8 @@ const getRandomBarStyle = () => {
   const left = Math.random() * 100 + '%';
   
   // Size: 黑色長方形，我們讓 width 隨機，height 較細
-  const width = Math.random() * 500 + 200 + 'px'; // 隨機長度 (200px to 400px)
-  const height = Math.random() * 5 + 30 + 'px';  // 較細的水平線 (50px to 55px)
+  const width = Math.random() * 700 + 10 + 'px'; // 隨機長度 (10px to 710px)
+  const height = Math.random() * 20 + 10 + 'px';  // 較細的水平線 (10px to 30px)
   
   // Animation Delay: 負的 delay 可以讓動畫 stagger 開來，看起來像隨機閃爍
   const delay = Math.random() * -3 + 's'; 
