@@ -51,6 +51,7 @@ import {
   QUERY_NOCACHE, 
   SHOW_BACKGROUND_STAGE
 } from '@/constants.js';
+import { GetBackgroundStyle } from '@/utils/assets_tools';
 
 import LandscapeGuard from '@/components/LandscapeGuard.vue';
 import Lobby from '@/components/Lobby.vue';
@@ -121,26 +122,19 @@ const uploadVote = (option) => {
 
 
 const currentBackgroundStyle = computed(() => {
-  // 如果還沒載入資料，或是沒有選中歌曲，就不顯示背景
-  if (!songData.value || songData.value.length === 0 || currentSongIndex.value == null) {
-    return {};
-  }
-
-  // 判斷是否在需要顯示背景的四個階段中
-  if (SHOW_BACKGROUND_STAGE.includes(currentStage.value)) {
-    const bgUrl = GetBackgroundLink(songData.value[currentSongIndex.value]);
-    if (bgUrl) {
-      return {
-        backgroundImage: `url('${bgUrl}')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      };
-    }
-  }
+  // 1. 決定方向
+  const orientation = (role.value === ROLE.PROJECTOR) ? "horizontal" : "vertical";
   
-  // 否則回傳空物件，不顯示背景
-  return {};
+  // 2. 取得單首歌曲資料 (防呆判斷)
+  const currentSong = (songData.value && songData.value.length > 0 && currentSongIndex.value != null)
+    ? songData.value[currentSongIndex.value] 
+    : null;
+
+  // 3. 判斷當前階段是否「不」在顯示清單中 (強制使用預設背景)
+  const useDefault = !SHOW_BACKGROUND_STAGE.includes(currentStage.value);
+
+  // 4. 呼叫 function 取得 style
+  return GetBackgroundStyle(currentSong, useDefault, orientation);
 });
 
 

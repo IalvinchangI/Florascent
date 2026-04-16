@@ -1,10 +1,6 @@
 <template>
   <router-view 
-    class="template-view" 
-    :style="{
-      '--bg-horizontal': `url(${BACKGROUND_HORIZONTAL_URL})`,
-      '--bg-vertical': `url(${BACKGROUND_VERTICAL_URL})`
-    }"
+    class="template-view"
   />
 </template>
 
@@ -46,20 +42,7 @@ body, html {
   margin: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
   overflow: hidden;
-}
-@media (orientation: portrait) {
-  .template-view {
-    background-image: var(--bg-vertical);
-  }
-}
-@media (orientation: landscape) {
-  .template-view {
-    background-image: var(--bg-horizontal);
-  }
 }
 
 /* image */
@@ -97,11 +80,12 @@ body, html {
 }
 
 /* button */
-.base-btn {
+.base-btn, .base-btn:active, .base-btn:focus {
   background-color: #fdfbf7;
   border: 1px solid #000000;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  outline: none;
 }
 .default-btn {
   padding: 15px 0;

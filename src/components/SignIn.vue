@@ -1,6 +1,6 @@
 <template>
-  <Loading v-if="isLoading === true" />
-  <div v-else class="sign-in-page">
+  <Loading v-if="isLoading === true" :style="backgroundStyle" />
+  <div v-else class="sign-in-page" :style="backgroundStyle">
     <div class="layout-container">
 
       <div v-if="!isError" class="login-box base-btn default-btn ">
@@ -63,8 +63,11 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import Loading from './Loading.vue';
 import router from '@/router';
 import { auth } from '@/firebase';
+import { GetBackgroundStyle } from '@/utils/assets_tools';
 
 const route = useRoute();
+
+const backgroundStyle = GetBackgroundStyle(null, true, "horizontal");
 
 // 狀態管理
 const isError = ref(false); 

@@ -120,11 +120,19 @@ export function GetWaitingLink(song) {
 /**
  * 取得該首歌曲的背景連結 (backgroundLink)
  * @param {Object} song - 單首歌曲的資料物件
+ * @param {string} orientation - 背景的方向 (`horizontal`或`vertical`)
  * @returns {string|null} 預設為 null
  */
-export function GetBackgroundLink(song) {
+export function GetBackgroundLink(song, orientation) {
   if (song && typeof song.backgroundLink === 'string' && song.backgroundLink.trim() !== '') {
-    return song.backgroundLink;
+    switch (orientation) {
+      case "horizontal":
+        return song.backgroundLink.horizontal;
+      case "vertical":
+        return song.backgroundLink.vertical;
+      default:
+        return null;
+    }
   }
   return null;
 }

@@ -62,7 +62,10 @@
       "isBroken": false,
       "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/character_kcffna.png",
       "waitingLink": null,
-      "backgroundLink": null,
+      "backgroundLink": {
+        "horizontal": null,
+        "vertical": null
+      },
       "description": {
         "en": "Spring has arrived, and a hundred flowers bloom. Red roses, white jasmines.\nA few bushes here, a few branches there,\nBlooming so abundantly, truly beautiful.",
         "zh-TW": "紅薔薇，白茉莉。\n這屏幾欉，彼屏幾蕊，\n開得真齊，真正美。"
@@ -118,7 +121,10 @@
       "isBroken": false,
       "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/character_kcffna.png",
       "waitingLink": null,
-      "backgroundLink": null,
+      "backgroundLink": {
+        "horizontal": null,
+        "vertical": null
+      },
       "description": {
         "en": "June jasmine scents the whole mountain, a single maiden guards an empty room.\nThe beautiful flowers bloom fully for picking, but who knows the eighteen-year-old maiden?\n\nJune jasmine scents the sky, the single maiden gazes at the stars.\nEven beautiful flowers need good pots; when will the maiden meet her beloved?\n\nJune jasmine scents the night, the single maiden sleeps in an empty room.\nIf the flowers wither, they lose their fragrance; the maiden's heart is anxious all night long.\n\nJune jasmine is truly fragrant, the single maiden is prone to dreaming.\nThe flowers have bloomed, waiting for the next season; when will the maiden's engagement be set?\n\nJune jasmine scents the whole mountain; when picking flowers, one must cherish the bush.\nLike a butterfly without affection, picking from one bush to another.\n\nA jasmine bush is planted in the soil, watched over with wide-open eyes.\nIt is you who are foolish and stuck in your ways, not knowing how to jump the wall to embrace me.\n\nJune jasmine divides into six paths, the most beautiful bush is moved into a pot.\nIn the daytime, someone guards it from being picked; at night, it is left alone.",
         "zh-TW": "六月茉莉滿山香，\n單身娘仔守空房，\n好花開透人來採，\n娘仔十八誰人知。"
@@ -174,7 +180,10 @@
       "isBroken": false,
       "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/character_kcffna.png",
       "waitingLink": null,
-      "backgroundLink": null,
+      "backgroundLink": {
+        "horizontal": null,
+        "vertical": null
+      },
       "description": {
         "en": "Description for Track 3",
         "zh-TW": "雨夜花雨夜花，\n受風雨吹落地，\n無人看見暝日怨嗟，\n花謝落土不再回。"
@@ -232,7 +241,10 @@
       "canRegret": false,
       "canChangeRoute": false,
       "isBroken": true,
-      "backgroundLink": null,
+      "backgroundLink": {
+        "horizontal": null,
+        "vertical": null
+      },
       "description": {
         "en": "Description for Track 4",
         "zh-TW": "曲目四 說明"

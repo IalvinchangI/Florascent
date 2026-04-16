@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-container">
+  <div class="admin-container" :style="backgroundStyle">
 
       <Loading v-if="isLoading" />
 
@@ -47,6 +47,7 @@ import {
   DownloadVoteData, CalculateVoteData, GetWinnerIndex, 
   ResetVoteData
 } from '@/utils/vote_logic';
+import { GetBackgroundStyle } from '@/utils/assets_tools';
 
 import Loading from '@/components/Loading.vue';
 import Start from '@/components/admin/Start.vue';
@@ -57,6 +58,8 @@ const currentPage = ref(sessionStorage.getItem(ADMIN_CURRENT_PAGE_KEY) || Admin.
 const isLoading = ref(currentPage.value !== Admin.Start);
 const disableControlSignalDetail = ref(null);
 const disableDisplayTimeDetail = ref(null);
+
+const backgroundStyle = GetBackgroundStyle(null, true, "horizontal");
 
 
 // ----- Start Control & Config ----- //

@@ -5,7 +5,7 @@
       <div class="left-column">
         <div class="monitor-frame img-box default-btn light-bg" ref="currentContainer">
           <div class="scaler-wrapper" :style="currentScaleStyle">
-            <div class="simulated-screen template-view">
+            <div class="simulated-screen template-view" :style="currentBackgroundStyle">
               <component 
                 :is="currentComponent" 
                 :role="ROLE.PROJECTOR"
@@ -62,7 +62,7 @@
         
         <div class="next-slide-box img-box default-btn white-bg" ref="nextContainer">
            <div class="scaler-wrapper" :style="nextScaleStyle">
-            <div class="simulated-screen template-view">
+            <div class="simulated-screen template-view" :style="nextBackgroundStyle">
                <component 
                 :is="nextComponent" 
                 :role="ROLE.PROJECTOR"
@@ -104,6 +104,7 @@ import {
   SHOW_BACKGROUND_STAGE
 } from '@/constants.js';
 import { IsAutoAdvanceStage, GetIndexAndStage } from '@/utils/stage_logic';
+import { GetBackgroundStyle } from '@/utils/assets_tools';
 
 // Components
 import LinkBox from '@/components/LinkBox.vue';
@@ -157,26 +158,29 @@ const nextComponent = computed(() => {
 });
 
 const currentBackgroundStyle = computed(() => {
-  // 如果還沒載入資料，或是沒有選中歌曲，就不顯示背景
-  if (!songData) {
-    return {};
-  }
+  // 1. 取得單首歌曲資料 (防呆判斷)
+  const songData = (props.songData) ? props.songData : null;
 
-  // 判斷是否在需要顯示背景的四個階段中
-  if (SHOW_BACKGROUND_STAGE.includes(currentStage)) {
-    const bgUrl = GetBackgroundLink(songData);
-    if (bgUrl) {
-      return {
-        backgroundImage: `url('${bgUrl}')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      };
-    }
-  }
-  
-  // 否則回傳空物件，不顯示背景
-  return {};
+  // 2. 判斷當前階段是否「不」在顯示清單中 (強制使用預設背景)
+  const useDefault = !SHOW_BACKGROUND_STAGE.includes(props.currentStage);
+
+  // 3. 呼叫 function 取得 style
+  return GetBackgroundStyle(songData, useDefault, "horizontal");
+});
+const nextBackgroundStyle = computed(() => {
+  // 1. 取得單首歌曲資料 (防呆判斷)
+  const songData = (props.songData) ? props.songData : null;
+
+  // 2. 判斷當下階段是否「不」在顯示清單中 (強制使用預設背景)
+  const { newIndex: index, newStage: stage } = GetIndexAndStage(
+    props.stageList, 
+    props.currentSongIndex, props.currentStage, 
+    1
+  );
+  const useDefault = !SHOW_BACKGROUND_STAGE.includes(stage);
+
+  // 3. 呼叫 function 取得 style
+  return GetBackgroundStyle(songData, useDefault, "horizontal");
 });
 
 
