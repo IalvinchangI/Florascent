@@ -112,8 +112,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { LANG, ROLE, LANG_SELECT, OPTION_SELECT } from '@/constants.js';
+import { ref, computed, onMounted, watch } from 'vue';
+import { LANG, ROLE, LANG_SELECT, OPTION_SELECT, VOTE_SELECTED_OPTION_KEY } from '@/constants.js';
 import Header from '@/components/Header.vue';
 import { GetWaitingLink, GetTitle, GetQuestion, GetOptions, GetCanRegret, GetIsBroken } from '@/utils/song_data_logic'; 
 
@@ -140,7 +140,6 @@ const emit = defineEmits([LANG_SELECT, OPTION_SELECT]);
 
 // State
 const currentPhase = ref('VOTING');
-const selectedOption = ref(null);
 const selectedOptionIndex = ref(null);
 
 // Computed
@@ -155,6 +154,10 @@ const currentQuestion = computed(() => {
 const processedOptions = computed(() => {
   return GetOptions(props.songData, props.lang);
 });
+const selectedOption = computed(() => {
+  if (selectedOptionIndex.value === null) return null;
+  return processedOptions.value[selectedOptionIndex.value];
+});
 
 const waitingURL = computed(() => {
   return GetWaitingLink(props.songData);
@@ -164,6 +167,7 @@ const isBroken = computed(() => {
   return GetIsBroken(props.songData);
 });
 
+// Helper Function
 const getUIText = (key, field) => {
   return uiLabels[key][field][props.lang] || uiLabels[key][field][LANG.TW];
 };
@@ -189,9 +193,28 @@ const getRandomBarStyle = () => {
   };
 };
 
+const getSavedVotes = () => {
+  const savedString = sessionStorage.getItem(VOTE_SELECTED_OPTION_KEY);
+  return savedString ? JSON.parse(savedString) : {};
+};
+const checkSavedVote = () => {
+  if (props.role !== ROLE.AUDIENCE || props.songData?.index == null) return;
+  
+  const votes = getSavedVotes();
+  const savedVoteIndex = votes[props.songData.index]; // 直接用 index 查字典
+
+  // 檢查是否有存檔 (注意：要用 !== undefined，因為 index 可能是 0)
+  if (savedVoteIndex !== undefined) {
+    selectedOptionIndex.value = savedVoteIndex;
+    currentPhase.value = 'WAITING';
+  } else {
+    selectedOptionIndex.value = null;
+    currentPhase.value = 'VOTING';
+  }
+};
+
 // Actions
 const handleOptionSelect = (option, index) => {
-  selectedOption.value = option;
   selectedOptionIndex.value = index; 
   
   if (GetCanRegret(props.songData)) {
@@ -203,11 +226,17 @@ const handleOptionSelect = (option, index) => {
 
 const confirmChoice = () => {
   currentPhase.value = 'WAITING';
+
+  if (props.songData?.index != null) {
+    const votes = getSavedVotes(); // 先抓出舊紀錄
+    votes[props.songData.index] = selectedOptionIndex.value; // 更新這首歌的紀錄
+    sessionStorage.setItem(VOTE_SELECTED_OPTION_KEY, JSON.stringify(votes)); // 轉回字串存進去
+  }
+
   emit(OPTION_SELECT, selectedOption.value);
 };
 
 const cancelChoice = () => {
-  selectedOption.value = null;
   selectedOptionIndex.value = null;
   currentPhase.value = 'VOTING';
 };
@@ -215,6 +244,13 @@ const cancelChoice = () => {
 const handleLangUpdate = (lang) => {
   emit(LANG_SELECT, lang);
 };
+
+
+watch(() => props.songData?.index, (newId) => {
+  if (newId != null) {
+    checkSavedVote();
+  }
+}, { immediate: true });
 </script>
 
 <style scoped>

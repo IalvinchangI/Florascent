@@ -70,7 +70,6 @@ const disableControlSignalDetail = ref(null);
 const disableDisplayTimeDetail = ref(null);
 
 
-// const userLang = ref(localStorage.getItem('slido_lang') || null);
 const userLang = ref(null);
 const setLang = (lang) => {
   userLang.value = lang;
@@ -117,7 +116,6 @@ const start = (lang) => {
 const uploadVote = (option) => {
   UploadVoteData(option);
   console.log("Vote ID:", option.id);
-  // localStorage.setItem('slido_lang', lang); // 存進瀏覽器，防重新整理
 };
 
 

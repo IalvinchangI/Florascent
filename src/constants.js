@@ -39,6 +39,8 @@ export const CACHE_TTL = 4 * 60 * 60 * 1000;  // 4 hr
 
 export const ADMIN_CURRENT_PAGE_KEY = 'Florascent_adminCurrentPage';
 
+export const VOTE_SELECTED_OPTION_KEY = 'Florascent_selectedOption';
+
 export const QUERY_NOCACHE = "preview";
 
 export const SHOW_BACKGROUND_STAGE = [
