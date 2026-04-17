@@ -60,11 +60,8 @@
       "canRegret": true,
       "canChangeRoute": false,
       "isBroken": false,
-      "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/character_kcffna.png",
-      "waitingLink": {
-        "slow": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776413075/song0_slow_qpd6n4.mov",
-        "fast": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412295/song0_fast_p0rb5j.mov"
-      },
+      "characterLink": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776413075/song0_slow_qpd6n4.mov",
+      "waitingLink": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412295/song0_fast_p0rb5j.mov",
       "backgroundLink": {
         "horizontal": null,
         "vertical": null
@@ -122,11 +119,8 @@
       "canRegret": true,
       "canChangeRoute": true,
       "isBroken": false,
-      "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/character_kcffna.png",
-      "waitingLink": {
-        "slow": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412293/song1_slow_dad90l.mov",
-        "fast": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412293/song1_fast_ughfoy.mov"
-      },
+      "characterLink": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412293/song1_slow_dad90l.mov",
+      "waitingLink": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412293/song1_fast_ughfoy.mov",
       "backgroundLink": {
         "horizontal": null,
         "vertical": null
@@ -184,11 +178,8 @@
       "canRegret": true,
       "canChangeRoute": false,
       "isBroken": false,
-      "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/character_kcffna.png",
-      "waitingLink": {
-        "slow": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412294/song2_slow_zrkkni.mov",
-        "fast": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412296/song2_fast_rlyydn.mov"
-      },
+      "characterLink": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412294/song2_slow_zrkkni.mov",
+      "waitingLink": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412296/song2_fast_rlyydn.mov",
       "backgroundLink": {
         "horizontal": null,
         "vertical": null
