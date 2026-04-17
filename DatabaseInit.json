@@ -61,51 +61,54 @@
       "canChangeRoute": false,
       "isBroken": false,
       "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/character_kcffna.png",
-      "waitingLink": null,
+      "waitingLink": {
+        "slow": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776413075/song0_slow_qpd6n4.mov",
+        "fast": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412295/song0_fast_p0rb5j.mov"
+      },
       "backgroundLink": {
         "horizontal": null,
         "vertical": null
       },
       "description": {
-        "en": "Spring has arrived, and a hundred flowers bloom. Red roses, white jasmines.\nA few bushes here, a few branches there,\nBlooming so abundantly, truly beautiful.",
+        "en": "Red roses, white jasmine.\nClumps here, blossoms there,\nblooming in full, truly beautiful.",
         "zh-TW": "紅薔薇，白茉莉。\n這屏幾欉，彼屏幾蕊，\n開得真齊，真正美。"
       },
       "index": 0,
       "options": [
         {
           "description": {
-            "en": "Option Description",
+            "en": "Aiming for a top school,\nbut not my true passion.",
             "zh-TW": "以考取頂尖學校為目標\n但科系並非自己最喜歡的"
           },
           "id": "0-1",
           "regretText": {
-            "en": "Track 1 Regret text for Option 1",
+            "en": "Why must I reach the “top”?\nI have no passion for these fields.\nAs long as I can do what I love, \nDoes it matter,\neven without a “future”?",
             "zh-TW": "為什麼一定要走到頂尖？\n我對這些領域完全沒有熱情\n人生只要能做自己喜歡的事情\n就算不受重視、沒有未來發展\n也無關緊要吧？"
           },
           "title": {
-            "en": "【 Stay 】",
+            "en": "Stay in my lifelong comfort zone",
             "zh-TW": "停留在從小到大的舒適圈"
           }
         },
         {
           "description": {
-            "en": "Option Description",
+            "en": "Chase my passion,\neven if everyone overlooks it.",
             "zh-TW": "以考取自己最喜歡的科系為目標\n但這些領域的未來不受社會重視"
           },
           "id": "0-2",
           "regretText": {
-            "en": "Track 1 Regret text for Option 2",
+            "en": "When passion becomes a tool for profit, will its essence change?\nChoosing a stable path might actually offer more freedom to keep my love alive.",
             "zh-TW": "當自己喜歡的事情變成賺錢的工具\n熱愛的本質是否會因此變質？\n如果唸更有未來發展的熱門科系\n也還是能繼續做我喜歡的事情\n留在舒適圈其實會更自在更自由"
           },
           "title": {
-            "en": "【 Leave 】",
+            "en": "Follow my true passion",
             "zh-TW": "走向自己最愛的領域"
           }
         }
       ],
       "question": [
         {
-          "en": "Story and Question——Story and Question——Story and Question——Story and Question——\nStory and Question——Story and Question——Story and Question——Story and Question——\nStory and Question——Story and Question——Story and Question——Story and Question——",
+          "en": "As I grow older,\nIt's time to choose my future.\nIn this fast-paced society,\nWhich path should I take?\nNo matter which direction I turn,\nthe “first choice” seems to be silently holding me hostage...",
           "zh-TW": "隨著年紀慢慢成長，\n我也要開始選擇未來的科系了。\n在這個變遷殘酷的社會裡，\n究竟要選擇\n但不管選擇走哪條路，\n「第一志願」好像默默地在綁架我..."
         }
       ],
@@ -120,56 +123,59 @@
       "canChangeRoute": true,
       "isBroken": false,
       "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/character_kcffna.png",
-      "waitingLink": null,
+      "waitingLink": {
+        "slow": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412293/song1_slow_dad90l.mov",
+        "fast": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412293/song1_fast_ughfoy.mov"
+      },
       "backgroundLink": {
         "horizontal": null,
         "vertical": null
       },
       "description": {
-        "en": "June jasmine scents the whole mountain, a single maiden guards an empty room.\nThe beautiful flowers bloom fully for picking, but who knows the eighteen-year-old maiden?\n\nJune jasmine scents the sky, the single maiden gazes at the stars.\nEven beautiful flowers need good pots; when will the maiden meet her beloved?\n\nJune jasmine scents the night, the single maiden sleeps in an empty room.\nIf the flowers wither, they lose their fragrance; the maiden's heart is anxious all night long.\n\nJune jasmine is truly fragrant, the single maiden is prone to dreaming.\nThe flowers have bloomed, waiting for the next season; when will the maiden's engagement be set?\n\nJune jasmine scents the whole mountain; when picking flowers, one must cherish the bush.\nLike a butterfly without affection, picking from one bush to another.\n\nA jasmine bush is planted in the soil, watched over with wide-open eyes.\nIt is you who are foolish and stuck in your ways, not knowing how to jump the wall to embrace me.\n\nJune jasmine divides into six paths, the most beautiful bush is moved into a pot.\nIn the daytime, someone guards it from being picked; at night, it is left alone.",
+        "en": "June jasmine scents the hills.\nA girl alone in her room.\nBlooms wait to be picked.\nNo one knows her heart.",
         "zh-TW": "六月茉莉滿山香，\n單身娘仔守空房，\n好花開透人來採，\n娘仔十八誰人知。"
       },
       "index": 1,
       "options": [
         {
           "description": {
-            "en": "Don't separate from my lover, stay in Taiwan.\nPut down roots for future marriage and family.",
+            "en": "Stay by my lover’s side,\nto build a future for the family.",
             "zh-TW": "不和愛人分開、留在臺灣\n為未來的婚姻與家庭扎根"
           },
           "id": "1-1",
           "regretText": {
-            "en": "Is this all there is to life?\nIt wasn't easy to get the chance to study abroad...\nI really want to see a different world.\nMy dreams are right there...\nThe people who love me will support me.",
+            "en": "Is this all my life will ever be?\nGoing abroad is a rare chance.\nI want to see a different world.\nMy dreams are right there.\nMy loved ones will support me.",
             "zh-TW": "人生就只能是這樣了嗎？\n好不容易能去留學...\n好想去看看不一樣的世界\n夢想就在那裡...\n愛我的人們，會支持我的"
           },
           "title": {
-            "en": "Stay in my hometown, stay by my lover's side",
+            "en": "Stay in my hometown",
             "zh-TW": "停留在家鄉、留在愛人身邊"
           }
         },
         {
           "description": {
-            "en": "Study abroad, research my favorite field.\nContinue pursuing my dreams.",
+            "en": "Study abroad, master true passion,\nand keep chasing my dreams.",
             "zh-TW": "出國留學、研讀自己最愛的領域\n繼續追尋夢想"
           },
           "id": "1-2",
           "regretText": {
-            "en": "Walking away like this, I'm so selfish and irrational...\nStudying abroad costs so much money... I miss home so much...\nLearning so much seems useless...\nAre dreams really that important...\nThe people I love, they need me.",
+            "en": "Was it selfish to just leave?\nStudying abroad is so expensive.\nAll I’ve learned seems useless now.\nAre dreams really this important? Those I love...they need me.",
             "zh-TW": "一走了之的我好自私、不夠理性...\n留學好花錢...好想家...\n學那麼多，好像也沒有用...\n夢想有這麼重要嗎...\n我愛的人，他們需要我"
           },
           "title": {
-            "en": "Head towards dreams and the vast, distant unknown",
+            "en": "Chasing my dreams",
             "zh-TW": "走向夢想和遙遠茫茫的遠方"
           }
         }
       ],
       "question": [
         {
-          "en": "After graduating from university, I possess the knowledge and abilities learned over many years, along with the diligence and passion of youth.\nBut facing a blank future, what I hold in my hands seems to be nothing at all.\nI need to quickly find something to rely on so I can find a foothold in this world...",
+          "en": "After graduation,\nI have the knowledge and skills from years of study,\nthe diligence and passion of youth. Yet, facing a blank future,\neverything in my hands seems like nothing at all.\nI need to find something to hold onto, to find a place where I truly belong in this world...",
           "zh-TW": "大學畢業後，\n我擁有學習多年的知識和能力、\n年輕人的勤奮和熱血。\n但面對空白的未來，\n我手中握住的似乎什麼都不是，\n需要趕快找到可以依靠的事物，\n才能在這個世界找到立足點..."
         }
       ],
       "title": {
-        "en": "June Jasmine",
+        "en": "June jasmine",
         "zh-TW": "六月茉莉"
       },
       "voteTime": 60
@@ -179,60 +185,63 @@
       "canChangeRoute": false,
       "isBroken": false,
       "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/character_kcffna.png",
-      "waitingLink": null,
+      "waitingLink": {
+        "slow": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412294/song2_slow_zrkkni.mov",
+        "fast": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412296/song2_fast_rlyydn.mov"
+      },
       "backgroundLink": {
         "horizontal": null,
         "vertical": null
       },
       "description": {
-        "en": "Description for Track 3",
+        "en": "Flower in a rainy night,\nFallen in the wind and rain.\nNo one sees the daily sorrow\nBlown down by the storm.",
         "zh-TW": "雨夜花雨夜花，\n受風雨吹落地，\n無人看見暝日怨嗟，\n花謝落土不再回。"
       },
       "index": 2,
       "options": [
         {
           "description": {
-            "en": "Track 3 Description for Option 1",
+            "en": "Hide the truth,\nand cherish our last happy days.",
             "zh-TW": "對愛人隱瞞病情\n度過最後一段幸福的生活"
           },
           "id": "2-1",
           "regretText": {
-            "en": "Track 3 Regret text for Option 1",
+            "en": "At the end of life,\nWhy must they lose the right to decide for themselves?\nThey deserve to know the truth.\nThough facing death and parting is heartbreaking, we will cherish our final moments even more.",
             "zh-TW": "為什麼來到生命的盡頭\n愛人卻失去了為自己做決定的機會？\n他也該有知道真相的權利\n雖然面對死亡和離別很傷感\n但我們都會更珍惜最後的這段時光"
           },
           "title": {
-            "en": "Track 3 Option 1",
+            "en": "Stay in the peace of a normal life",
             "zh-TW": "停留在正常的平靜生活"
           }
         },
         {
           "description": {
-            "en": "Track 3 Description for Option 2",
+            "en": "Tell them the truth.\nFace the end and fear together.",
             "zh-TW": "告訴愛人病情真相\n每天練習面對生離死別和不安"
           },
           "id": "2-2",
           "regretText": {
-            "en": "Track 3 Regret text for Option 2",
+            "en": "Truth is cruel;silence is out of love.\nBefore an unchangeable fate,\nIs honesty a virtue, or just more pain? Let them live the last days in peace.",
             "zh-TW": "真相是殘酷的，善意的謊言是不捨\n在步步逼近且無法改變的命運前\n面對現實究竟是誠實\n還是另一種折磨？\n最後的路程讓他無憂慮地快樂生活吧"
           },
           "title": {
-            "en": "Track 3 Option 2",
+            "en": "Toward the inevitable end",
             "zh-TW": "走向一定會到來的結局"
           }
         }
       ],
       "question": [
         {
-          "en": "Story and Question for Track 3-1",
+          "en": "Noticing their weakening health,\nI took them for regular check-ups.\nOne day, just like any other visit,\nThe doctor spoke to me alone.\nI was told the condition is\nworsening rapidly…\nThey are leaving me soon.",
           "zh-TW": "因為發現愛人的身體抵抗力變差\n所以我一直有定期帶他去醫院做檢查\n有一天，我和往常一樣陪他去回診\n看完診後，醫生卻單獨把我叫進診間\n告訴我愛人病情急速惡化\n在不久後即將離世..."
         },
         {
-          "en": "Story and Question for Track 3-2",
+          "en": "Back in my hometown,\nThey’ve grown so frail and thin.\nI took them for a check-up.\nThe doctor spoke to me alone.\nI was told the condition is\nworsening rapidly…\nThey are leaving me soon.",
           "zh-TW": "回到家鄉後\n我發現愛人和多年前的氣色差好多\n我帶著他去醫院看診\n醫生單獨把我留在診間\n告訴我愛人病情急速惡化\n在不久後即將離世..."
         }
       ],
       "title": {
-        "en": "Track 3",
+        "en": "Flower in a rainy night",
         "zh-TW": "雨夜花"
       },
       "voteTime": 60
@@ -246,17 +255,17 @@
         "vertical": null
       },
       "description": {
-        "en": "Description for Track 4",
-        "zh-TW": "曲目四 說明"
+        "en": "Finale",
+        "zh-TW": "終曲"
       },
       "index": 3,
       "options": [],
       "question": {
-        "en": "Story and Question for Track 4",
+        "en": "Years later,\nafter countless choices...",
         "zh-TW": "多年後，經歷了無數次的選擇..."
       },
       "title": {
-        "en": "Track 4",
+        "en": "Finale",
         "zh-TW": "終曲"
       },
       "voteTime": 60
