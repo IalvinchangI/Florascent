@@ -13,21 +13,23 @@
 
       <div class="text-group">
         
-        <div class="text-section info-text">
+        <div class="text-section info-text default-font">
+          <span class="title">活動說明</span>
           <div v-if="role === ROLE.PROJECTOR">
-            <p v-for="(line, index) in Introduction.get(LANG.TW)" :key="index" class="default-font">{{ line }}</p>
+            <p v-for="(line, index) in Introduction.get(LANG.TW)" :key="index" class="default-font">{{ line }}&nbsp;</p>
           </div>
           <div v-else-if="role === ROLE.AUDIENCE">
-            <p v-for="(line, index) in Introduction.get(lang)" :key="index" class="default-font">{{ line }}</p>
+            <p v-for="(line, index) in Introduction.get(lang)" :key="index" class="default-font">{{ line }}&nbsp;</p>
           </div>
         </div>
 
         <div class="text-section rules-text default-font">
+          <span class="title">投票規則</span>
           <div v-if="role === ROLE.PROJECTOR">
-            <p v-for="(line, index) in VoteRules.get(LANG.TW)" :key="index" class="default-font">{{ line }}</p>
+            <p v-for="(line, index) in VoteRules.get(LANG.TW)" :key="index" class="default-font">{{ line }}&nbsp;</p>
           </div>
           <div v-else-if="role === ROLE.AUDIENCE">
-            <p v-for="(line, index) in VoteRules.get(lang)" :key="index" class="default-font">{{ line }}</p>
+            <p v-for="(line, index) in VoteRules.get(lang)" :key="index" class="default-font">{{ line }}&nbsp;</p>
           </div>
         </div>
 
