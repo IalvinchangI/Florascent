@@ -3,7 +3,7 @@
     <div class="layout-wrapper">
 
       <div class="left-column">
-        <div class="monitor-frame img-box default-btn light-bg" ref="currentContainer">
+        <div class="monitor-frame img-box light-bg" ref="currentContainer">
           <div class="scaler-wrapper" :style="currentScaleStyle">
             <div class="simulated-screen template-view" :style="currentBackgroundStyle">
               <component 
@@ -60,7 +60,7 @@
 
       <div class="right-column">
         
-        <div class="next-slide-box img-box default-btn white-bg" ref="nextContainer">
+        <div class="next-slide-box img-box white-bg" ref="nextContainer">
            <div class="scaler-wrapper" :style="nextScaleStyle">
             <div class="simulated-screen template-view" :style="nextBackgroundStyle">
                <component 

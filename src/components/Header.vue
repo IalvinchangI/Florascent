@@ -15,10 +15,7 @@
       </div>
     </div>
 
-    <div v-if="role === ROLE.AUDIENCE" class="header-title-wrapper">
-      <h1 class="header-title serif-font">{{ title }}</h1>
-    </div>
-    <div v-else-if="role === ROLE.PROJECTOR">
+    <div class="header-title-wrapper">
       <h1 class="header-title serif-font">{{ title }}</h1>
     </div>
   
@@ -69,19 +66,15 @@ onUnmounted(() => document.removeEventListener('click', closeMenu));
 .app-header {
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
+  gap: 1rem;
 }
 .app-header.audience {
-  height: 6vh;
-  max-width: 500px;
   justify-content: space-between;
-  flex: 1;
-  margin: 0 auto 3vh auto;
 }
 .app-header.projector {
   justify-content: center;
-  margin-bottom: 6vh;
 }
 
 .header-title {
@@ -102,7 +95,7 @@ onUnmounted(() => document.removeEventListener('click', closeMenu));
   position: relative;
 }
 .header-title-wrapper {
-  /* width: 50%; */
+  flex: 1;
   display: flex;
   justify-content: center;
 }

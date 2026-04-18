@@ -2,6 +2,7 @@
   <div class="intro-page" :class="[role, { 'has-image': currentCharacterLink != null }]">
     
     <Header 
+      class="header-container"
       :role="role" 
       :lang="lang" 
       :title="`《${currentTitle}》`" 
@@ -24,7 +25,9 @@
         </div>
       </div>
 
-      <div class="text-section default-font">
+      <div class="text-section default-font" :class="{'scroll-mask-container': role === ROLE.AUDIENCE}" 
+        ref="scrollBox" @scroll="handleScroll" :style="maskStyles"
+      >
         <p v-for="(line, index) in currentDescriptionLines" :key="index">{{ line }}</p>
       </div>
     </div>
@@ -33,10 +36,11 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { ref, computed, onMounted, nextTick } from 'vue';
 import { ROLE, LANG_SELECT } from '@/constants.js';
 import Header from '@/components/Header.vue';
-import { GetTitle, GetDescription, GetCharacterLink } from '@/utils/song_data_logic'; 
+import { GetTitle, GetDescription, GetCharacterLink } from '@/utils/song_data_logic';
+import { CalculateScrollMaskStyle } from '@/utils/style_tools';
 
 const props = defineProps({
   role: String,
@@ -66,6 +70,25 @@ const emit = defineEmits([LANG_SELECT]);
 const handleLangUpdate = (lang) => {
   emit(LANG_SELECT, lang);
 };
+
+// Scroll Mask
+const scrollBox = ref(null);
+const maskStyles = ref({});
+
+// 處理滾動事件
+const handleScroll = () => {
+  if (props.role === ROLE.AUDIENCE) {
+    maskStyles.value = CalculateScrollMaskStyle(scrollBox.value);
+  } else {
+    maskStyles.value = {};
+  }
+};
+
+
+onMounted(async () => {
+  await nextTick(); // 確保 DOM 渲染完畢
+  handleScroll();   // 執行一次以套用初始遮罩狀態
+});
 </script>
 
 <style scoped>
@@ -78,10 +101,7 @@ const handleLangUpdate = (lang) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.text-section p {
-  margin: 0;
+  justify-content: space-between;
 }
 
 /* =========================================
@@ -91,7 +111,10 @@ const handleLangUpdate = (lang) => {
   padding: 10% 8% 15% 8%; 
 }
 
-/* Layout Container */
+.audience .header-container {
+  height: 7%;
+  width: 100%;
+}
 .audience .layout-container {
   display: flex;
   flex-direction: column;
@@ -115,14 +138,15 @@ const handleLangUpdate = (lang) => {
   line-height: 2.2;
   letter-spacing: 2px;
   width: 100%;
-  overflow-y: auto;
+}
+.audience .text-section p {
+  margin: 0.5rem 0;
 }
 
 .audience .media-section {
   order: 2;
   flex-shrink: 0;
-  max-height: 55%;
-  width: 70%;
+  width: 80%;
 }
 
 .audience:not(.has-image) .layout-container {
@@ -136,23 +160,26 @@ const handleLangUpdate = (lang) => {
    Projector Style
    ========================================= */
 .intro-page.projector {
-  padding: 5%;
-  justify-content: center; 
+  padding: 4.5%;
 }
 
+.projector .header-container {
+  height: 10%;
+  width: 100%;
+}
 .projector .layout-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between; 
   align-items: center;
-  height: 65vh; 
-  width: 90%;
+  height: 85%;
+  width: 100%;
   /* max-width: 1200px; */
   gap: 4vw;
 }
 
 .projector .media-section {
-  max-height: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
 }
@@ -163,10 +190,14 @@ const handleLangUpdate = (lang) => {
   line-height: 2.5;
   letter-spacing: 6px;
   text-align: start; 
-  height: 100%; 
+  height: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column; 
   justify-content: center; 
+}
+.projector .text-section p {
+  margin: 0 1rem;
 }
 
 .projector:not(.has-image) .text-section {

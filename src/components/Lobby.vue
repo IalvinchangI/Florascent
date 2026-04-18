@@ -44,7 +44,7 @@ const selectLanguage = (lang) => {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 25%;
+  padding-top: 15%;
   padding-bottom: 15%;
   padding-left: 10%;
   padding-right: 10%;
@@ -54,13 +54,14 @@ const selectLanguage = (lang) => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   max-width: 500px;
-  gap: 2vh;
+  gap: 3dvh;
 }
 
 .logo-wrapper {
   width: 70%;
-  padding-bottom: 15%;
+  padding-bottom: 20%;
 }
 
 .text-section {
@@ -69,7 +70,7 @@ const selectLanguage = (lang) => {
 
 .button-group {
   display: flex;
-  gap: 5vh;
+  gap: 15%;
   width: 100%;
 }
 

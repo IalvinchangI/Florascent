@@ -1,5 +1,5 @@
 <template>
-  <div class="client-container" :style="currentBackgroundStyle">
+  <div class="client-container" :class="{ 'projector-screen': role === ROLE.PROJECTOR }" :style="currentBackgroundStyle">
     <LandscapeGuard v-if="role === ROLE.AUDIENCE" />
 
     <Lobby v-if="role === ROLE.AUDIENCE && !userLang" @[LANG_SELECT]="start" />
@@ -151,3 +151,25 @@ onUnmounted(() => {
   }
 });
 </script>
+
+<style scoped>
+.client-container {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #f5efca 0%, #cfbb8e 100%);
+  position: relative;
+}
+
+.projector-screen {
+  max-width: calc(100vh * 16 / 9);
+  max-height: calc(100vw * 9 / 16);
+  
+  /* 將容器絕對置中，讓多餘的空間均勻分佈在上下或左右 (會露出上一層的黑底) */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  overflow: hidden; 
+}
+</style>

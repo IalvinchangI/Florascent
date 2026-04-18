@@ -16,7 +16,7 @@ body, html {
   padding: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, #f5efca 0%, #cfbb8e 100%);
+  background-color: #000000;
   color: #000000;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   overflow: hidden;
@@ -58,17 +58,17 @@ body, html {
 }
 
 .img-box-square {
-  width: 100%;
+  /* width: 100%; */
   /* max-width: 180px; */
   aspect-ratio: 1 / 1; 
 }
 .img-box-vertical {
-  width: 100%;
+  /* width: 100%; */
   /* max-width: 180px; */
   aspect-ratio: 3 / 4;
 }
 .img-box-horizontal {
-  width: 100%;
+  /* width: 100%; */
   /* max-width: 240px; */
   aspect-ratio: 4 / 3;
 }
@@ -184,6 +184,33 @@ body, html {
 .title-en {
   letter-spacing: 1px;
   margin: 0;
+}
+
+/* 漸層捲動遮罩 */
+/* 動態文字捲動遮罩 */
+.scroll-mask-container {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox 隱藏捲動條 */
+  
+  /* 預設值為 0%，由 JS 動態賦予實際的模糊比例 */
+  --mask-top: 0%;
+  --mask-bottom: 0%;
+
+  /* 核心遮罩 */
+  --mask-image-content: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black var(--mask-top),
+    black calc(100% - var(--mask-bottom)),
+    transparent 100%
+  );
+
+  -webkit-mask-image: var(--mask-image-content);
+  mask-image: var(--mask-image-content);
+}
+
+.scroll-mask-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari 隱藏捲動條 */
 }
 
 ::selection {

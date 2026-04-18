@@ -208,3 +208,12 @@ onUnmounted(() => {
   leaveControl();
 });
 </script>
+
+<style scoped>
+.admin-container {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #f5efca 0%, #cfbb8e 100%);
+  position: relative;
+}
+</style>

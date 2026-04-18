@@ -15,10 +15,12 @@
         </div>
       </div>
 
-      <div class="text-group">
+      <div class="text-group" :class="{'scroll-mask-container': role === ROLE.AUDIENCE}" 
+        ref="scrollBox" @scroll="handleScroll" :style="maskStyles"
+      >
         
         <div class="text-section info-text default-font">
-          <span class="title">活動說明</span>
+          <span class="title">{{ (lang === LANG.EN) ? "Info" : "活動說明" }}</span>
           <div v-if="role === ROLE.PROJECTOR">
             <p v-for="(line, index) in Introduction.get(LANG.TW)" :key="index" class="default-font">{{ line }}&nbsp;</p>
           </div>
@@ -28,7 +30,7 @@
         </div>
 
         <div class="text-section rules-text default-font">
-          <span class="title">投票規則</span>
+          <span class="title">{{ (lang === LANG.EN) ? "Rules" : "投票規則" }}</span>
           <div v-if="role === ROLE.PROJECTOR">
             <p v-for="(line, index) in VoteRules.get(LANG.TW)" :key="index" class="default-font">{{ line }}&nbsp;</p>
           </div>
@@ -43,8 +45,10 @@
 </template>
 
 <script setup>
+import { ref, onMounted, nextTick } from 'vue';
 import {LANG, ROLE} from '@/constants.js';
-import { LOGO_URL, QRCODE_URL } from '@/assets_url';
+import { LOGO_URL, LOGO_VIDEO_URL, QRCODE_URL } from '@/assets_url';
+import { CalculateScrollMaskStyle } from '@/utils/style_tools';
 
 const props = defineProps({
   role: String,
@@ -83,6 +87,24 @@ VoteRules.set(LANG.EN, [
   "5. Vote Rules——Vote Rules——Vote Rules——Vote Rules——Vote Rules——"
 ])
 
+// Scroll Mask
+const scrollBox = ref(null);
+const maskStyles = ref({});
+
+// 處理滾動事件
+const handleScroll = () => {
+  if (props.role === ROLE.AUDIENCE) {
+    maskStyles.value = CalculateScrollMaskStyle(scrollBox.value);
+  } else {
+    maskStyles.value = {};
+  }
+};
+
+
+onMounted(async () => {
+  await nextTick(); // 確保 DOM 渲染完畢
+  handleScroll();   // 執行一次以套用初始遮罩狀態
+});
 </script>
 
 <style scoped>
@@ -97,11 +119,6 @@ VoteRules.set(LANG.EN, [
 .media-section .img-box {
   margin-bottom: 0;
 }
-.logo-box span, .qrcode-box span {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #000;
-}
 .text-section {
   text-align: justify;
   line-height: 2;
@@ -115,8 +132,8 @@ VoteRules.set(LANG.EN, [
    ========================================= */
 .waiting-page.audience {
   align-items: flex-start;
-  padding-top: 25%; 
-  padding-bottom: 10%;
+  padding-top: 15%; 
+  padding-bottom: 12%;
   padding-left: 10%;
   padding-right: 10%;
   box-sizing: border-box;
@@ -137,15 +154,13 @@ VoteRules.set(LANG.EN, [
   width: 70%;
   max-width: 500px;
   flex-shrink: 0; 
-  padding-bottom: 5vh;
+  padding-bottom: 15%;
 }
 
 .audience .text-group {
   order: 2;
   flex: 1;
   width: 100%;
-  overflow-y: auto;
-  /* padding-bottom: 20px; */
   display: flex;
   flex-direction: column;
   gap: 30px; 
@@ -159,41 +174,41 @@ VoteRules.set(LANG.EN, [
    ========================================= */
 .waiting-page.projector {
   align-items: center;
-  padding: 5%;
+  padding: 4.5%;
 }
 
 .projector .layout-container {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 5vw;
+  position: relative;
 }
 
 .projector .media-section {
-  order: 2;
-  flex: 0 0 25%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 23.5%;
   min-width: 150px;
-  width: 30%;
   height: 100%;
-  padding: 0% 2%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 5vh;
+  pointer-events: none;
 }
 
 .projector .text-group {
-  display: contents;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
 }
-.projector .info-text {
-  order: 1;
-  flex: 1;
-}
+
+.projector .info-text,
 .projector .rules-text {
-  order: 3;
-  flex: 1;
+  width: calc(50% - max(11.75%, 75px) - 6vw);
+  pointer-events: auto;
 }
 </style>

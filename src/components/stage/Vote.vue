@@ -2,6 +2,7 @@
   <div class="vote-page" :class="role">
     
     <Header 
+      class="header-container"
       :role="role" 
       :lang="lang" 
       :title="(currentPhase === 'WAITING') ? null : `《${currentTitle}》`" 
@@ -13,12 +14,16 @@
     <div v-if="role === ROLE.AUDIENCE" class="layout-container">
       <div v-if="currentPhase === 'VOTING' || currentPhase === 'REGRET'" class="audience-layout">
         <!-- text -->
-        <div v-if="currentPhase === 'VOTING'" class="text-row default-font">
+        <div v-if="currentPhase === 'VOTING'" class="text-row default-font"  
+          :class="{'scroll-mask-container': role === ROLE.AUDIENCE}" ref="scrollBox" @scroll="handleScroll" :style="maskStyles"
+        >
           <p v-for="(line, index) in currentQuestion" :key="index" class="text-content">
             {{ line }}
           </p>
         </div>
-        <div v-else-if="currentPhase === 'REGRET'" class="text-row default-font">
+        <div v-else-if="currentPhase === 'REGRET'" class="text-row default-font"
+          :class="{'scroll-mask-container': role === ROLE.AUDIENCE}" ref="scrollBox" @scroll="handleScroll" :style="maskStyles"
+        >
           <p v-for="(line, index) in selectedOption?.regretText" :key="index" class="text-content italic-text">
             {{ line }}
           </p>
@@ -115,11 +120,12 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch, nextTick } from 'vue';
 import { LANG, ROLE, LANG_SELECT, OPTION_SELECT, VOTE_SELECTED_OPTION_KEY } from '@/constants.js';
 import Header from '@/components/Header.vue';
 import { GetWaitingLink, GetTitle, GetQuestion, GetOptions, GetCanRegret, GetIsBroken } from '@/utils/song_data_logic';
 import { GetCountdownSecondLink, PreloadtCountdownSecondLink } from '@/utils/assets_tools';
+import { CalculateScrollMaskStyle } from '@/utils/style_tools';
 
 const props = defineProps({
   role: String,
@@ -253,9 +259,24 @@ const handleLangUpdate = (lang) => {
   emit(LANG_SELECT, lang);
 };
 
+// Scroll Mask
+const scrollBox = ref(null);
+const maskStyles = ref({});
 
-onMounted(() => {
+// 處理滾動事件
+const handleScroll = () => {
+  if (props.role === ROLE.AUDIENCE) {
+    maskStyles.value = CalculateScrollMaskStyle(scrollBox.value);
+  } else {
+    maskStyles.value = {};
+  }
+};
+
+
+onMounted(async () => {
   if (props.role === ROLE.PROJECTOR) {
+    await nextTick(); // 確保 DOM 渲染完畢
+    handleScroll();   // 執行一次以套用初始遮罩狀態
     PreloadtCountdownSecondLink();
   }
 });
@@ -273,6 +294,7 @@ watch(() => props.songData?.index, (newId) => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
 
 .option-title {
@@ -283,12 +305,20 @@ watch(() => props.songData?.index, (newId) => {
   font-weight: bold;
 }
 
+.text-content {
+  width: 100%;
+  text-align: center;
+}
+
 /* ================== Audience Fixed Layout ================== */
 .vote-page.audience {
   padding: 10% 8% 15% 8%;
 }
 
-/* Layout Container */
+.audience .header-container {
+  height: 7%;
+  width: 100%;
+}
 .audience .layout-container {
   display: flex;
   flex-direction: column;
@@ -296,7 +326,6 @@ watch(() => props.songData?.index, (newId) => {
   
   height: 90%;
   width: 100%;
-  max-width: 500px;
   justify-content: flex-start;
 }
 
@@ -307,32 +336,30 @@ watch(() => props.songData?.index, (newId) => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 3%;
 }
 
 .audience-layout .text-row {
-  height: 45%; 
+  flex: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  overflow-y: auto;
 }
 .audience-layout .slot-row {
   height: 25%;
   width: 100%;
 }
 
-.text-content {
-  width: 100%;
-  text-align: center;
-  line-height: 1.8;
-  margin: 0;
+.audience-layout .text-content {
+  line-height: 1.5;
+  margin: 0.4rem 0;
 }
 
 .italic-text {
   font-style: italic;
   text-align: center;
-  color: #444;
+  color: #000000;
 }
 
 .option-button-wrapper {
@@ -383,35 +410,37 @@ watch(() => props.songData?.index, (newId) => {
 
 /* ================== Projector ================== */
 .vote-page.projector {
-  padding: 5%;
-  justify-content: center;
+  padding: 4.5%;
 }
 
-/* Layout Container */
+.projector .header-container {
+  height: 10%;
+  width: 100%;
+}
 .projector .layout-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   
-  height: 90%;
+  height: 88%;
   width: 100%;
-  max-width: 1200px;
-  gap: 4vw;
+  /* max-width: 1200px; */
 }
 
 .projector-layout {
+  height: 100%;
+  width: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  position: relative;
+  gap: 5%;
 }
 
 .projector-layout .text-row {
-  height: 48%;
+  flex: 1;
   width: 100%;
   text-align: center;
   font-size: 1.5rem;
@@ -420,12 +449,16 @@ watch(() => props.songData?.index, (newId) => {
   overflow-y: hidden;
 }
 .projector-layout .slot-row {
-  height: 48%;
+  height: 45%;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 4vw;
+  gap: 3%;
+}
+.projector-layout .text-content {
+  line-height: 1.8;
+  margin: 0.25rem 0;
 }
 
 .countdown-overlay {
