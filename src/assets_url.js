@@ -2,7 +2,9 @@
 export const BACKGROUND_HORIZONTAL_URL = "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/background_horizontal_ywrzpn.png";
 export const BACKGROUND_VERTICAL_URL = "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/background_vertical_ikhuov.png";
 
-export const LOGO_URL = "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/character_kcffna.png"
+export const LOGO_URL = "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/v1776515569/logo_ehyzyc.png"
+export const LOGO_ICON_URL = "/logo.png"
+export const LOGO_VIDEO_URL = "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776515498/logo_video_fz9gje.mp4"
 export const QRCODE_URL = "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/qrcode_q56pwn.png"
 
 export const COUNTDOWN_SECOND_URLS = [

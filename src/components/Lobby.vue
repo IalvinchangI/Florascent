@@ -3,8 +3,12 @@
     <div class="content-container">
       
       <div class="logo-wrapper">
-        <div class="img-box img-box-square img-restrict">
-          <img :src=LOGO_URL alt="Logo"/>
+        <div class="img-box img-box-square img-restrict video-restrict-small serif-font title title-en">
+          <!-- <img :src="LOGO_URL" alt="Florascent"/> -->
+          <video autoplay loop muted playsinline>
+            <source :src="LOGO_VIDEO_URL" type="video/webm">
+            Florascent
+          </video>
         </div>
       </div>
 
@@ -24,7 +28,7 @@
 
 <script setup>
 import { LANG, LANG_SELECT } from '@/constants.js';
-import { LOGO_URL } from '@/assets_url';
+import { LOGO_URL, LOGO_VIDEO_URL } from '@/assets_url';
 
 const emit = defineEmits([LANG_SELECT]);
 

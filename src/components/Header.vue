@@ -27,7 +27,7 @@
         {{ time }}
       </div>
       <div v-else class="header-icon-restrict base-btn pill-btn" style="cursor: default;">
-        <img :src=LOGO_URL alt="logo" />
+        <img :src="LOGO_ICON_URL" alt="logo" style="transform: translateY(2px);" />
       </div>
     </div>
 
@@ -37,7 +37,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { LANG, ROLE, LANG_SELECT } from '@/constants.js';
-import { LOGO_URL } from '@/assets_url';
+import { LOGO_ICON_URL } from '@/assets_url';
 
 const props = defineProps({
   role: { type: String, required: true },

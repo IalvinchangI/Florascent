@@ -3,11 +3,15 @@
     <div class="layout-container">
       
       <div class="media-section">
-        <div class="img-box img-box-square img-restrict">
-          <img :src=LOGO_URL alt="Logo"/>
+        <div class="img-box img-box-square img-restrict video-restrict-small serif-font title title-en">
+          <!-- <img :src="LOGO_URL" alt="Florascent"/> -->
+          <video autoplay loop muted playsinline>
+            <source :src="LOGO_VIDEO_URL" type="video/webm">
+            Florascent
+          </video>
         </div>
         <div v-if="role === ROLE.PROJECTOR" class="img-box img-box-square img-restrict">
-          <img :src=QRCODE_URL alt="QR Code"/>
+          <img :src="QRCODE_URL" alt="QR Code"/>
         </div>
       </div>
 
