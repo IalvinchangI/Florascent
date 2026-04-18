@@ -63,8 +63,8 @@
       "characterLink": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776413075/song0_slow_qpd6n4.mov",
       "waitingLink": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412295/song0_fast_p0rb5j.mov",
       "backgroundLink": {
-        "horizontal": null,
-        "vertical": null
+        "horizontal": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song0_background_horizontal_ferujf.jpg",
+        "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song0_background_vertical_xra4de.jpg"
       },
       "description": {
         "en": "Red roses, white jasmine.\nClumps here, blossoms there,\nblooming in full, truly beautiful.",
@@ -122,8 +122,8 @@
       "characterLink": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412293/song1_slow_dad90l.mov",
       "waitingLink": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412293/song1_fast_ughfoy.mov",
       "backgroundLink": {
-        "horizontal": null,
-        "vertical": null
+        "horizontal": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song1_background_horizontal_j5hkcj.jpg",
+        "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song1_background_vertical_hscxx6.jpg"
       },
       "description": {
         "en": "June jasmine scents the hills.\nA girl alone in her room.\nBlooms wait to be picked.\nNo one knows her heart.",
@@ -181,8 +181,8 @@
       "characterLink": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412294/song2_slow_zrkkni.mov",
       "waitingLink": "https://res.cloudinary.com/dhbxvo9za/video/upload/ac_none,f_auto:video,q_auto,vc_auto/v1776412296/song2_fast_rlyydn.mov",
       "backgroundLink": {
-        "horizontal": null,
-        "vertical": null
+        "horizontal": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song2_background_horizontal_kws4lo.jpg",
+        "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song2_background_vertical_w9q2t1.jpg"
       },
       "description": {
         "en": "Flower in a rainy night,\nFallen in the wind and rain.\nNo one sees the daily sorrow\nBlown down by the storm.",
@@ -242,8 +242,8 @@
       "canChangeRoute": false,
       "isBroken": true,
       "backgroundLink": {
-        "horizontal": null,
-        "vertical": null
+        "horizontal": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song3_background_horizontal_q1ht0y.jpg",
+        "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song3_background_vertical_jncqz5.jpg"
       },
       "description": {
         "en": "Finale",
