@@ -10,11 +10,17 @@
 
     <div class="layout-container">
       <div v-if="currentCharacterLink != null" class="media-section">
-        <div v-if="role === ROLE.AUDIENCE" class="img-box img-box-vertical img-restrict">
-          <img :src="currentCharacterLink" alt="Character Animation" />
+        <div v-if="role === ROLE.AUDIENCE" class="img-box img-box-vertical video-restrict-big">
+          <video autoplay loop muted playsinline>
+            <source :src="currentCharacterLink" type="video/webm">
+            Can not play animation!
+          </video>
         </div>
-        <div v-else-if="role === ROLE.PROJECTOR" class="img-box img-box-horizontal img-restrict">
-          <img :src="currentCharacterLink" alt="Character Animation" />
+        <div v-else-if="role === ROLE.PROJECTOR" class="img-box img-box-horizontal video-restrict-small">
+          <video autoplay loop muted playsinline>
+            <source :src="currentCharacterLink" type="video/webm">
+            Can not play animation!
+          </video>
         </div>
       </div>
 

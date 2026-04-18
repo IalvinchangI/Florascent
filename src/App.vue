@@ -78,6 +78,18 @@ body, html {
   max-height: 100%;
   object-fit: scale-down;
 }
+.video-restrict-big video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+.video-restrict-small video {
+  width: 100%;
+  height: 100%;
+  object-fit: scale-down;
+  overflow: hidden;
+}
 
 /* button */
 .base-btn, .base-btn:active, .base-btn:focus {

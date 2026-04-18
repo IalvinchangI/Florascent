@@ -8,8 +8,12 @@
       </div>
 
       <div class="animation-row">
-        <div class="img-box img-box-vertical img-restrict">
-          <img v-if="waitingURL !== null" :src=waitingURL alt="LOADING..." />
+        <div class="img-box img-box-vertical video-restrict-big">
+          <!-- <img v-if="waitingURL !== null" :src=waitingURL alt="LOADING..." /> -->
+          <video v-if="waitingURL !== null" autoplay loop muted playsinline>
+            <source :src="waitingURL" type="video/webm">
+            Can not play animation!
+          </video>
         </div>
       </div>
 

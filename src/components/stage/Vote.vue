@@ -62,8 +62,11 @@
         
         <!-- LOADING animation -->
         <div v-if="waitingURL !== null" class="waiting-animation-row">
-          <div class="img-box img-box-vertical img-restrict full-size">
-            <img :src="waitingURL" alt="LOADING..." />
+          <div class="img-box img-box-vertical video-restrict-big full-size">
+            <video autoplay loop muted playsinline>
+              <source :src="waitingURL" type="video/webm">
+              Can not play animation!
+            </video>
           </div>
         </div>
 
