@@ -124,12 +124,12 @@ export function GetWaitingLink(song) {
  * @returns {string|null} 預設為 null
  */
 export function GetBackgroundLink(song, orientation) {
-  if (song && typeof song.backgroundLink === 'string' && song.backgroundLink.trim() !== '') {
+  if (song && typeof song.backgroundLink === 'object' && song.backgroundLink !== null) {
     switch (orientation) {
       case "horizontal":
-        return song.backgroundLink.horizontal;
+        return song.backgroundLink.horizontal || null;
       case "vertical":
-        return song.backgroundLink.vertical;
+        return song.backgroundLink.vertical || null;
       default:
         return null;
     }
