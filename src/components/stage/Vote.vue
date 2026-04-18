@@ -106,8 +106,8 @@
           :style="getRandomBarStyle()"
         ></div>
       </div>
-      <div v-else class="video-overlay">
-        <!-- TODO video -->
+      <div v-else class="countdown-overlay img-restrict">
+        <img v-if="countdownURL" :src="countdownURL">
       </div>
     </div>
 
@@ -118,7 +118,8 @@
 import { ref, computed, onMounted, watch } from 'vue';
 import { LANG, ROLE, LANG_SELECT, OPTION_SELECT, VOTE_SELECTED_OPTION_KEY } from '@/constants.js';
 import Header from '@/components/Header.vue';
-import { GetWaitingLink, GetTitle, GetQuestion, GetOptions, GetCanRegret, GetIsBroken } from '@/utils/song_data_logic'; 
+import { GetWaitingLink, GetTitle, GetQuestion, GetOptions, GetCanRegret, GetIsBroken } from '@/utils/song_data_logic';
+import { GetCountdownSecondLink, PreloadtCountdownSecondLink } from '@/utils/assets_tools';
 
 const props = defineProps({
   role: String,
@@ -164,6 +165,10 @@ const selectedOption = computed(() => {
 
 const waitingURL = computed(() => {
   return GetWaitingLink(props.songData);
+});
+
+const countdownURL = computed(() => {
+  return GetCountdownSecondLink(props.time);
 });
 
 const isBroken = computed(() => {
@@ -249,6 +254,11 @@ const handleLangUpdate = (lang) => {
 };
 
 
+onMounted(() => {
+  if (props.role === ROLE.PROJECTOR) {
+    PreloadtCountdownSecondLink();
+  }
+});
 watch(() => props.songData?.index, (newId) => {
   if (newId != null) {
     checkSavedVote();
@@ -418,7 +428,7 @@ watch(() => props.songData?.index, (newId) => {
   gap: 4vw;
 }
 
-.video-overlay {
+.countdown-overlay {
   position: absolute;
   top: 0;
   left: 0;

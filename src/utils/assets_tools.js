@@ -1,5 +1,5 @@
 import { GetBackgroundLink } from "./song_data_logic";
-import { BACKGROUND_HORIZONTAL_URL, BACKGROUND_VERTICAL_URL } from "@/assets_url";
+import { BACKGROUND_HORIZONTAL_URL, BACKGROUND_VERTICAL_URL, COUNTDOWN_SECOND_URLS } from "@/assets_url";
 
 /**
  * 取得當前畫面的背景樣式 (Background Style)
@@ -38,4 +38,39 @@ export function GetBackgroundStyle(songData, useDefaultBackground, orientation) 
     return template;
 }
 
+/**
+ * 根據倒數時間（MM:SS）取得對應秒數的提示圖片 URL。
+ * 註：僅在倒數時間小於 1 分鐘（即分鐘數為 0）時才會觸發顯示。
+ *
+ * @param {string} time - 倒數時間字串，預期格式為 "MM:SS"（例如 "00:15"）。
+ * @returns {string|null} 回傳對應秒數的圖片 URL。若格式不符、時間大於等於 1 分鐘或查無圖片，則回傳 null。
+ */
+export function GetCountdownSecondLink(time) {
+    // 1. 防呆機制：確保 time 參數存在，且包含時間分隔符號 ":"
+    if (!time || !time.includes(":")) {
+        return null;
+    }
 
+    // 2. 解析字串：將時間拆分為分鐘與秒數，並轉換為十進位整數 (Base 10)
+    const splitTime = time.split(":");
+    const minutes = parseInt(splitTime[0], 10);
+    const seconds = parseInt(splitTime[1], 10);
+
+    // 3. 條件限制：如果還有剩餘的分鐘數（大於等於 1 分鐘），則不顯示倒數圖片
+    if (minutes !== 0) {
+        return null;
+    }
+
+    // 4. 回傳結果：使用解析出的秒數作為 Key，尋找對應的圖片 URL，若無則回傳 null
+    return COUNTDOWN_SECOND_URLS[seconds - 1] || null;
+}
+
+/**
+ * 預載每一張倒數圖片
+ */
+export async function PreloadtCountdownSecondLink() {
+    COUNTDOWN_SECOND_URLS.forEach((url) => {
+        const img = new Image();
+        img.src = url;
+    });
+}
