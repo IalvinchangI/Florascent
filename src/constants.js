@@ -31,6 +31,8 @@ export const ADMIN_PREV_SLIDE = "previous-slide"
 export const ADMIN_NEXT_SLIDE = "next-slide"
 export const ADMIN_RESTART = "restart-control"
 
+export const PROJECTOR_BLACKOUT = "projector-blackout"
+
 export const SONGDATA_CACHE_KEY = 'Florascent_songData';
 export const SONGDATA_CACHE_TIME_KEY = 'Florascent_songData_timestamp';
 export const STAGELIST_CACHE_KEY = 'Florascent_stageList';

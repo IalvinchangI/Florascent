@@ -10,7 +10,7 @@
                 :is="currentComponent" 
                 :role="ROLE.PROJECTOR"
                 :lang="LANG.TW" 
-                :songData="songData"
+                :songData="songDatas[currentSongIndex]"
                 :currentRoute="currentRoute"
                 :voteResult="voteResult" 
                 :time="time"
@@ -67,7 +67,7 @@
                 :is="nextComponent" 
                 :role="ROLE.PROJECTOR"
                 :lang="LANG.TW" 
-                :songData="songData"
+                :songData="songDatas[nextSongIndex]"
                 :currentRoute="currentRoute"
                 :voteResult="voteResult" 
                 :time="time"
@@ -116,7 +116,7 @@ import Performance from '@/components/stage/Performance.vue';
 import Next from '@/components/stage/Next.vue';
 
 const props = defineProps({
-  songData: { type: Object, required: true },
+  songDatas: { type: Array, required: true },
   stageList: { type: Array, required: true },
   currentSongIndex: { type: Number, required: true },
   currentStage: { type: String, required: true },
@@ -148,18 +148,22 @@ const getComponentByStage = (stage) => {
 
 const currentComponent = computed(() => getComponentByStage(props.currentStage));
 
+const nextSongIndex = ref(null);
+const nextStage = ref(null);
 const nextComponent = computed(() => {
-  const { newIndex: index, newStage: stage } = GetIndexAndStage(
+  ({ newIndex: nextSongIndex.value, newStage: nextStage.value } = GetIndexAndStage(
     props.stageList, 
     props.currentSongIndex, props.currentStage, 
     1
-  );
-  return getComponentByStage(stage);
+  ));
+  return getComponentByStage(nextStage.value);
 });
 
 const currentBackgroundStyle = computed(() => {
+  const songDatas = (props.songDatas) ? props.songDatas : null;
+  
   // 1. 取得單首歌曲資料 (防呆判斷)
-  const songData = (props.songData) ? props.songData : null;
+  const songData = (songDatas[props.currentSongIndex]) ? songDatas[props.currentSongIndex] : null;
 
   // 2. 判斷當前階段是否「不」在顯示清單中 (強制使用預設背景)
   const useDefault = !SHOW_BACKGROUND_STAGE.includes(props.currentStage);
@@ -168,8 +172,10 @@ const currentBackgroundStyle = computed(() => {
   return GetBackgroundStyle(songData, useDefault, "horizontal");
 });
 const nextBackgroundStyle = computed(() => {
+  const songDatas = (props.songDatas) ? props.songDatas : null;
+  
   // 1. 取得單首歌曲資料 (防呆判斷)
-  const songData = (props.songData) ? props.songData : null;
+  const songData = (songDatas[nextSongIndex.value]) ? songDatas[nextSongIndex.value] : null;
 
   // 2. 判斷當下階段是否「不」在顯示清單中 (強制使用預設背景)
   const { newIndex: index, newStage: stage } = GetIndexAndStage(
@@ -185,7 +191,7 @@ const nextBackgroundStyle = computed(() => {
 
 
 // --- 資訊顯示 ---
-const currentSongTitle = computed(() => props.songData?.title?.[LANG.TW] || '');
+const currentSongTitle = computed(() => props.songDatas?.[props.currentSongIndex]?.title?.[LANG.TW] || '');
 const pageName = computed(() => {
   const map = {
     [Stage.Waiting]: '活動介紹', 

@@ -20,10 +20,12 @@
           @[LANG_SELECT]="setLang" @[OPTION_SELECT]="uploadVote" 
         />
         <Result v-else-if="currentStage === Stage.Result || (currentStage === Stage.Performance && role === ROLE.AUDIENCE)" 
-          :role="role" :lang="userLang" :songData="songData[currentSongIndex]" :voteResult="voteResult"
+          :role="role" :lang="userLang" :songData="songData[currentSongIndex]" :voteResult="voteResult" 
+          @[PROJECTOR_BLACKOUT]="handleBlackout"
         />
         <Performance v-else-if="currentStage === Stage.Performance && role === ROLE.PROJECTOR" 
           :role="role" :lang="userLang" 
+          @[PROJECTOR_BLACKOUT]="handleBlackout"
         />
         <Next v-else-if="currentStage === Stage.Next && role === ROLE.PROJECTOR" 
           :role="role" :lang="userLang" 
@@ -35,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { GetSongData, GetBackgroundLink } from '@/utils/song_data_logic';
 import { 
@@ -47,7 +49,7 @@ import { IsAutoAdvanceStage } from '@/utils/stage_logic';
 import { UploadVoteData } from '@/utils/vote_logic';
 import { 
   LANG, Stage, ROLE, 
-  LANG_SELECT, OPTION_SELECT, 
+  LANG_SELECT, OPTION_SELECT, PROJECTOR_BLACKOUT,
   QUERY_NOCACHE, 
   SHOW_BACKGROUND_STAGE
 } from '@/constants.js';
@@ -66,6 +68,7 @@ import Next from '@/components/stage/Next.vue';
 const route = useRoute();
 const role = ref(ROLE.AUDIENCE);
 const isLoading = ref(false);
+const isBlackout = ref(false);
 const disableControlSignalDetail = ref(null);
 const disableDisplayTimeDetail = ref(null);
 
@@ -119,7 +122,21 @@ const uploadVote = (option) => {
 };
 
 
+const handleBlackout = () => {
+  isBlackout.value = true;
+  console.log("isBlackout", isBlackout);
+};
+
+
 const currentBackgroundStyle = computed(() => {
+  // === 攔截黑屏狀態，強制回傳純黑背景 ===
+  if (isBlackout.value) {
+    return {
+      background: '#000', 
+      backgroundImage: 'none'
+    };
+  }
+
   // 1. 決定方向
   const orientation = (role.value === ROLE.PROJECTOR) ? "horizontal" : "vertical";
   
@@ -141,6 +158,9 @@ onMounted(() => {
     role.value = ROLE.PROJECTOR;
     start(LANG.TW);
   }
+});
+watch(currentStage, () => {
+  isBlackout.value = false;
 });
 onUnmounted(() => {
   if (disableControlSignalDetail.value != null) {

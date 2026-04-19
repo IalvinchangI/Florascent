@@ -8,7 +8,7 @@
           @[ADMIN_START]="startControl"
         />
         <SlideControl v-else-if="currentPage === Admin.SlideControl" 
-          :songData="songData[currentSongIndex]" :stageList="stageList"
+          :songDatas="songData" :stageList="stageList"
           :voteResult="voteResult" :time="displayTime"
           :currentSongIndex="currentSongIndex" :currentStage="currentStage" :currentRoute="currentRoute"
           @[ADMIN_PREV_SLIDE]="prevSlide" @[ADMIN_NEXT_SLIDE]="nextSlide" @[ADMIN_RESTART]="handleRestart"

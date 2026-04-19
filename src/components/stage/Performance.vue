@@ -10,12 +10,21 @@
 </template>
 
 <script setup>
-import { LANG, ROLE } from '@/constants.js';
+import { onMounted } from 'vue';
+import { LANG, ROLE, PROJECTOR_BLACKOUT } from '@/constants.js';
 
 const props = defineProps({
   role: String,
   lang: String,
 });
+const emit = defineEmits([PROJECTOR_BLACKOUT]);
+
+onMounted(() => {
+  if (props.role === ROLE.PROJECTOR) {
+    emit(PROJECTOR_BLACKOUT);
+  }
+});
+
 </script>
 
 <style scoped>
