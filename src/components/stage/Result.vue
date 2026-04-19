@@ -3,12 +3,12 @@
     
     <div v-if="role === ROLE.AUDIENCE" class="audience-layout">
       <div class="text-row">
-        <h2 class="serif-font title" style="margin: 0;">{{ uiText.musicStarting }}</h2>
+        <h2 class="serif-font title option-title" style="margin: 0;">{{ uiText.musicStarting }}</h2>
         <p class="default-font" style="margin: 5px;">{{ uiText.silenceDevices }}</p>
       </div>
 
       <div class="animation-row">
-        <div class="img-box img-box-vertical video-restrict-big">
+        <div class="img-box img-box-vertical video-restrict-big" style="width: 100%;">
           <!-- <img v-if="waitingURL !== null" :src=waitingURL alt="LOADING..." /> -->
           <video v-if="waitingURL !== null" autoplay loop muted playsinline>
             <source :src="waitingURL" type="video/webm">
@@ -25,7 +25,7 @@
 
     <div v-else-if="role === ROLE.PROJECTOR" class="projector-layout">
       
-      <div class="bars-container" :class="currentPhase">
+      <div class="bars-container relative-text-wrapper" :class="currentPhase">
         <div 
           v-for="(option, index) in processedOptions" 
           :key="index"
@@ -38,7 +38,7 @@
         >
           <div class="base-btn default-btn option-card">
             <h3 
-              class="serif-font title" 
+              class="serif-font title option-title" 
               :style="{ fontSize: getDynamicFontSize(option.id, 'title') }"
             >
               {{ option.title }}
@@ -166,7 +166,7 @@ const getDynamicFontSize = (id, type) => {
 
   const baseSize = type === 'title' ? FONT_CONFIG.TITLE_BASE : FONT_CONFIG.PERCENT_BASE;
   
-  return `${baseSize * scale}rem`;
+  return `${baseSize * scale}em`;
 };
 
 /* TEXT */
@@ -252,6 +252,7 @@ const uiText = computed(() => {
    PROJECTOR SIDE
    ========================================== */
 .projector-layout {
+  padding: 4.5%;
   width: 100%;
   height: 100%;
   display: flex;
@@ -263,7 +264,7 @@ const uiText = computed(() => {
 /* --- 條狀圖容器 --- */
 .bars-container {
   display: flex;
-  width: 80%;
+  width: 100%;
   height: 75%;
   gap: 20px;
   justify-content: center;
@@ -297,6 +298,7 @@ const uiText = computed(() => {
   background-color: #fdfbf7; 
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   transition: all 0.5s ease;
+  font-size: clamp(6px, 1.3cqw, 24px);
 }
 
 .percentage-text {
@@ -305,7 +307,7 @@ const uiText = computed(() => {
   color: #333;
   transition: font-size 0.2s linear; 
 }
-.title {
+.option-title {
   margin: 0;
   transition: font-size 0.2s linear;
 }
@@ -320,15 +322,15 @@ const uiText = computed(() => {
   padding: 0 !important;
   margin: 0 !important;
   
-  height: 300px !important; /* 關鍵：強制與 Winner 同高 */
+  height: 65% !important; /* 關鍵：強制與 Winner 同高 */
   
   opacity: 0;
   transform: scale(0.8);
 }
 .bars-container.WINNER .bar-wrapper.is-winner, 
 .bars-container.BLACKOUT .bar-wrapper.is-winner {
-  width: 600px !important;  
-  height: 300px !important; 
+  width: 55% !important;  
+  height: 65% !important; 
   transform: scale(1.1);
 }
 .bars-container.WINNER .option-card, 

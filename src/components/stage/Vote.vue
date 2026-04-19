@@ -14,14 +14,14 @@
     <div v-if="role === ROLE.AUDIENCE" class="layout-container">
       <div v-if="currentPhase === 'VOTING' || currentPhase === 'REGRET'" class="audience-layout">
         <!-- text -->
-        <div v-if="currentPhase === 'VOTING'" class="text-row default-font"  
+        <div v-if="currentPhase === 'VOTING'" class="text-row default-font relative-text-wrapper"  
           :class="{'scroll-mask-container': role === ROLE.AUDIENCE}" ref="scrollBox" @scroll="handleScroll" :style="maskStyles"
         >
           <p v-for="(line, index) in currentQuestion" :key="index" class="text-content">
             {{ line }}
           </p>
         </div>
-        <div v-else-if="currentPhase === 'REGRET'" class="text-row default-font"
+        <div v-else-if="currentPhase === 'REGRET'" class="text-row default-font relative-text-wrapper"
           :class="{'scroll-mask-container': role === ROLE.AUDIENCE}" ref="scrollBox" @scroll="handleScroll" :style="maskStyles"
         >
           <p v-for="(line, index) in selectedOption?.regretText" :key="index" class="text-content italic-text">
@@ -33,24 +33,24 @@
         <div v-for="(option, index) in processedOptions" :key="index" class="slot-row">
           <!-- VOTING || selected -->
           <div v-if="currentPhase === 'VOTING'" 
-               class="base-btn default-btn img-box-horizontal animate-btn option-button-wrapper full-size"
+               class="base-btn default-btn img-box-horizontal animate-btn option-button-wrapper full-size relative-text-wrapper"
                @click="!isBroken && handleOptionSelect(option, index)">
-            <h3 class="option-title serif-font title">{{ option.title }}</h3>
+            <h3 class="option-title serif-font title" :class="{ 'long': option.title.length >= 25 }">{{ option.title }}</h3>
             <p class="option-desc default-font" v-for="(line, i) in option.description" :key="i">{{ line }}</p>
           </div>
           <div v-else-if="currentPhase === 'REGRET' && selectedOptionIndex !== index" class="regret-buttons-wrapper full-size">
-            <div class="base-btn default-btn animate-btn img-box-horizontal option-button-wrapper half-card" @click="cancelChoice">
-              <h3 class="option-title serif-font title">{{ getUIText('back', 'title') }}</h3>
-              <p class="option-desc default-font">{{ getUIText('back', 'desc') }}</p>
+            <div class="base-btn default-btn animate-btn img-box-horizontal option-button-wrapper half-card relative-text-wrapper" @click="cancelChoice">
+              <h3 class="option-title serif-font title short">{{ getUIText('back', 'title') }}</h3>
+              <p class="option-desc default-font short">{{ getUIText('back', 'desc') }}</p>
             </div>
-            <div class="base-btn default-btn animate-btn img-box-horizontal option-button-wrapper half-card" @click="confirmChoice">
-              <h3 class="option-title serif-font title">{{ getUIText('continue', 'title') }}</h3>
-              <p class="option-desc default-font">{{ getUIText('continue', 'desc') }}</p>
+            <div class="base-btn default-btn animate-btn img-box-horizontal option-button-wrapper half-card relative-text-wrapper" @click="confirmChoice">
+              <h3 class="option-title serif-font title short">{{ getUIText('continue', 'title') }}</h3>
+              <p class="option-desc default-font short">{{ getUIText('continue', 'desc') }}</p>
             </div>
           </div>
           <!-- REGRET && selected -->
-          <div v-else class="base-btn default-btn img-box-horizontal option-button-wrapper full-size disable">
-            <h3 class="option-title serif-font title">{{ option.title }}</h3>
+          <div v-else class="base-btn default-btn img-box-horizontal option-button-wrapper full-size disable relative-text-wrapper">
+            <h3 class="option-title serif-font title" :class="{ 'long': option.title.length >= 25 }">{{ option.title }}</h3>
             <p class="option-desc default-font" v-for="(line, i) in option.description" :key="i">{{ line }}</p>
           </div>
         </div>
@@ -59,8 +59,8 @@
       <div v-else-if="currentPhase === 'WAITING'" class="audience-layout">
         <!-- slot -->
         <div class="waiting-slot-row">
-          <div class="base-btn default-btn img-box-horizontal option-button-wrapper full-size disable">
-            <h3 class="option-title serif-font title">{{ selectedOption?.title }}</h3>
+          <div class="base-btn default-btn img-box-horizontal option-button-wrapper full-size disable relative-text-wrapper">
+            <h3 class="option-title serif-font title" :class="{ 'long': selectedOption?.title.length >= 25 }">{{ selectedOption?.title }}</h3>
             <p class="option-desc default-font" v-for="(line, i) in selectedOption?.description" :key="i">{{ line }}</p>
           </div>
         </div>
@@ -82,7 +82,7 @@
     <div v-else-if="role === ROLE.PROJECTOR" class="layout-container">
       <div class="projector-layout">
         <!-- text -->
-        <div class="text-row default-font">
+        <div class="text-row default-font relative-text-wrapper">
           <p v-for="(line, index) in currentQuestion" :key="index" class="text-content">
             {{ line }}
           </p>
@@ -90,8 +90,11 @@
 
         <!-- slots -->
         <div class="slot-row">
-          <div v-for="(option, index) in processedOptions" :key="index" class="base-btn default-btn option-button-wrapper full-size" style="cursor: default;">
-            <h3 class="option-title serif-font title">{{ option.title }}</h3>
+          <div 
+            v-for="(option, index) in processedOptions" :key="index" 
+            class="base-btn default-btn option-button-wrapper full-size relative-text-wrapper" style="cursor: default;"
+          >
+            <h3 class="option-title serif-font title" :class="{ 'long': option.title.length >= 25 }">{{ option.title }}</h3>
             <p v-for="(line, idx) in option.description" :key="idx" class="option-desc default-font">{{ line }}</p>
           </div>
         </div>
@@ -298,11 +301,21 @@ watch(() => props.songData?.index, (newId) => {
 }
 
 .option-title {
-  margin: 0 0 5px 0;
+  margin: 0 5% 0.5em 5%;
+  font-size: clamp(12px, 6cqw, 60px);
 }
-.option-desc { 
-  margin: 0;
-  font-weight: bold;
+.option-title.short {
+  font-size: clamp(12px, 12cqw, 60px);
+}
+.option-title.long {
+  font-size: clamp(12px, 4.7cqw, 60px);
+}
+.option-desc {
+  margin: 0 5%;
+  font-size: clamp(8px, 4.5cqw, 40px);
+}
+.option-desc.short {
+  font-size: clamp(8px, 9cqw, 40px);
 }
 
 .text-content {
@@ -353,7 +366,8 @@ watch(() => props.songData?.index, (newId) => {
 
 .audience-layout .text-content {
   line-height: 1.5;
-  margin: 0.4rem 0;
+  font-size: clamp(8px, 6cqh, 60px);
+  margin: 0.5em 0;
 }
 
 .italic-text {
@@ -443,7 +457,7 @@ watch(() => props.songData?.index, (newId) => {
   flex: 1;
   width: 100%;
   text-align: center;
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
   line-height: 2;
   letter-spacing: 3px;
   overflow-y: hidden;
@@ -457,8 +471,9 @@ watch(() => props.songData?.index, (newId) => {
   gap: 3%;
 }
 .projector-layout .text-content {
-  line-height: 1.8;
-  margin: 0.25rem 0;
+  line-height: 2;
+  font-size: clamp(8px, 8.5cqh, 60px);
+  margin: 0;
 }
 
 .countdown-overlay {

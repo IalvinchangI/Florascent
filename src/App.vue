@@ -5,9 +5,6 @@
 </template>
 
 <script setup>
-import {
-  BACKGROUND_HORIZONTAL_URL, BACKGROUND_VERTICAL_URL
-} from './assets_url';
 </script>
 
 <style>
@@ -157,14 +154,13 @@ body, html {
 
 /* text */
 .default-font {
-  font-size: clamp(0.875rem, 4vw, 1.5rem);
+  font-size: clamp(14px, 3.5vmin, 24px);
   line-height: 1.6;
   letter-spacing: 0.5px;
   font-weight: normal;
 }
-
 .serif-font {
-  font-size: clamp(0.875rem, 4vw, 1.5rem);
+  font-size: clamp(14px, 3.5vmin, 36px);
   line-height: 1.6;
   font-family: 'Times New Roman', serif;
   letter-spacing: 2px;
@@ -172,11 +168,15 @@ body, html {
   font-weight: normal;
 }
 
-.title {
-  font-weight: bold;
-  font-size: clamp(1rem, 5vw, 2.5rem);
+.relative-text-wrapper {
+  container-type: size;
 }
 
+.title {
+  font-weight: bold;
+  font-size: clamp(16px, 4.5vmin, 60px);
+  line-height: 1.2;
+}
 .title-tw {
   letter-spacing: 3px;
   margin: 0 0 8px 0;
@@ -184,6 +184,9 @@ body, html {
 .title-en {
   letter-spacing: 1px;
   margin: 0;
+}
+.relative-title-wrapper {
+  container-type: size;
 }
 
 /* 漸層捲動遮罩 */

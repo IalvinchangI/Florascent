@@ -15,8 +15,10 @@
       </div>
     </div>
 
-    <div class="header-title-wrapper">
-      <h1 class="header-title serif-font">{{ title }}</h1>
+    <div class="header-title-wrapper relative-text-wrapper">
+      <h1 class="serif-font title header-title" :class="{ 'long': title?.length >= 10, 'extra-long': title?.length >= 20 }">
+        {{ title }}
+      </h1>
     </div>
   
     <div v-if="role === ROLE.AUDIENCE" class="header-pill-wrapper">
@@ -66,9 +68,9 @@ onUnmounted(() => document.removeEventListener('click', closeMenu));
 .app-header {
   width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   position: relative;
-  gap: 1rem;
+  gap: 3%;
 }
 .app-header.audience {
   justify-content: space-between;
@@ -79,12 +81,21 @@ onUnmounted(() => document.removeEventListener('click', closeMenu));
 
 .header-title {
   margin: 0;
-  height: 100%;
-  width: 100%;
-  font-weight: normal;
   text-align: center;
-  font-size: clamp(1.2rem, 5vw, 2rem);
   letter-spacing: 2px;
+  line-height: 1;
+}
+.app-header.audience .header-title {
+  font-size: clamp(16px, 15cqw, 40px);
+}
+.app-header.audience .header-title.long {
+  font-size: clamp(16px, 10cqw, 40px);
+}
+.app-header.audience .header-title.extra-long {
+  font-size: clamp(8px, 6cqw, 36px);
+}
+.app-header.projector .header-title {
+  font-size: clamp(16px, 70cqh, 60px);
 }
 
 .header-pill-wrapper {
@@ -95,9 +106,12 @@ onUnmounted(() => document.removeEventListener('click', closeMenu));
   position: relative;
 }
 .header-title-wrapper {
+  height: 100%;
+  width: 100%;
   flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .header-icon-restrict img {
