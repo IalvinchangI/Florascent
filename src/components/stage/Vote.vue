@@ -362,6 +362,7 @@ watch(() => props.songData?.index, (newId) => {
 
 .audience-layout .text-row {
   flex: 1;
+  max-height: 50%;
   width: 100%;
   display: flex;
   flex-direction: column;
