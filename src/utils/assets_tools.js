@@ -1,6 +1,18 @@
 import { GetBackgroundLink } from "./song_data_logic";
 import { BACKGROUND_HORIZONTAL_URL, BACKGROUND_VERTICAL_URL, COUNTDOWN_SECOND_URLS } from "@/assets_url";
 
+
+/**
+ * 預載圖片
+ * @param {String} url 圖片的路徑
+ */
+export function PreloadImage(url) {
+  if (!url) return;
+  const img = new Image();
+  img.src = url;
+};
+
+
 /**
  * 取得當前畫面的背景樣式 (Background Style)
  * * 根據目前的歌曲資料、所處階段以及設備方向，決定要顯示「該歌曲的專屬背景」或是「預設背景」。
@@ -70,7 +82,6 @@ export function GetCountdownSecondLink(time) {
  */
 export async function PreloadtCountdownSecondLink() {
     COUNTDOWN_SECOND_URLS.forEach((url) => {
-        const img = new Image();
-        img.src = url;
+        PreloadImage(url);
     });
 }

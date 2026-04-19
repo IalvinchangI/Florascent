@@ -53,7 +53,7 @@ import {
   QUERY_NOCACHE, 
   SHOW_BACKGROUND_STAGE
 } from '@/constants.js';
-import { GetBackgroundStyle } from '@/utils/assets_tools';
+import { GetBackgroundStyle, PreloadImage } from '@/utils/assets_tools';
 
 import LandscapeGuard from '@/components/LandscapeGuard.vue';
 import Lobby from '@/components/Lobby.vue';
