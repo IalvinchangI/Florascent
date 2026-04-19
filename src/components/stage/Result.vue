@@ -10,8 +10,9 @@
       <div class="animation-row">
         <div class="img-box img-box-vertical video-restrict-big" style="width: 100%;">
           <!-- <img v-if="waitingURL !== null" :src=waitingURL alt="LOADING..." /> -->
-          <video v-if="waitingURL !== null" autoplay loop muted playsinline>
-            <source :src="waitingURL" type="video/webm">
+          <video autoplay loop muted playsinline>
+            <source :src="waitingURL_WEBM" type="video/webm">
+            <source :src="waitingURL_MP4" type="video/mp4">
             Can not play animation!
           </video>
         </div>
@@ -68,6 +69,7 @@
 import { ref, computed, onMounted, reactive } from 'vue';
 import { LANG, ROLE, RESULT_TRANSITION_TIMING } from '@/constants.js';
 import { GetWaitingLink, GetOptions } from '@/utils/song_data_logic';
+import { ChangeVideoUrlFormat } from '@/utils/assets_tools';
 
 const props = defineProps({
   role: String,
@@ -106,6 +108,12 @@ processedOptions.value.forEach(opt => {
 
 const waitingURL = computed(() => {
   return GetWaitingLink(props.songData);
+});
+const waitingURL_WEBM = computed(() => {
+  return ChangeVideoUrlFormat(waitingURL.value, "webm");
+});
+const waitingURL_MP4 = computed(() => {
+  return ChangeVideoUrlFormat(waitingURL.value, "mp4");
 });
 
 const winnerId = computed(() => {

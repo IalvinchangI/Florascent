@@ -69,7 +69,8 @@
         <div v-if="waitingURL !== null" class="waiting-animation-row">
           <div class="img-box img-box-vertical video-restrict-big full-size">
             <video autoplay loop muted playsinline>
-              <source :src="waitingURL" type="video/webm">
+              <source :src="waitingURL_WEBM" type="video/webm">
+              <source :src="waitingURL_MP4" type="video/mp4">
               Can not play animation!
             </video>
           </div>
@@ -127,7 +128,7 @@ import { ref, computed, onMounted, watch, nextTick } from 'vue';
 import { LANG, ROLE, LANG_SELECT, OPTION_SELECT, VOTE_SELECTED_OPTION_KEY } from '@/constants.js';
 import Header from '@/components/Header.vue';
 import { GetWaitingLink, GetTitle, GetQuestion, GetOptions, GetCanRegret, GetIsBroken } from '@/utils/song_data_logic';
-import { GetCountdownSecondLink, PreloadtCountdownSecondLink } from '@/utils/assets_tools';
+import { GetCountdownSecondLink, PreloadtCountdownSecondLink, ChangeVideoUrlFormat } from '@/utils/assets_tools';
 import { CalculateScrollMaskStyle } from '@/utils/style_tools';
 
 const props = defineProps({
@@ -175,6 +176,13 @@ const selectedOption = computed(() => {
 const waitingURL = computed(() => {
   return GetWaitingLink(props.songData);
 });
+const waitingURL_WEBM = computed(() => {
+  return ChangeVideoUrlFormat(waitingURL.value, "webm");
+});
+const waitingURL_MP4 = computed(() => {
+  return ChangeVideoUrlFormat(waitingURL.value, "mp4");
+});
+console.log(waitingURL_MP4);
 
 const countdownURL = computed(() => {
   return GetCountdownSecondLink(props.time);

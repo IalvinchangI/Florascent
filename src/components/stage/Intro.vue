@@ -13,13 +13,15 @@
       <div v-if="currentCharacterLink != null" class="media-section">
         <div v-if="role === ROLE.AUDIENCE" class="img-box img-box-vertical video-restrict-big">
           <video autoplay loop muted playsinline>
-            <source :src="currentCharacterLink" type="video/webm">
+            <source :src="currentCharacterLink_WEBM" type="video/webm">
+            <source :src="currentCharacterLink_MP4" type="video/mp4">
             Can not play animation!
           </video>
         </div>
         <div v-else-if="role === ROLE.PROJECTOR" class="img-box img-box-horizontal video-restrict-small">
           <video autoplay loop muted playsinline>
-            <source :src="currentCharacterLink" type="video/webm">
+            <source :src="currentCharacterLink_WEBM" type="video/webm">
+            <source :src="currentCharacterLink_MP4" type="video/mp4">
             Can not play animation!
           </video>
         </div>
@@ -41,6 +43,7 @@ import { ROLE, LANG_SELECT } from '@/constants.js';
 import Header from '@/components/Header.vue';
 import { GetTitle, GetDescription, GetCharacterLink } from '@/utils/song_data_logic';
 import { CalculateScrollMaskStyle } from '@/utils/style_tools';
+import { ChangeVideoUrlFormat } from '@/utils/assets_tools';
 
 const props = defineProps({
   role: String,
@@ -64,6 +67,12 @@ const currentDescriptionLines = computed(() => {
 // 使用 GetCharacterLink 取得角色圖片連結
 const currentCharacterLink = computed(() => {
   return GetCharacterLink(props.songData);
+});
+const currentCharacterLink_WEBM = computed(() => {
+  return ChangeVideoUrlFormat(currentCharacterLink.value, "webm");
+});
+const currentCharacterLink_MP4 = computed(() => {
+  return ChangeVideoUrlFormat(currentCharacterLink.value, "mp4");
 });
 
 const emit = defineEmits([LANG_SELECT]);
@@ -146,7 +155,7 @@ onMounted(async () => {
 .audience .media-section {
   order: 2;
   flex-shrink: 0;
-  width: 80%;
+  width: 70%;
 }
 
 .audience:not(.has-image) .layout-container {

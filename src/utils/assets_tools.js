@@ -3,6 +3,42 @@ import { BACKGROUND_HORIZONTAL_URL, BACKGROUND_VERTICAL_URL, COUNTDOWN_SECOND_UR
 
 
 /**
+ * Cloudinary 影片網址轉換器
+ * @param {string} url - 原始的 Cloudinary 影片網址
+ * @param {string} targetFormat - 目標格式 (`mp4` 或 `webm`)
+ * @returns {string} - 加上轉檔參數的全新網址
+ */
+export function ChangeVideoUrlFormat(url, targetFormat) {
+  if (!url) return '';
+
+  // 1. 定義對應格式的專屬編碼參數
+  const formatParams = {
+    mp4: 'f_mp4,vc_h265',
+    webm: 'f_webm,vc_vp9'
+  };
+
+  const insertParams = formatParams[targetFormat];
+  if (!insertParams) {
+    console.error("targetFormat 只能是 'mp4' 或 'webm'");
+    return url;
+  }
+
+  let newUrl = url;
+
+  // 2. 處理參數插入
+  // 如果網址中已經有 ac_none,q_auto，就把新參數接在後面
+  if (newUrl.includes('ac_none,q_auto')) {
+    // 避免重複加入，先檢查是不是已經加過了
+    if (!newUrl.includes(insertParams)) {
+      newUrl = newUrl.replace('ac_none,q_auto', `ac_none,q_auto,${insertParams}`);
+    }
+  }
+
+  return newUrl;
+}
+
+
+/**
  * 預載圖片
  * @param {String} url 圖片的路徑
  */

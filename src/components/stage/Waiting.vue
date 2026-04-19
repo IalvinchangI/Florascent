@@ -6,7 +6,8 @@
         <div class="img-box img-box-square img-restrict video-restrict-small serif-font title title-en">
           <!-- <img :src="LOGO_URL" alt="Florascent"/> -->
           <video autoplay loop muted playsinline>
-            <source :src="LOGO_VIDEO_URL" type="video/webm">
+            <source :src="logoVideoWEBM" type="video/webm">
+            <source :src="logoVideoMP4" type='video/mp4'>
             Florascent
           </video>
         </div>
@@ -49,11 +50,15 @@ import { ref, onMounted, nextTick } from 'vue';
 import {LANG, ROLE} from '@/constants.js';
 import { LOGO_URL, LOGO_VIDEO_URL, QRCODE_URL } from '@/assets_url';
 import { CalculateScrollMaskStyle } from '@/utils/style_tools';
+import { ChangeVideoUrlFormat } from '@/utils/assets_tools';
 
 const props = defineProps({
   role: String,
   lang: String
 });
+
+const logoVideoWEBM = ref(ChangeVideoUrlFormat(LOGO_VIDEO_URL, "webm"));
+const logoVideoMP4 = ref(ChangeVideoUrlFormat(LOGO_VIDEO_URL, "mp4"));
 
 var Introduction = new Map()
 Introduction.set(LANG.TW, [

@@ -6,7 +6,8 @@
         <div class="img-box img-box-square img-restrict video-restrict-small serif-font title title-en">
           <!-- <img :src="LOGO_URL" alt="Florascent"/> -->
           <video autoplay loop muted playsinline>
-            <source :src="LOGO_VIDEO_URL" type="video/webm">
+            <source :src="logoVideoWEBM" type="video/webm">
+            <source :src="logoVideoMP4" type='video/mp4'>
             Florascent
           </video>
         </div>
@@ -27,10 +28,15 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { LANG, LANG_SELECT } from '@/constants.js';
 import { LOGO_URL, LOGO_VIDEO_URL } from '@/assets_url';
+import { ChangeVideoUrlFormat } from '@/utils/assets_tools';
 
 const emit = defineEmits([LANG_SELECT]);
+
+const logoVideoWEBM = ref(ChangeVideoUrlFormat(LOGO_VIDEO_URL, "webm"));
+const logoVideoMP4 = ref(ChangeVideoUrlFormat(LOGO_VIDEO_URL, "mp4"));
 
 const selectLanguage = (lang) => {
   emit(LANG_SELECT, lang);
