@@ -8,7 +8,7 @@
         <p class="default-font sub-text">Please view the content on your mobile device.</p>
       </div>
 
-      <div class="icon-box">
+      <div class="icon-box relative-text-wrapper">
         <div class="phone-icon"></div>
       </div>
 
@@ -76,6 +76,8 @@ const props = defineProps({
 }
 
 .icon-box {
+  height: 50%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,10 +89,10 @@ const props = defineProps({
    CSS Phone Icon & Animation
    ========================================= */
 .phone-icon {
-  width: 230px;
-  height: 350px;
-  border: 12px solid #000;
-  border-radius: 24px;
+  width: 68cqh;
+  height: 100cqh;
+  border: 2.5cqh solid #000;
+  border-radius: 5cqh;
   position: relative;
   animation: vibrate-phone 5s infinite ease-in-out;
 }
@@ -98,11 +100,11 @@ const props = defineProps({
 .phone-icon::before {
   content: '';
   position: absolute;
-  bottom: 16px;
+  bottom: 4.5cqh;
   left: 50%;
   transform: translateX(-50%);
-  width: 20px;
-  height: 20px;
+  width: 5.5cqh;
+  height: 5.5cqh;
   background: #000;
   border-radius: 50%;
 }
