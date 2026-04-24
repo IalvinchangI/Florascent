@@ -73,7 +73,8 @@ body, html {
 .img-restrict img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: scale-down;
+  object-fit: contain;
+  /* object-fit: scale-down; */
 }
 .video-restrict-big video {
   width: 100%;
@@ -154,7 +155,7 @@ body, html {
 
 /* text */
 .default-font {
-  font-size: clamp(14px, 3.5vmin, 36px);
+  font-size: clamp(14px, 3vmin, 80px);
   line-height: 1.6;
   font-family: 'Times New Roman', serif;
   letter-spacing: 2px;
@@ -165,10 +166,13 @@ body, html {
 .relative-text-wrapper {
   container-type: size;
 }
+.relative-text-width-wrapper {
+  container-type: inline-size;
+}
 
 .title {
   font-weight: bold;
-  font-size: clamp(16px, 4.5vmin, 60px);
+  font-size: clamp(16px, 4vmin, 120px);
   line-height: 1.2;
 }
 .title-tw {
@@ -178,9 +182,6 @@ body, html {
 .title-en {
   letter-spacing: 1px;
   margin: 0;
-}
-.relative-title-wrapper {
-  container-type: size;
 }
 
 /* 漸層捲動遮罩 */

@@ -86,16 +86,16 @@ onUnmounted(() => document.removeEventListener('click', closeMenu));
   line-height: 1;
 }
 .app-header.audience .header-title {
-  font-size: clamp(16px, 15cqw, 40px);
+  font-size: clamp(16px, 15cqw, 120px);
 }
 .app-header.audience .header-title.long {
-  font-size: clamp(16px, 10cqw, 40px);
+  font-size: clamp(16px, 10cqw, 120px);
 }
 .app-header.audience .header-title.extra-long {
-  font-size: clamp(8px, 6cqw, 36px);
+  font-size: clamp(8px, 6cqw, 120px);
 }
 .app-header.projector .header-title {
-  font-size: clamp(16px, 70cqh, 60px);
+  font-size: clamp(16px, 70cqh, 120px);
 }
 
 .header-pill-wrapper {

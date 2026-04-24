@@ -27,7 +27,11 @@
         </div>
       </div>
 
-      <div class="text-section default-font" :class="{'scroll-mask-container': role === ROLE.AUDIENCE}" 
+      <div class="text-section default-font" :class="{
+          'scroll-mask-container': role === ROLE.AUDIENCE, 
+          'relative-text-width-wrapper': role === ROLE.AUDIENCE, 
+          'relative-text-wrapper': role === ROLE.PROJECTOR
+        }" 
         ref="scrollBox" @scroll="handleScroll" :style="maskStyles"
       >
         <p v-for="(line, index) in currentDescriptionLines" :key="index">{{ line }}</p>
@@ -149,6 +153,7 @@ onMounted(async () => {
   width: 100%;
 }
 .audience .text-section p {
+  font-size: clamp(12px, 5.5cqw, 60px);
   margin: 0.5rem 0;
 }
 
@@ -206,6 +211,7 @@ onMounted(async () => {
   justify-content: center; 
 }
 .projector .text-section p {
+  font-size: clamp(24px, 5.3cqh, 120px);
   margin: 0 1rem;
 }
 

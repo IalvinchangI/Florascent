@@ -20,23 +20,23 @@
         ref="scrollBox" @scroll="handleScroll" :style="maskStyles"
       >
         
-        <div class="text-section info-text default-font">
-          <span class="title">{{ (lang === LANG.EN) ? "Info" : "活動說明" }}</span>
+        <div class="text-section info-text default-font relative-text-width-wrapper">
+          <div class="title relative-title">{{ (lang === LANG.EN) ? "Info" : "活動說明" }}</div>
           <div v-if="role === ROLE.PROJECTOR">
-            <p v-for="(line, index) in Introduction.get(LANG.TW)" :key="index" class="default-font">{{ line }}&nbsp;</p>
+            <p v-for="(line, index) in Introduction.get(LANG.TW)" :key="index" class="default-font relative-text">{{ line }}&nbsp;</p>
           </div>
           <div v-else-if="role === ROLE.AUDIENCE">
-            <p v-for="(line, index) in Introduction.get(lang)" :key="index" class="default-font">{{ line }}&nbsp;</p>
+            <p v-for="(line, index) in Introduction.get(lang)" :key="index" class="default-font relative-text">{{ line }}&nbsp;</p>
           </div>
         </div>
 
-        <div class="text-section rules-text default-font">
-          <span class="title">{{ (lang === LANG.EN) ? "Rules" : "投票規則" }}</span>
+        <div class="text-section rules-text default-font relative-text-width-wrapper">
+          <div class="title relative-title">{{ (lang === LANG.EN) ? "Rules" : "投票規則" }}</div>
           <div v-if="role === ROLE.PROJECTOR">
-            <p v-for="(line, index) in VoteRules.get(LANG.TW)" :key="index" class="default-font">{{ line }}&nbsp;</p>
+            <p v-for="(line, index) in VoteRules.get(LANG.TW)" :key="index" class="default-font relative-text">{{ line }}&nbsp;</p>
           </div>
           <div v-else-if="role === ROLE.AUDIENCE">
-            <p v-for="(line, index) in VoteRules.get(lang)" :key="index" class="default-font">{{ line }}&nbsp;</p>
+            <p v-for="(line, index) in VoteRules.get(lang)" :key="index" class="default-font relative-text">{{ line }}&nbsp;</p>
           </div>
         </div>
 
@@ -130,6 +130,14 @@ onMounted(async () => {
 }
 .text-section p {
   margin: 0;
+}
+
+.relative-title {
+  font-size: clamp(24px, 10cqw, 120px);
+  margin: 0 0 0.5em 0;
+}
+.relative-text {
+  font-size: clamp(18px, 6cqw, 80px);
 }
 
 /* =========================================

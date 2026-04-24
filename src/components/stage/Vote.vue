@@ -310,20 +310,20 @@ watch(() => props.songData?.index, (newId) => {
 
 .option-title {
   margin: 0 5% 0.5em 5%;
-  font-size: clamp(12px, 6cqw, 60px);
+  font-size: clamp(12px, 6cqw, 120px);
 }
 .option-title.short {
-  font-size: clamp(12px, 12cqw, 60px);
+  font-size: clamp(12px, 12cqw, 120px);
 }
 .option-title.long {
-  font-size: clamp(12px, 4.7cqw, 60px);
+  font-size: clamp(12px, 4.7cqw, 120px);
 }
 .option-desc {
   margin: 0 5%;
-  font-size: clamp(8px, 4.5cqw, 40px);
+  font-size: clamp(8px, 4.5cqw, 80px);
 }
 .option-desc.short {
-  font-size: clamp(8px, 9cqw, 40px);
+  font-size: clamp(8px, 9cqw, 80px);
 }
 
 .text-content {
@@ -375,7 +375,7 @@ watch(() => props.songData?.index, (newId) => {
 
 .audience-layout .text-content {
   line-height: 1.5;
-  font-size: clamp(8px, 6cqh, 60px);
+  font-size: clamp(8px, 6cqh, 120px);
   margin: 0.5em 0;
 }
 
@@ -481,7 +481,7 @@ watch(() => props.songData?.index, (newId) => {
 }
 .projector-layout .text-content {
   line-height: 2;
-  font-size: clamp(8px, 8.5cqh, 60px);
+  font-size: clamp(8px, 8.5cqh, 120px);
   margin: 0;
 }
 

@@ -306,7 +306,7 @@ const uiText = computed(() => {
   background-color: #fdfbf7; 
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   transition: all 0.5s ease;
-  font-size: clamp(6px, 1.3cqw, 24px);
+  font-size: clamp(6px, 1.3cqw, 80px);
 }
 
 .percentage-text {

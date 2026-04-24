@@ -3,7 +3,7 @@
     
     <div v-if="role === ROLE.PROJECTOR" class="projector-container">
       
-      <div class="text-group">
+      <div class="text-group relative-text-width-wrapper">
         <h2 class="default-font main-text">請查看您的手機頁面</h2>
         <p class="default-font sub-text">Please view the content on your mobile device.</p>
       </div>
@@ -43,6 +43,8 @@ const props = defineProps({
    Projector Style
    ========================================= */
 .projector-container {
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -52,20 +54,21 @@ const props = defineProps({
 }
 
 .text-group {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5vh;
 }
 .main-text {
-  font-size: 2.5rem;
+  font-size: clamp(24px, 3.3cqw, 120px);
   margin: 0;
   letter-spacing: 5px;
   font-weight: bold;
   color: #000;
 }
 .sub-text {
-  font-size: 2.3rem;
+  font-size: clamp(20px, 3cqw, 110px);
   margin: 0;
   letter-spacing: 1px;
   font-weight: bold;
