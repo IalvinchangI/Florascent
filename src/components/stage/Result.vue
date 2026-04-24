@@ -3,7 +3,7 @@
     
     <div v-if="role === ROLE.AUDIENCE" class="audience-layout">
       <div class="text-row">
-        <h2 class="serif-font title option-title" style="margin: 0;">{{ uiText.musicStarting }}</h2>
+        <h2 class="default-font title option-title" style="margin: 0;">{{ uiText.musicStarting }}</h2>
         <p class="default-font" style="margin: 5px;">{{ uiText.silenceDevices }}</p>
       </div>
 
@@ -39,14 +39,14 @@
         >
           <div class="base-btn default-btn option-card">
             <h3 
-              class="serif-font title option-title" 
+              class="default-font title option-title" 
               :style="{ fontSize: getDynamicFontSize(option.id, 'title') }"
             >
               {{ option.title }}
             </h3>
             
             <div 
-              class="percentage-text serif-font"
+              class="percentage-text default-font"
               :style="{ fontSize: getDynamicFontSize(option.id, 'percent') }"
             >
               {{ animatedDisplayMap[option.id] }}%

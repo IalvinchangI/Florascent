@@ -154,12 +154,6 @@ body, html {
 
 /* text */
 .default-font {
-  font-size: clamp(14px, 3.5vmin, 24px);
-  line-height: 1.6;
-  letter-spacing: 0.5px;
-  font-weight: normal;
-}
-.serif-font {
   font-size: clamp(14px, 3.5vmin, 36px);
   line-height: 1.6;
   font-family: 'Times New Roman', serif;

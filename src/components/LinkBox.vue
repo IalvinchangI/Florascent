@@ -3,7 +3,7 @@
     
     <input 
       type="text" 
-      class="url-input serif-font" 
+      class="url-input default-font" 
       readonly 
       :value="projectorUrl"
       @click="selectAll" 

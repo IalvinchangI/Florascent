@@ -8,7 +8,7 @@
           <input 
             type="text" 
             v-model="form.account"
-            class="real-input serif-font"
+            class="real-input default-font"
             placeholder="帳號"
           />
           <div class="icon-placeholder"></div>
@@ -18,7 +18,7 @@
           <input 
             :type="showPassword ? 'text' : 'password'"
             v-model="form.password"
-            class="real-input serif-font"
+            class="real-input default-font"
             placeholder="密碼"
             @keyup.enter="handleLogin"
           />
@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <button class="action-btn base-btn default-btn animate-btn serif-font" @click="handleLogin">
+        <button class="action-btn base-btn default-btn animate-btn default-font" @click="handleLogin">
           登入
         </button>
       </div>
@@ -46,7 +46,7 @@
           <p>好好欣賞表演</p>
         </div>
 
-        <button class="retry-btn base-btn default-btn animate-btn serif-font" @click="handleRetry">
+        <button class="retry-btn base-btn default-btn animate-btn default-font" @click="handleRetry">
           重試
         </button>
       </div>

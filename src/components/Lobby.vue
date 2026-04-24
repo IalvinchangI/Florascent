@@ -3,7 +3,7 @@
     <div class="content-container">
       
       <div class="logo-wrapper">
-        <div class="img-box img-box-square img-restrict video-restrict-small serif-font title title-en">
+        <div class="img-box img-box-square img-restrict video-restrict-small default-font title title-en">
           <!-- <img :src="LOGO_URL" alt="Florascent"/> -->
           <video autoplay loop muted playsinline>
             <source :src="logoVideoWEBM" type="video/webm">
@@ -14,13 +14,13 @@
       </div>
 
       <div class="text-section">
-        <p class="title-tw serif-font">請選擇您的語言</p>
-        <p class="title-en serif-font">Please select your language</p>
+        <p class="title-tw default-font">請選擇您的語言</p>
+        <p class="title-en default-font">Please select your language</p>
       </div>
 
       <div class="button-group">
-        <button class="base-btn default-btn animate-btn serif-font" @click="selectLanguage(LANG.TW)">繁體中文</button>
-        <button class="base-btn default-btn animate-btn serif-font" @click="selectLanguage(LANG.EN)">ENGLISH</button>
+        <button class="base-btn default-btn animate-btn default-font" @click="selectLanguage(LANG.TW)">繁體中文</button>
+        <button class="base-btn default-btn animate-btn default-font" @click="selectLanguage(LANG.EN)">ENGLISH</button>
       </div>
       
     </div>

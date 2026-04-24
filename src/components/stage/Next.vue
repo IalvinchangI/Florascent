@@ -4,8 +4,8 @@
     <div v-if="role === ROLE.PROJECTOR" class="projector-container">
       
       <div class="text-group">
-        <h2 class="serif-font main-text">請查看您的手機頁面</h2>
-        <p class="serif-font sub-text">Please view the content on your mobile device.</p>
+        <h2 class="default-font main-text">請查看您的手機頁面</h2>
+        <p class="default-font sub-text">Please view the content on your mobile device.</p>
       </div>
 
       <div class="icon-box">

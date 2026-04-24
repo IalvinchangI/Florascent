@@ -31,14 +31,14 @@
           </button>
 
           <div class="info-display img-box default-btn white-bg">
-            <span class="song-title serif-font">《{{ currentSongTitle }}》</span>
+            <span class="song-title default-font">《{{ currentSongTitle }}》</span>
             <span class="separator">|</span>
             <span class="page-name default-font">{{ pageName }}</span>
           </div>
 
           <button v-if="IsAutoAdvanceStage(currentStage)" class="nav-btn base-btn auto-mode animate-btn" @click="nextSlideWithConfirm">
             <div class="timer-box">
-              <span class="time-text serif-font">{{ time }}</span>
+              <span class="time-text default-font">{{ time }}</span>
               <span class="auto-label default-font">自動跳轉</span>
             </div>
 

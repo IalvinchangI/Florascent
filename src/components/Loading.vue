@@ -6,7 +6,7 @@
         <div class="inner-square"></div>
       </div>
 
-      <p class="loading-text serif-font">
+      <p class="loading-text default-font">
         Loading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
       </p>
 

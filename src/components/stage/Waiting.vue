@@ -3,7 +3,7 @@
     <div class="layout-container">
       
       <div class="media-section">
-        <div class="img-box img-box-square img-restrict video-restrict-small serif-font title title-en">
+        <div class="img-box img-box-square img-restrict video-restrict-small default-font title title-en">
           <!-- <img :src="LOGO_URL" alt="Florascent"/> -->
           <video autoplay loop muted playsinline>
             <source :src="logoVideoWEBM" type="video/webm">

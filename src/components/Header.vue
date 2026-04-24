@@ -16,7 +16,7 @@
     </div>
 
     <div class="header-title-wrapper relative-text-wrapper">
-      <h1 class="serif-font title header-title" :class="{ 'long': title?.length >= 10, 'extra-long': title?.length >= 20 }">
+      <h1 class="default-font title header-title" :class="{ 'long': title?.length >= 10, 'extra-long': title?.length >= 20 }">
         {{ title }}
       </h1>
     </div>

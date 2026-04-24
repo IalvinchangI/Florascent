@@ -35,22 +35,22 @@
           <div v-if="currentPhase === 'VOTING'" 
                class="base-btn default-btn img-box-horizontal animate-btn option-button-wrapper full-size relative-text-wrapper"
                @click="!isBroken && handleOptionSelect(option, index)">
-            <h3 class="option-title serif-font title" :class="{ 'long': option.title.length >= 25 }">{{ option.title }}</h3>
+            <h3 class="option-title default-font title" :class="{ 'long': option.title.length >= 25 }">{{ option.title }}</h3>
             <p class="option-desc default-font" v-for="(line, i) in option.description" :key="i">{{ line }}</p>
           </div>
           <div v-else-if="currentPhase === 'REGRET' && selectedOptionIndex !== index" class="regret-buttons-wrapper full-size">
             <div class="base-btn default-btn animate-btn img-box-horizontal option-button-wrapper half-card relative-text-wrapper" @click="cancelChoice">
-              <h3 class="option-title serif-font title short">{{ getUIText('back', 'title') }}</h3>
+              <h3 class="option-title default-font title short">{{ getUIText('back', 'title') }}</h3>
               <p class="option-desc default-font short">{{ getUIText('back', 'desc') }}</p>
             </div>
             <div class="base-btn default-btn animate-btn img-box-horizontal option-button-wrapper half-card relative-text-wrapper" @click="confirmChoice">
-              <h3 class="option-title serif-font title short">{{ getUIText('continue', 'title') }}</h3>
+              <h3 class="option-title default-font title short">{{ getUIText('continue', 'title') }}</h3>
               <p class="option-desc default-font short">{{ getUIText('continue', 'desc') }}</p>
             </div>
           </div>
           <!-- REGRET && selected -->
           <div v-else class="base-btn default-btn img-box-horizontal option-button-wrapper full-size disable relative-text-wrapper">
-            <h3 class="option-title serif-font title" :class="{ 'long': option.title.length >= 25 }">{{ option.title }}</h3>
+            <h3 class="option-title default-font title" :class="{ 'long': option.title.length >= 25 }">{{ option.title }}</h3>
             <p class="option-desc default-font" v-for="(line, i) in option.description" :key="i">{{ line }}</p>
           </div>
         </div>
@@ -60,7 +60,7 @@
         <!-- slot -->
         <div class="waiting-slot-row">
           <div class="base-btn default-btn img-box-horizontal option-button-wrapper full-size disable relative-text-wrapper">
-            <h3 class="option-title serif-font title" :class="{ 'long': selectedOption?.title.length >= 25 }">{{ selectedOption?.title }}</h3>
+            <h3 class="option-title default-font title" :class="{ 'long': selectedOption?.title.length >= 25 }">{{ selectedOption?.title }}</h3>
             <p class="option-desc default-font" v-for="(line, i) in selectedOption?.description" :key="i">{{ line }}</p>
           </div>
         </div>
@@ -95,7 +95,7 @@
             v-for="(option, index) in processedOptions" :key="index" 
             class="base-btn default-btn option-button-wrapper full-size relative-text-wrapper" style="cursor: default;"
           >
-            <h3 class="option-title serif-font title" :class="{ 'long': option.title.length >= 25 }">{{ option.title }}</h3>
+            <h3 class="option-title default-font title" :class="{ 'long': option.title.length >= 25 }">{{ option.title }}</h3>
             <p v-for="(line, idx) in option.description" :key="idx" class="option-desc default-font">{{ line }}</p>
           </div>
         </div>
