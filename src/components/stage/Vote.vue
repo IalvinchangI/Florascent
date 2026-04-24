@@ -67,7 +67,7 @@
         
         <!-- LOADING animation -->
         <div v-if="waitingURL !== null" class="waiting-animation-row">
-          <div class="img-box img-box-vertical video-restrict-big full-size">
+          <div class="img-box-vertical video-restrict-big full-size">
             <video autoplay loop muted playsinline>
               <source :src="waitingURL_WEBM" type="video/webm">
               <source :src="waitingURL_MP4" type="video/mp4">

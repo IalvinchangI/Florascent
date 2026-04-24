@@ -11,14 +11,14 @@
 
     <div class="layout-container">
       <div v-if="currentCharacterLink != null" class="media-section">
-        <div v-if="role === ROLE.AUDIENCE" class="img-box img-box-vertical video-restrict-big">
+        <div v-if="role === ROLE.AUDIENCE" class="img-box-vertical video-restrict-big">
           <video autoplay loop muted playsinline>
             <source :src="currentCharacterLink_WEBM" type="video/webm">
             <source :src="currentCharacterLink_MP4" type="video/mp4">
             Can not play animation!
           </video>
         </div>
-        <div v-else-if="role === ROLE.PROJECTOR" class="img-box img-box-horizontal video-restrict-small">
+        <div v-else-if="role === ROLE.PROJECTOR" class="img-box-horizontal video-restrict-small">
           <video autoplay loop muted playsinline>
             <source :src="currentCharacterLink_WEBM" type="video/webm">
             <source :src="currentCharacterLink_MP4" type="video/mp4">

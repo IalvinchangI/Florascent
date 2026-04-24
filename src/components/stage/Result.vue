@@ -8,7 +8,7 @@
       </div>
 
       <div class="animation-row">
-        <div class="img-box img-box-vertical video-restrict-big" style="width: 100%;">
+        <div class="img-box-vertical video-restrict-big" style="width: 100%;">
           <!-- <img v-if="waitingURL !== null" :src=waitingURL alt="LOADING..." /> -->
           <video autoplay loop muted playsinline>
             <source :src="waitingURL_WEBM" type="video/webm">

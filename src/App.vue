@@ -71,8 +71,8 @@ body, html {
 }
 
 .img-restrict img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   /* object-fit: scale-down; */
 }
@@ -85,7 +85,7 @@ body, html {
 .video-restrict-small video {
   width: 100%;
   height: 100%;
-  object-fit: scale-down;
+  object-fit: contain;
   overflow: hidden;
 }
 
