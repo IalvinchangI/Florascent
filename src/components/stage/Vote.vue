@@ -345,6 +345,7 @@ watch(() => props.songData?.index, (newId) => {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .option-title {
