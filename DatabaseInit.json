@@ -23,33 +23,33 @@
         "Intro", 
         "Vote", 
         "Result", 
-        "Performance", 
-        "Next"
+        "Performance"
       ]
     }, 
     {
       "index": 1,
       "list": [
+        "Next", 
         "Intro", 
         "Vote", 
         "Result", 
-        "Performance", 
-        "Next"
+        "Performance"
       ]
     }, 
     {
       "index": 2,
       "list": [
+        "Next", 
         "Intro", 
         "Vote", 
         "Result", 
-        "Performance", 
-        "Next"
+        "Performance"
       ]
     }, 
     {
       "index": 3,
       "list": [
+        "Next", 
         "Vote", 
         "Performance"
       ]

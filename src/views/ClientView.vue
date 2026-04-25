@@ -124,7 +124,6 @@ const uploadVote = (option) => {
 
 const handleBlackout = () => {
   isBlackout.value = true;
-  console.log("isBlackout", isBlackout);
 };
 
 

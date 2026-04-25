@@ -46,6 +46,7 @@ export const VOTE_SELECTED_OPTION_KEY = 'Florascent_selectedOption';
 export const QUERY_NOCACHE = "preview";
 
 export const SHOW_BACKGROUND_STAGE = [
+  Stage.Next, 
   Stage.Intro, 
   Stage.Vote, 
   Stage.Result, 
