@@ -9,16 +9,9 @@
       @[LANG_SELECT]="handleLangUpdate" 
     />
 
-    <div class="layout-container">
+    <div v-if="role === ROLE.AUDIENCE" class="layout-container">
       <div v-if="currentCharacterLink != null" class="media-section">
-        <div v-if="role === ROLE.AUDIENCE" class="img-box-vertical video-restrict-big">
-          <video autoplay loop muted playsinline>
-            <source :src="currentCharacterLink_WEBM" type="video/webm">
-            <source :src="currentCharacterLink_MP4" type="video/mp4">
-            Can not play animation!
-          </video>
-        </div>
-        <div v-else-if="role === ROLE.PROJECTOR" class="img-box-horizontal video-restrict-small">
+        <div class="img-box-vertical video-restrict-big">
           <video autoplay loop muted playsinline>
             <source :src="currentCharacterLink_WEBM" type="video/webm">
             <source :src="currentCharacterLink_MP4" type="video/mp4">
@@ -27,17 +20,33 @@
         </div>
       </div>
 
-      <div class="text-section default-font" :class="{
-          'scroll-mask-container': role === ROLE.AUDIENCE, 
-          'relative-text-width-wrapper': role === ROLE.AUDIENCE, 
-          'relative-text-wrapper': role === ROLE.PROJECTOR
-        }" 
+      <div class="text-section default-font scroll-mask-container relative-text-width-wrapper" 
         ref="scrollBox" @scroll="handleScroll" :style="maskStyles"
       >
         <p v-for="(line, index) in currentDescriptionLines" :key="index">{{ line }}</p>
       </div>
     </div>
 
+    <!-- projector -->
+    <div v-else-if="role === ROLE.PROJECTOR" class="layout-container">
+      <div class="text-section default-font relative-text-wrapper" style="justify-content: right;">
+        <p v-for="(line, index) in leftDescriptionLines" :key="index">{{ line }}</p>
+      </div>
+
+      <div v-if="currentCharacterLink != null" class="media-section">
+        <div class="img-box-horizontal video-restrict-small">
+          <video autoplay loop muted playsinline>
+            <source :src="currentCharacterLink_WEBM" type="video/webm">
+            <source :src="currentCharacterLink_MP4" type="video/mp4">
+            Can not play animation!
+          </video>
+        </div>
+      </div>
+
+      <div class="text-section default-font relative-text-wrapper" style="justify-content: left;">
+        <p v-for="(line, index) in rightDescriptionLines" :key="index">{{ line }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -66,6 +75,16 @@ const currentTitle = computed(() => {
 // 使用 GetDescription 取得介紹文字 (已經是處理好的陣列)
 const currentDescriptionLines = computed(() => {
   return GetDescription(props.songData, props.lang);
+});
+const rightDescriptionLines = computed(() => {
+  const lines = currentDescriptionLines.value;
+  const midIndex = Math.floor((lines.length + 1) / 2);
+  return lines.slice(0, midIndex);
+});
+const leftDescriptionLines = computed(() => {
+  const lines = currentDescriptionLines.value;
+  const midIndex = Math.floor((lines.length + 1) / 2);
+  return lines.slice(midIndex);
 });
 
 // 使用 GetCharacterLink 取得角色圖片連結
@@ -196,6 +215,7 @@ onMounted(async () => {
   height: 100%;
   display: flex;
   justify-content: center;
+  flex: 0 1 auto;
 }
 
 .projector .text-section {
@@ -208,7 +228,6 @@ onMounted(async () => {
   flex: 1;
   display: flex;
   flex-direction: column; 
-  justify-content: center; 
 }
 .projector .text-section p {
   font-size: clamp(24px, 5.3cqh, 120px);
