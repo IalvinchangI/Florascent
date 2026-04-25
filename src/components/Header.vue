@@ -1,7 +1,7 @@
 <template>
   <div class="app-header" :class="role">
     <div v-if="role === ROLE.AUDIENCE" class="header-pill-wrapper relative-text-width-wrapper">
-      <button class="base-btn pill-btn animate-btn" @click.stop="toggleMenu">
+      <button class="base-btn pill-btn animate-btn language-font" @click.stop="toggleMenu">
         {{ lang === LANG.TW ? 'Language' : '語言' }}
       </button>
 
@@ -22,7 +22,7 @@
     </div>
   
     <div v-if="role === ROLE.AUDIENCE" class="header-pill-wrapper">
-      <div v-if="time" class="base-btn pill-btn time-display" style="cursor: default;">
+      <div v-if="time" class="base-btn pill-btn time-font" style="cursor: default;">
         {{ time }}
       </div>
       <div v-else class="header-icon-restrict base-btn pill-btn" style="cursor: default;">
@@ -120,9 +120,15 @@ onUnmounted(() => document.removeEventListener('click', closeMenu));
   object-fit: scale-down;
   overflow: hidden;
 }
-.time-display {
-  color: #d9534f; 
+.time-font {
+  color: #d9534f;
+  font-size: clamp(6px, 8cqw, 24px);
   font-weight: bold;
+}
+
+.language-font {
+  color: #333;
+  font-size: clamp(6px, 13cqw, 24px);
 }
 
 .pill-btn {
@@ -131,9 +137,7 @@ onUnmounted(() => document.removeEventListener('click', closeMenu));
   border-radius: 20px;
   line-height: 1;
   letter-spacing: 1px;
-  color: #333;
   font-size: clamp(0.5rem, 2.1vw, 0.9rem);
-  font-size: clamp(6px, 13cqw, 24px);
   overflow: hidden;
   
   -webkit-user-select: none;
