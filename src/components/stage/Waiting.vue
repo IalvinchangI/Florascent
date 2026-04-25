@@ -21,7 +21,7 @@
       >
         
         <div class="text-section info-text default-font relative-text-width-wrapper">
-          <div class="title relative-title">{{ (lang === LANG.EN) ? "Info" : "活動說明" }}</div>
+          <div class="title relative-title">{{ (lang === LANG.EN) ? "Event Information" : "活動說明" }}</div>
           <div v-if="role === ROLE.PROJECTOR">
             <p v-for="(line, index) in Introduction.get(LANG.TW)" :key="index" class="default-font relative-text">{{ line }}&nbsp;</p>
           </div>
@@ -31,7 +31,7 @@
         </div>
 
         <div class="text-section rules-text default-font relative-text-width-wrapper">
-          <div class="title relative-title">{{ (lang === LANG.EN) ? "Rules" : "投票規則" }}</div>
+          <div class="title relative-title">{{ (lang === LANG.EN) ? "Voting Rules" : "投票規則" }}</div>
           <div v-if="role === ROLE.PROJECTOR">
             <p v-for="(line, index) in VoteRules.get(LANG.TW)" :key="index" class="default-font relative-text">{{ line }}&nbsp;</p>
           </div>
@@ -69,11 +69,11 @@ Introduction.set(LANG.TW, [
   "演出期間如遇身體不適，請與工作人員反應，並依照指示離場。"
 ])
 Introduction.set(LANG.EN, [
-  "1. Introduction——Introduction——Introduction——Introduction——Introduction——", 
-  "2. Introduction——Introduction——Introduction——Introduction——Introduction——", 
-  "3. Introduction——Introduction——Introduction——Introduction——Introduction——", 
-  "4. Introduction——Introduction——Introduction——Introduction——Introduction——", 
-  "5. Introduction——Introduction——Introduction——Introduction——Introduction——"
+  "The total duration of this performance is approximately 100 minutes, consisting of a 60-minute live musical performance followed by a 40-minute perfume experience session", 
+  "", 
+  "The live performance features four musical pieces, during which the featured perfumes will be showcased on stage. A limited-edition program booklet will be available for purchase at NT$20. Each booklet includes scent strips corresponding to each piece of music. We invite guests who wi", 
+  "", 
+  "If you feel unwell during the performance, please notify our staff immediately and follow their guidance to exit the venue"
 ])
 
 var VoteRules = new Map()
@@ -85,11 +85,11 @@ VoteRules.set(LANG.TW, [
   "請務必協助將手機及電子產品轉為靜音模式，以維護眾人的觀展體驗品質。演出期間不開放攝影錄音，請好好放鬆聽覺、視覺及嗅覺，享受時走時停的人生步調。"
 ])
 VoteRules.set(LANG.EN, [
-  "1. Vote Rules——Vote Rules——Vote Rules——Vote Rules——Vote Rules——", 
-  "2. Vote Rules——Vote Rules——Vote Rules——Vote Rules——Vote Rules——", 
-  "3. Vote Rules——Vote Rules——Vote Rules——Vote Rules——Vote Rules——", 
-  "4. Vote Rules——Vote Rules——Vote Rules——Vote Rules——Vote Rules——", 
-  "5. Vote Rules——Vote Rules——Vote Rules——Vote Rules——Vote Rules——"
+  "Before each musical piece begins, an audience vote will be held. Your choices will influence the protagonist’s decisions and the direction of the narrative. Please cast your vote promptly within the allotted time!", 
+  "", 
+  "To ensure a high-quality experience for everyone, please switch your mobile phones and electronic devices to silent mode. Photography and audio recording are strictly prohibited during the performance. We invite you to relax your senses—sight, sound, and smell—and embrace the ebb and flow of life’s journey.", 
+  "", 
+  "“ To stay, or to go —— that is the question. ”"
 ])
 
 // Scroll Mask
