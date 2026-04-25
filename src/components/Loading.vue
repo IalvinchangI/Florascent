@@ -1,5 +1,5 @@
 <template>
-  <div class="loading-overlay">
+  <div class="loading-overlay relative-text-wrapper">
     <div class="loading-content">
       
       <div class="spinner-box">
@@ -31,15 +31,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 5cqmin;
 }
 
 /* --- 方塊動畫 --- */
 .spinner-box {
-  width: 50px;
-  height: 50px;
-  border: 1px solid #333;
-  border-radius: 8px;
+  width: 15cqmin;
+  height: 15cqmin;
+  border: 0.3cqmin solid #333;
+  border-radius: 2.4cqmin;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,10 +48,10 @@
 }
 
 .inner-square {
-  width: 20px;
-  height: 20px;
+  width: 6cqmin;
+  height: 6cqmin;
   background-color: #333;
-  border-radius: 2px;
+  border-radius: 0.6cqmin;
   opacity: 0.8;
   
   /* 內部方塊反向旋轉 */
@@ -60,7 +60,7 @@
 
 /* --- 文字動畫 --- */
 .loading-text {
-  font-size: 1.2rem;
+  font-size: clamp(8px, 4.5cqmin, 120px);
   color: #333;
   letter-spacing: 2px;
   margin: 0;
