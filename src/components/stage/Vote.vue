@@ -67,12 +67,13 @@
         
         <!-- LOADING animation -->
         <div v-if="waitingURL !== null" class="waiting-animation-row">
-          <div class="img-box-vertical video-restrict-big full-size">
-            <video autoplay loop muted playsinline>
+          <div class="img-box-vertical img-restrict-big video-restrict-big full-size">
+            <img :src="waitingURL" alt="LOADING..." />
+            <!-- <video autoplay loop muted playsinline>
               <source :src="waitingURL_WEBM" type="video/webm">
               <source :src="waitingURL_MP4" type="video/mp4">
               Can not play animation!
-            </video>
+            </video> -->
           </div>
         </div>
 
@@ -179,12 +180,12 @@ const selectedOption = computed(() => {
 const waitingURL = computed(() => {
   return GetWaitingLink(props.songData);
 });
-const waitingURL_WEBM = computed(() => {
-  return ChangeVideoUrlFormat(waitingURL.value, "webm");
-});
-const waitingURL_MP4 = computed(() => {
-  return ChangeVideoUrlFormat(waitingURL.value, "mp4");
-});
+// const waitingURL_WEBM = computed(() => {
+//   return ChangeVideoUrlFormat(waitingURL.value, "webm");
+// });
+// const waitingURL_MP4 = computed(() => {
+//   return ChangeVideoUrlFormat(waitingURL.value, "mp4");
+// });
 
 const countdownURL = computed(() => {
   return GetCountdownSecondLink(props.time);

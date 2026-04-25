@@ -70,7 +70,13 @@ body, html {
   aspect-ratio: 4 / 3;
 }
 
-.img-restrict img {
+.img-restrict-big img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* object-fit: scale-down; */
+}
+.img-restrict img, .img-restrict-small img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -172,6 +178,7 @@ body, html {
 
 .title {
   font-weight: bold;
+  white-space: nowrap;
   font-size: clamp(16px, 4vmin, 120px);
   line-height: 1.2;
 }

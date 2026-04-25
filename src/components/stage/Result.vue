@@ -8,13 +8,13 @@
       </div>
 
       <div class="animation-row">
-        <div class="img-box-vertical video-restrict-big" style="width: 100%;">
-          <!-- <img v-if="waitingURL !== null" :src=waitingURL alt="LOADING..." /> -->
-          <video autoplay loop muted playsinline>
+        <div class="img-box-vertical img-restrict-big video-restrict-big" style="width: 100%;">
+          <img :src="waitingURL" alt="LOADING..." />
+          <!-- <video autoplay loop muted playsinline>
             <source :src="waitingURL_WEBM" type="video/webm">
             <source :src="waitingURL_MP4" type="video/mp4">
             Can not play animation!
-          </video>
+          </video> -->
         </div>
       </div>
 
@@ -109,12 +109,12 @@ processedOptions.value.forEach(opt => {
 const waitingURL = computed(() => {
   return GetWaitingLink(props.songData);
 });
-const waitingURL_WEBM = computed(() => {
-  return ChangeVideoUrlFormat(waitingURL.value, "webm");
-});
-const waitingURL_MP4 = computed(() => {
-  return ChangeVideoUrlFormat(waitingURL.value, "mp4");
-});
+// const waitingURL_WEBM = computed(() => {
+//   return ChangeVideoUrlFormat(waitingURL.value, "webm");
+// });
+// const waitingURL_MP4 = computed(() => {
+//   return ChangeVideoUrlFormat(waitingURL.value, "mp4");
+// });
 
 const winnerId = computed(() => {
   const winnerOption = processedOptions.value.find(opt => opt.isWinner);

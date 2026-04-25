@@ -11,12 +11,13 @@
 
     <div v-if="role === ROLE.AUDIENCE" class="layout-container">
       <div v-if="currentCharacterLink != null" class="media-section">
-        <div class="img-box-vertical video-restrict-big">
-          <video autoplay loop muted playsinline>
+        <div class="img-box-vertical img-restrict-big video-restrict-big">
+          <img :src="currentCharacterLink" alt="Character Animation" />
+          <!-- <video autoplay loop muted playsinline>
+            <source :src="currentCharacterLink_MP4" type='video/mp4; codecs="hvc1"'>
             <source :src="currentCharacterLink_WEBM" type="video/webm">
-            <source :src="currentCharacterLink_MP4" type="video/mp4">
             Can not play animation!
-          </video>
+          </video> -->
         </div>
       </div>
 
@@ -34,12 +35,13 @@
       </div>
 
       <div v-if="currentCharacterLink != null" class="media-section">
-        <div class="img-box-horizontal video-restrict-small">
-          <video autoplay loop muted playsinline>
+        <div class="img-box-horizontal img-restrict-small video-restrict-small">
+          <img :src="currentCharacterLink" alt="Character Animation" />
+          <!-- <video autoplay loop muted playsinline>
+            <source :src="currentCharacterLink_MP4" type='video/mp4; codecs="hvc1"'>
             <source :src="currentCharacterLink_WEBM" type="video/webm">
-            <source :src="currentCharacterLink_MP4" type="video/mp4">
             Can not play animation!
-          </video>
+          </video> -->
         </div>
       </div>
 
@@ -91,12 +93,12 @@ const leftDescriptionLines = computed(() => {
 const currentCharacterLink = computed(() => {
   return GetCharacterLink(props.songData);
 });
-const currentCharacterLink_WEBM = computed(() => {
-  return ChangeVideoUrlFormat(currentCharacterLink.value, "webm");
-});
-const currentCharacterLink_MP4 = computed(() => {
-  return ChangeVideoUrlFormat(currentCharacterLink.value, "mp4");
-});
+// const currentCharacterLink_WEBM = computed(() => {
+//   return ChangeVideoUrlFormat(currentCharacterLink.value, "webm");
+// });
+// const currentCharacterLink_MP4 = computed(() => {
+//   return ChangeVideoUrlFormat(currentCharacterLink.value, "mp4");
+// });
 
 const emit = defineEmits([LANG_SELECT]);
 const handleLangUpdate = (lang) => {
