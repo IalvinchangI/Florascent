@@ -70,7 +70,7 @@
                 :songData="songDatas[nextSongIndex]"
                 :currentRoute="currentRoute"
                 :voteResult="voteResult" 
-                :time="time"
+                :time="'00:30'"
               />
             </div>
           </div>

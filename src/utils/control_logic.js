@@ -46,6 +46,13 @@ export function DisableOnControlSignalChange({
  */
 export function ConfigDisplayTime(controlSignal, output, onTimeUpCallback) {
   let timerId = null;
+  let serverTimeOffset = 0; // 儲存本機與伺服器的時間差
+
+  // 監聽 Firebase 內建的時間偏移量
+  const offsetRef = dbRef(db, '.info/serverTimeOffset');
+  const unsubscribeOffset = onValue(offsetRef, (snap) => {
+    serverTimeOffset = snap.val() || 0;
+  });
 
   const clearTimer = () => {
     if (timerId) {
@@ -56,8 +63,8 @@ export function ConfigDisplayTime(controlSignal, output, onTimeUpCallback) {
 
   // 封裝好的本機倒數邏輯
   const calculateTime = (endTime) => {
-    const now = Date.now();
-    const remainMs = endTime - now;
+    const trueNow = Date.now() + serverTimeOffset;
+    const remainMs = endTime - trueNow;
 
     if (remainMs <= 0) {
       output.value = "00:00";
@@ -78,7 +85,7 @@ export function ConfigDisplayTime(controlSignal, output, onTimeUpCallback) {
   };
 
   // 監控 controlSignal，只要 DB 的資料改變，就觸發這裡
-  watch(controlSignal, (newVal) => {
+  const unwatch = watch(controlSignal, (newVal) => {
     clearTimer(); // 每次訊號有變（例如主控台重設時間），先砍掉舊的計時器
 
     // 判斷是否需要開始倒數 (例如 endTime 大於 0)
@@ -96,13 +103,18 @@ export function ConfigDisplayTime(controlSignal, output, onTimeUpCallback) {
 
   // disable detail
   return {
-    callback: clearTimer
+    callback: () => {
+      clearTimer();
+      unsubscribeOffset(); // 解除監聽 Firebase 時間差
+      unwatch();           // 解除 watch 監聽，避免記憶體洩漏
+    }
   };
 }
-export function DisableDisplayTime({
-  callback
-}) {
-  callback();
+
+export function DisableDisplayTime({ callback }) {
+  if (typeof callback === 'function') {
+    callback();
+  }
 }
 
 /**
