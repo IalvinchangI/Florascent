@@ -103,19 +103,21 @@
 
       <div v-if="isBroken" class="broken-overlay">
         <div 
-          v-for="i in 60" 
-          :key="i" 
+          v-for="i in glitchCount" 
+          :key="'w'+i" 
           class="broken-bar white" 
           :style="getRandomBarStyle()"
         ></div>
         <div 
-          v-for="i in 60" 
-          :key="i" 
+          v-for="i in glitchCount" 
+          :key="'b'+i" 
           class="broken-bar black" 
           :style="getRandomBarStyle()"
         ></div>
       </div>
+      
       <div v-else class="countdown-overlay img-restrict">
+        <div class="red-overlay" :style="{ opacity: redOverlayOpacity }"></div>
         <img v-if="countdownURL" :src="countdownURL">
       </div>
     </div>
@@ -125,11 +127,12 @@
 
 <script setup>
 import { ref, computed, onMounted, watch, nextTick } from 'vue';
-import { LANG, ROLE, LANG_SELECT, OPTION_SELECT, VOTE_SELECTED_OPTION_KEY } from '@/constants.js';
 import Header from '@/components/Header.vue';
 import { GetWaitingLink, GetTitle, GetQuestion, GetOptions, GetCanRegret, GetIsBroken } from '@/utils/song_data_logic';
 import { GetCountdownSecondLink, PreloadtCountdownSecondLink, ChangeVideoUrlFormat } from '@/utils/assets_tools';
 import { CalculateScrollMaskStyle } from '@/utils/style_tools';
+import { LANG, ROLE, LANG_SELECT, OPTION_SELECT, VOTE_SELECTED_OPTION_KEY } from '@/constants.js';
+import { COUNTDOWN_SECOND_URLS } from '@/assets_url';
 
 const props = defineProps({
   role: String,
@@ -182,7 +185,6 @@ const waitingURL_WEBM = computed(() => {
 const waitingURL_MP4 = computed(() => {
   return ChangeVideoUrlFormat(waitingURL.value, "mp4");
 });
-console.log(waitingURL_MP4);
 
 const countdownURL = computed(() => {
   return GetCountdownSecondLink(props.time);
@@ -190,6 +192,42 @@ const countdownURL = computed(() => {
 
 const isBroken = computed(() => {
   return GetIsBroken(props.songData);
+});
+
+// 將字串時間轉換為剩餘總秒數
+const remainingSeconds = computed(() => {
+  if (!props.time) return 0;
+  const timeParts = props.time.split(":");
+  const mm = parseInt(timeParts[0], 10);
+  const ss = parseInt(timeParts[1], 10);
+  return mm * 60 + ss;
+});
+
+// 計算紅色遮罩的透明度
+const redOverlayOpacity = computed(() => {
+  const triggerSeconds = COUNTDOWN_SECOND_URLS.length; // 倒數計時陣列大小
+  
+  // 如果大於規定秒數，完全透明
+  if (remainingSeconds.value >= triggerSeconds) return 0;
+  // 如果已經倒數結束，給予最大透明度
+  if (remainingSeconds.value <= 0) return 0.7; 
+  
+  // 比例計算：隨著秒數變少，從 0 慢慢增加到最大透明度 0.7
+  return ((triggerSeconds - remainingSeconds.value) / triggerSeconds) * 0.7;
+});
+
+// 計算壞掉的雜訊數量 (隨時間減少而增多)
+const glitchCount = computed(() => {
+  const maxVoteSeconds = (props.songData != null) ? props.songData.voteTime : 0;
+  const minBars = 20;        // 剛開始時的雜訊數量 (最少)
+  const maxBars = 100;       // 快結束時的雜訊數量 (最多)
+
+  // 確保秒數不會超出範圍
+  const safeSeconds = Math.max(0, Math.min(remainingSeconds.value, maxVoteSeconds));
+  
+  // 反向比例：時間越少，progress 越接近 1，算出來的 bar 就越多
+  const progress = 1 - (safeSeconds / maxVoteSeconds);
+  return Math.floor(minBars + progress * (maxBars - minBars));
 });
 
 // Helper Function
@@ -316,7 +354,7 @@ watch(() => props.songData?.index, (newId) => {
   font-size: clamp(12px, 12cqw, 120px);
 }
 .option-title.long {
-  font-size: clamp(12px, 4.7cqw, 120px);
+  font-size: clamp(12px, 4.6cqw, 120px);
 }
 .option-desc {
   margin: 0 5%;
@@ -493,6 +531,23 @@ watch(() => props.songData?.index, (newId) => {
   height: 100%;
   z-index: 10;
   pointer-events: none;
+}
+
+/* =========================================
+   Red Overlay Style
+   ========================================= */
+.red-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #8b0000; /* 深紅色 */
+  z-index: 5; /* 蓋在背景之上，但放在文字(z-index預設為auto)與 countdown-overlay 之下 */
+  pointer-events: none;
+  
+  /* 加入 transition，讓每秒更新 opacity 時有一個平滑的過渡效果，不會一卡一卡的 */
+  transition: opacity 1s linear; 
 }
 
 /* =========================================
