@@ -96,7 +96,7 @@ body, html {
 }
 
 /* button */
-.base-btn, .base-btn:active, .base-btn:focus {
+.base-btn {
   background-color: #fdfbf7;
   border: 1px solid #000000;
   cursor: pointer;
@@ -112,51 +112,6 @@ body, html {
 .animate-btn:active {
   transition: all 0.2s ease;
   background-color: #bbb;
-}
-
-.pill-btn {
-  width: 100%;
-  aspect-ratio: 2 / 1;
-  border-radius: 20px;
-  line-height: 1;
-  letter-spacing: 1px;
-  font-size: clamp(0.5rem, 2.1vw, 0.9rem);
-  overflow: hidden;
-
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.dropdown-menu {
-  position: absolute;
-  background-color: #fdfbf7; /* 配合你的背景色 */
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  overflow: hidden;
-  min-width: 100px;
-  z-index: 1000;
-  
-  /* 預設位置，可被個別樣式覆寫 */
-  top: 100%;
-  left: 0;
-  margin-top: 5px;
-}
-.dropdown-item {
-  padding: 10px 16px;
-  cursor: pointer;
-  text-align: center;
-  transition: background 0.2s;
-  color: #333;
-}
-.dropdown-item:hover {
-  background-color: #eee;
-}
-.dropdown-item.active {
-  font-weight: bold;
-  background-color: #e6e6e6;
 }
 
 /* text */
