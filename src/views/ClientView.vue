@@ -39,7 +39,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { GetSongData, GetBackgroundLink } from '@/utils/song_data_logic';
+import { GetSongData, GetBackgroundLink, GetCharacterLink, GetWaitingLink } from '@/utils/song_data_logic';
 import { 
   ConfigOnControlSignalChange, DisableOnControlSignalChange, 
   ConfigCurrentStage, ConfigCurrentSongIndex, ConfigCurrentRoute, 
@@ -76,7 +76,6 @@ const disableDisplayTimeDetail = ref(null);
 const userLang = ref(null);
 const setLang = (lang) => {
   userLang.value = lang;
-  // localStorage.setItem('slido_lang', lang); // 存進瀏覽器，防重新整理
 };
 
 
@@ -105,14 +104,14 @@ const start = (lang) => {
     ConfigCurrentStage(controlSignal, currentStage);
     ConfigCurrentRoute(controlSignal, currentRoute);
     disableDisplayTimeDetail.value = ConfigDisplayTime(controlSignal, displayTime, () => {
-      if (role === ROLE.PROJECTOR && currentStage === Stage.Result) return;
-      if (IsAutoAdvanceStage(currentStage.value) === true) {
+      if (currentStage.value === Stage.Vote) {
         isLoading.value = true;
       }
     });
     ConfigVoteResult(controlSignal, voteResult);
   }).then(() => {
     console.log(currentSongIndex, currentStage, currentRoute, displayTime, voteResult);
+    preloadAssets();
   });
 }
 
@@ -152,6 +151,25 @@ const currentBackgroundStyle = computed(() => {
 });
 
 
+const preloadAssets = () => {
+  if (currentStage.value === Stage.Next || currentStage.value === Stage.Waiting) {
+    // preload character
+    PreloadImage(GetCharacterLink(songData.value?.[currentSongIndex.value]));
+  }
+  else if (currentStage.value === Stage.Vote && role.value === ROLE.AUDIENCE) {
+    // preload waiting
+    PreloadImage(GetWaitingLink(songData.value?.[currentSongIndex.value]));
+  }
+  else if (currentStage.value === Stage.Performance) {
+    // preload background
+    PreloadImage(GetBackgroundLink(
+      songData.value?.[currentSongIndex.value + 1], 
+      role.value === ROLE.AUDIENCE ? "vertical" : "horizontal"
+    ));
+  }
+};
+
+
 onMounted(() => {
   if (route.query.role === ROLE.PROJECTOR) {
     role.value = ROLE.PROJECTOR;
@@ -160,6 +178,9 @@ onMounted(() => {
 });
 watch(currentStage, () => {
   isBlackout.value = false;
+
+  // preload
+  preloadAssets();
 });
 onUnmounted(() => {
   if (disableControlSignalDetail.value != null) {
