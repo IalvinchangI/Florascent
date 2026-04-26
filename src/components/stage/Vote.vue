@@ -360,6 +360,7 @@ watch(() => props.songData?.index, (newId) => {
 }
 .option-desc {
   margin: 0 5%;
+  text-align: center;
   font-size: clamp(8px, 4.5cqw, 80px);
 }
 .option-desc.short {
