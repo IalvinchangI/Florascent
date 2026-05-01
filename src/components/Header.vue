@@ -1,7 +1,7 @@
 <template>
   <div class="app-header" :class="role">
     <div v-if="role === ROLE.AUDIENCE" class="header-pill-wrapper relative-text-width-wrapper">
-      <button class="base-btn pill-btn animate-btn language-font" @click.stop="toggleMenu">
+      <button class="base-btn pill-btn animate-btn language-font default-font" @click.stop="toggleMenu">
         {{ lang === LANG.TW ? 'Language' : '語言' }}
       </button>
 

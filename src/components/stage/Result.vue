@@ -22,6 +22,41 @@
         <p class="default-font" style="margin: 5px;">{{ uiText.screenOffHint }}</p>
         <p class="default-font" style="margin: 5px;">{{ uiText.dontClose }}</p>
       </div>
+
+      <div v-if="isBroken" class="broken-overlay">
+        <div 
+          v-for="i in 40" 
+          :key="'w'+i" 
+          class="broken-bar color0" 
+          :style="GetRandomBarStyle()"
+        ></div>
+        <div 
+          v-for="i in 40" 
+          :key="'r'+i" 
+          class="broken-bar color1" 
+          :style="GetRandomBarStyle()"
+        ></div>
+        <div 
+          v-for="i in 40" 
+          :key="'b'+i" 
+          class="broken-bar color2" 
+          :style="GetRandomBarStyle()"
+        ></div>
+        <div 
+          v-for="i in 20" 
+          :key="'t'+i" 
+          class="broken-bar" 
+          :style="GetRandomBarStyle()"
+        >{{uiText.screenOffHint}}</div>
+        <div 
+          v-for="i in 20" 
+          :key="'t'+i" 
+          class="broken-bar" 
+          :style="GetRandomBarStyle()"
+        >
+          <span style="opacity: 0.5;">asorg[apq4wiv- queohsdkfjnsduifhg0aejrtpskd;lbnao'df[ihbs]]</span>
+        </div>
+      </div>
     </div>
 
     <div v-else-if="role === ROLE.PROJECTOR" class="projector-layout">
@@ -68,7 +103,8 @@
 <script setup>
 import { ref, computed, onMounted, reactive } from 'vue';
 import { LANG, ROLE, RESULT_TRANSITION_TIMING } from '@/constants.js';
-import { GetWaitingLink, GetOptions } from '@/utils/song_data_logic';
+import { GetWaitingLink, GetOptions, GetIsBroken } from '@/utils/song_data_logic';
+import { GetRandomBarStyle } from '@/utils/style_tools';
 import { ChangeVideoUrlFormat } from '@/utils/assets_tools';
 
 const props = defineProps({
@@ -100,6 +136,10 @@ const processedOptions = computed(() => {
       isWinner: result.winner
     };
   });
+});
+
+const isBroken = computed(() => {
+  return GetIsBroken(props.songData);
 });
 
 processedOptions.value.forEach(opt => {
@@ -377,5 +417,61 @@ const uiText = computed(() => {
 }
 .blackout-overlay.active {
   opacity: 1;
+}
+
+/* =========================================
+   Broken Overlay Style & Animation
+   ========================================= */
+
+.broken-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* 使用者無法操作 */
+  overflow: hidden;    /* 黑色方塊變長時不會溢出螢幕 */
+  /* z-index: 9999; */
+}
+
+.broken-bar {
+  position: absolute;
+  opacity: 0; /* 預設為全透明 */
+
+  width: var(--base-width);
+  
+  /* 在同位置閃爍，閃爍時鐘建有幾幀長方形會變長 */
+  /* 動畫名稱 | 時長 | 無限循環 | 線性 */
+  animation: broken-bar-flicker 1.5s infinite linear;
+}
+.broken-bar.color0 {
+  background-color: rgba(179, 209, 124, 0.532);
+}
+.broken-bar.color1 {
+  background-color: rgba(199, 95, 20, 0.118);
+}
+.broken-bar.color2 {
+  background-color: rgba(16, 80, 8, 0.141);
+}
+
+@keyframes broken-bar-flicker {
+  /* 隨機閃爍效果，利用快速切換透明度 */
+  0%   { opacity: 0; }
+  5%   { opacity: 0.5; }
+  10%  { opacity: 0; }
+  15%  { opacity: 1; }
+  20%  { opacity: 0; }
+  25%  { opacity: 0.7; }
+  30%  { opacity: 0; }
+  35%  { opacity: 1; }
+
+  /* 瞬間變為滿版長度 */
+  39%  { opacity: 0.7; width: var(--base-width); }
+  40%  { opacity: 1; width: calc(var(--base-width) + 300px); }
+  42%  { opacity: 0.7; width: calc(var(--base-width) + 300px); }
+  43%  { opacity: 1; width: var(--base-width); }
+  
+  50%  { opacity: 0; }
+  100% { opacity: 0; } /* 長時間的黑暗，模擬Sporadic閃爍 */
 }
 </style>

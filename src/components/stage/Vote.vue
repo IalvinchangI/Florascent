@@ -102,25 +102,52 @@
         </div>
       </div>
 
-      <div v-if="isBroken" class="broken-overlay">
-        <div 
-          v-for="i in glitchCount" 
-          :key="'w'+i" 
-          class="broken-bar white" 
-          :style="getRandomBarStyle()"
-        ></div>
-        <div 
-          v-for="i in glitchCount" 
-          :key="'b'+i" 
-          class="broken-bar black" 
-          :style="getRandomBarStyle()"
-        ></div>
-      </div>
       
-      <div v-else class="countdown-overlay img-restrict">
+      
+      <div v-if="!isBroken" class="countdown-overlay img-restrict">
         <div class="red-overlay" :style="{ opacity: redOverlayOpacity }"></div>
         <img v-if="countdownURL" :src="countdownURL">
       </div>
+    </div>
+
+    <!-- Common -->
+    <div v-if="isBroken" class="broken-overlay">
+      <div 
+          v-for="i in 40" 
+          :key="'w'+i" 
+          class="broken-bar color0" 
+          :style="GetRandomBarStyle()"
+        ></div>
+        <div 
+          v-for="i in 40" 
+          :key="'r'+i" 
+          class="broken-bar color1" 
+          :style="GetRandomBarStyle()"
+        ></div>
+        <div 
+          v-for="i in 40" 
+          :key="'b'+i" 
+          class="broken-bar color2" 
+          :style="GetRandomBarStyle()"
+        ></div>
+        <div 
+          v-for="i in 20" 
+          :key="'t'+i" 
+          class="broken-bar" 
+          :style="GetRandomBarStyle()"
+        >
+          <p v-for="(line, index) in currentQuestion" :key="index" class="text-content">
+            {{ line }}
+          </p>
+        </div>
+        <div 
+          v-for="i in 20" 
+          :key="'t'+i" 
+          class="broken-bar" 
+          :style="GetRandomBarStyle()"
+        >
+          <span style="opacity: 0.5;">asorg[apq4wiv- queohsdkfjnsduifhg0aejrtpskd;lbnao'df[ihbs]]</span>
+        </div>
     </div>
 
   </div>
@@ -131,7 +158,7 @@ import { ref, computed, onMounted, watch, nextTick } from 'vue';
 import Header from '@/components/Header.vue';
 import { GetWaitingLink, GetTitle, GetQuestion, GetOptions, GetCanRegret, GetIsBroken } from '@/utils/song_data_logic';
 import { GetCountdownSecondLink, PreloadtCountdownSecondLink, ChangeVideoUrlFormat } from '@/utils/assets_tools';
-import { CalculateScrollMaskStyle } from '@/utils/style_tools';
+import { CalculateScrollMaskStyle, GetRandomBarStyle } from '@/utils/style_tools';
 import { LANG, ROLE, LANG_SELECT, OPTION_SELECT, VOTE_SELECTED_OPTION_KEY } from '@/constants.js';
 import { COUNTDOWN_SECOND_URLS } from '@/assets_url';
 
@@ -234,27 +261,6 @@ const glitchCount = computed(() => {
 // Helper Function
 const getUIText = (key, field) => {
   return uiLabels[key][field][props.lang] || uiLabels[key][field][LANG.TW];
-};
-
-const getRandomBarStyle = () => {
-  // Positions (0% to 100%)
-  const top = Math.random() * 100 + '%';
-  const left = Math.random() * 100 + '%';
-  
-  // Size: 黑色長方形，我們讓 width 隨機，height 較細
-  const width = Math.random() * 700 + 10 + 'px'; // 隨機長度 (10px to 710px)
-  const height = Math.random() * 20 + 10 + 'px';  // 較細的水平線 (10px to 30px)
-  
-  // Animation Delay: 負的 delay 可以讓動畫 stagger 開來，看起來像隨機閃爍
-  const delay = Math.random() * -3 + 's'; 
-
-  return {
-    top,
-    left,
-    '--base-width': width,
-    height,
-    animationDelay: delay, // Staggered start
-  };
 };
 
 const getSavedVotes = () => {
@@ -565,7 +571,6 @@ watch(() => props.songData?.index, (newId) => {
   height: 100%;
   pointer-events: none; /* 使用者無法操作 */
   overflow: hidden;    /* 黑色方塊變長時不會溢出螢幕 */
-  background-color: rgba(0, 0, 0, 0.4);
   /* z-index: 9999; */
 }
 
@@ -579,11 +584,14 @@ watch(() => props.songData?.index, (newId) => {
   /* 動畫名稱 | 時長 | 無限循環 | 線性 */
   animation: broken-bar-flicker 1.5s infinite linear;
 }
-.broken-bar.white {
-  background-color: rgb(140, 140, 140);
+.broken-bar.color0 {
+  background-color: rgba(179, 209, 124, 0.532);
 }
-.broken-bar.black {
-  background-color: rgb(31, 31, 31);
+.broken-bar.color1 {
+  background-color: rgba(199, 95, 20, 0.118);
+}
+.broken-bar.color2 {
+  background-color: rgba(16, 80, 8, 0.141);
 }
 
 @keyframes broken-bar-flicker {

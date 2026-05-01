@@ -19,6 +19,14 @@ body, html {
   overflow: hidden;
 }
 
+img {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
 * {
   box-sizing: border-box;
   /* border: 1px solid red; */

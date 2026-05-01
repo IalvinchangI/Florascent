@@ -35,7 +35,7 @@
       </div>
 
       <div v-if="currentCharacterLink != null" class="media-section">
-        <div class="img-box-horizontal img-restrict-small video-restrict-small">
+        <div class="img-box-square img-restrict-small video-restrict-small">
           <img :src="currentCharacterLink" alt="Character Animation" />
           <!-- <video autoplay loop muted playsinline>
             <source :src="currentCharacterLink_MP4" type='video/mp4; codecs="hvc1"'>
@@ -175,7 +175,7 @@ onMounted(async () => {
 }
 .audience .text-section p {
   font-size: clamp(12px, 5.5cqw, 60px);
-  margin: 0.5rem 0;
+  margin: 0.3rem 0;
 }
 
 .audience .media-section {
@@ -218,6 +218,9 @@ onMounted(async () => {
   display: flex;
   justify-content: center;
   flex: 0 1 auto;
+}
+.projector .media-section .img-box-square {
+  height: 100%;
 }
 
 .projector .text-section {

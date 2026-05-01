@@ -60,15 +60,15 @@
       "canRegret": true,
       "canChangeRoute": false,
       "isBroken": false,
-      "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_webp/q_auto/song0_slow_htw1iq.webp",
-      "waitingLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_webp/q_auto/song0_fast_ssekch.webp",
+      "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_gif/q_auto/song0_slow_htw1iq.webp",
+      "waitingLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_gif/q_auto/song0_fast_ssekch.webp",
       "backgroundLink": {
         "horizontal": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song0_background_horizontal_ferujf.jpg",
         "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song0_background_vertical_xra4de.jpg"
       },
       "description": {
         "en": "Red roses, white jasmine.\nClumps here, blossoms there,\nblooming in full, truly beautiful.",
-        "zh-TW": "紅薔薇，白茉莉。\n這屏幾欉，彼屏幾蕊，\n開得真齊，真正美。"
+        "zh-TW": "春天到，百花開，\n紅薔薇，白茉莉。\n這屏幾欉，彼屏幾蕊，\n開得真齊，真正美。"
       },
       "index": 0,
       "options": [
@@ -106,7 +106,7 @@
       "question": [
         {
           "en": "As I grow older,\nIt's time to choose my future.\nIn this fast-paced society,\nWhich path should I take?\nNo matter which direction I turn,\nthe “first choice” seems to be silently holding me hostage...",
-          "zh-TW": "隨著年紀慢慢成長，\n我也要開始選擇未來的科系了。\n在這個變遷殘酷的社會裡，\n究竟要選擇\n但不管選擇走哪條路，\n「第一志願」好像默默地在綁架我..."
+          "zh-TW": "隨著年紀慢慢成長，\n我也要開始選擇未來的科系了。\n在這個變遷殘酷的社會裡，\n究竟什麼才是最好的選擇？\n但不管選擇走哪條路，\n「第一志願」好像默默地在綁架我..."
         }
       ],
       "title": {
@@ -119,8 +119,8 @@
       "canRegret": true,
       "canChangeRoute": true,
       "isBroken": false,
-      "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_webp/q_auto/song1_slow_nofmqy.webp",
-      "waitingLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_webp/q_auto/song1_fast_uc0ltg.webp",
+      "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_gif/q_auto/song1_slow_nofmqy.webp",
+      "waitingLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_gif/q_auto/song1_fast_uc0ltg.webp",
       "backgroundLink": {
         "horizontal": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song1_background_horizontal_j5hkcj.jpg",
         "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song1_background_vertical_hscxx6.jpg"
@@ -178,8 +178,8 @@
       "canRegret": true,
       "canChangeRoute": false,
       "isBroken": false,
-      "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_webp/q_auto/song2_slow_obv7th.webp",
-      "waitingLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_webp/q_auto/song2_fast_xn0fdg.webp",
+      "characterLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_gif/q_auto/song2_slow_obv7th.webp",
+      "waitingLink": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_gif/q_auto/song2_fast_xn0fdg.webp",
       "backgroundLink": {
         "horizontal": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song2_background_horizontal_kws4lo.jpg",
         "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song2_background_vertical_w9q2t1.jpg"
@@ -259,7 +259,7 @@
         "en": "Finale",
         "zh-TW": "終曲"
       },
-      "voteTime": 60
+      "voteTime": 10
     }
   ],
   "voteStatistic": null

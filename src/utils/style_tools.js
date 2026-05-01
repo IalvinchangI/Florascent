@@ -28,3 +28,25 @@ export function CalculateScrollMaskStyle(element, fadeTopRatio = "10%", fadeBott
     '--mask-bottom': isAtBottom ? '0%' : fadeBottomRatio
   };
 }
+
+
+export function GetRandomBarStyle() {
+  // Positions (0% to 100%)
+  const top = Math.random() * 100 + '%';
+  const left = Math.random() * 100 + '%';
+  
+  // Size: 黑色長方形，我們讓 width 隨機，height 較細
+  const width = Math.random() * 700 + 10 + 'px'; // 隨機長度 (10px to 710px)
+  const height = Math.random() * 20 + 10 + 'px';  // 較細的水平線 (10px to 30px)
+  
+  // Animation Delay: 負的 delay 可以讓動畫 stagger 開來，看起來像隨機閃爍
+  const delay = Math.random() * -3 + 's'; 
+
+  return {
+    top,
+    left,
+    '--base-width': width,
+    height,
+    animationDelay: delay, // Staggered start
+  };
+}
