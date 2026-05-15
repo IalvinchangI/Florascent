@@ -6,6 +6,7 @@
       :role="role" 
       :lang="lang" 
       :title="`《${currentTitle}》`" 
+      :author="currentAuthor"
       @[LANG_SELECT]="handleLangUpdate" 
     />
 
@@ -24,14 +25,14 @@
       <div class="text-section default-font scroll-mask-container relative-text-width-wrapper" 
         ref="scrollBox" @scroll="handleScroll" :style="maskStyles"
       >
-        <p v-for="(line, index) in currentDescriptionLines" :key="index">{{ line }}&nbsp;</p>
+        <p v-for="(line, index) in currentDescriptionLines" :key="index">{{ line }}</p>
       </div>
     </div>
 
     <!-- projector -->
     <div v-else-if="role === ROLE.PROJECTOR" class="layout-container">
       <div class="text-section default-font relative-text-wrapper" style="justify-content: right;">
-        <p v-for="(line, index) in leftDescriptionLines" :key="index">{{ line }}&nbsp;</p>
+        <p v-for="(line, index) in leftDescriptionLines" :key="index">{{ line }}</p>
       </div>
 
       <div v-if="currentCharacterLink != null" class="media-section">
@@ -46,7 +47,7 @@
       </div>
 
       <div class="text-section default-font relative-text-wrapper" style="justify-content: left;">
-        <p v-for="(line, index) in rightDescriptionLines" :key="index">{{ line }}&nbsp;</p>
+        <p v-for="(line, index) in rightDescriptionLines" :key="index">{{ line }}</p>
       </div>
     </div>
   </div>
@@ -56,7 +57,7 @@
 import { ref, computed, onMounted, nextTick } from 'vue';
 import { ROLE, LANG_SELECT } from '@/constants.js';
 import Header from '@/components/Header.vue';
-import { GetTitle, GetDescription, GetCharacterLink } from '@/utils/song_data_logic';
+import { GetTitle, GetDescription, GetCharacterLink, GetAuthor } from '@/utils/song_data_logic';
 import { CalculateScrollMaskStyle } from '@/utils/style_tools';
 import { ChangeVideoUrlFormat } from '@/utils/assets_tools';
 
@@ -67,6 +68,10 @@ const props = defineProps({
     type: Object,
     required: true
   }
+});
+
+const currentAuthor = computed(() => {
+  return GetAuthor(props.songData, props.lang);
 });
 
 // 使用 GetTitle 取得標題
@@ -142,7 +147,7 @@ onMounted(async () => {
    Audience Style
    ========================================= */
 .intro-page.audience {
-  padding: 10% 8% 15% 8%; 
+  padding: 10% 8% 8% 8%; 
 }
 
 .audience .header-container {
@@ -154,7 +159,7 @@ onMounted(async () => {
   flex-direction: column;
   align-items: center;
   
-  height: 90%;
+  height: 85%;
   width: 100%;
   max-width: 500px;
   justify-content: flex-start;
@@ -210,7 +215,7 @@ onMounted(async () => {
   height: 85%;
   width: 100%;
   /* max-width: 1200px; */
-  /* gap: 4vw; */
+  /* gap: 3vw; */
 }
 
 .projector .media-section {
@@ -235,8 +240,8 @@ onMounted(async () => {
   flex-direction: column; 
 }
 .projector .text-section p {
-  font-size: clamp(18px, 5.3cqh, 120px);
-  margin: 0 0.3rem;
+  font-size: clamp(18px, 6cqh, 120px);
+  margin: 0 2rem;
 }
 
 .projector:not(.has-image) .text-section {

@@ -226,3 +226,23 @@ export function GetQuestion(song, lang, currentRoute = 0) {
   const text = textObj[lang] || textObj[LANG.TW];
   return text ? text.split('\n') : [];
 }
+
+/**
+ * 取得該首歌曲的作者資訊 (author)
+ * @param {Object} song - 單首歌曲的資料物件
+ * @param {string} lang - 當前選擇的語言 (例如 'zh-TW', 'en')
+ * @returns {Object} 回傳處理過語言的作者資訊物件
+ */
+export function GetAuthor(song, lang) {
+  if (!song || !song.author) return {};
+  
+  const author = song.author;
+
+  const lyricsText = author.Lyrics ? (author.Lyrics[lang] || author.Lyrics[LANG.TW]) : '';
+  const composerText = author.Composer ? (author.Composer[lang] || author.Composer[LANG.TW]) : '';
+
+  return {
+    Lyrics: lyricsText,
+    Composer: composerText
+  };
+}
