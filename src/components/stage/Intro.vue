@@ -24,14 +24,14 @@
       <div class="text-section default-font scroll-mask-container relative-text-width-wrapper" 
         ref="scrollBox" @scroll="handleScroll" :style="maskStyles"
       >
-        <p v-for="(line, index) in currentDescriptionLines" :key="index">{{ line }}</p>
+        <p v-for="(line, index) in currentDescriptionLines" :key="index">{{ line }}&nbsp;</p>
       </div>
     </div>
 
     <!-- projector -->
     <div v-else-if="role === ROLE.PROJECTOR" class="layout-container">
       <div class="text-section default-font relative-text-wrapper" style="justify-content: right;">
-        <p v-for="(line, index) in leftDescriptionLines" :key="index">{{ line }}</p>
+        <p v-for="(line, index) in leftDescriptionLines" :key="index">{{ line }}&nbsp;</p>
       </div>
 
       <div v-if="currentCharacterLink != null" class="media-section">
@@ -46,7 +46,7 @@
       </div>
 
       <div class="text-section default-font relative-text-wrapper" style="justify-content: left;">
-        <p v-for="(line, index) in rightDescriptionLines" :key="index">{{ line }}</p>
+        <p v-for="(line, index) in rightDescriptionLines" :key="index">{{ line }}&nbsp;</p>
       </div>
     </div>
   </div>
@@ -210,7 +210,7 @@ onMounted(async () => {
   height: 85%;
   width: 100%;
   /* max-width: 1200px; */
-  gap: 4vw;
+  /* gap: 4vw; */
 }
 
 .projector .media-section {
@@ -235,8 +235,8 @@ onMounted(async () => {
   flex-direction: column; 
 }
 .projector .text-section p {
-  font-size: clamp(24px, 5.3cqh, 120px);
-  margin: 0 1rem;
+  font-size: clamp(18px, 5.3cqh, 120px);
+  margin: 0 0.3rem;
 }
 
 .projector:not(.has-image) .text-section {

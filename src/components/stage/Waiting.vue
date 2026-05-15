@@ -117,7 +117,7 @@ onMounted(async () => {
   margin-bottom: 0;
 }
 .text-section {
-  text-align: justify;
+  /*text-align: justify;*/
   line-height: 2;
 }
 .text-section p {
@@ -168,7 +168,7 @@ onMounted(async () => {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px; 
+  gap: 5em; 
 }
 .audience .info-text {
   padding-bottom: 0;
