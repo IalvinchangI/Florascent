@@ -62,34 +62,26 @@ const logoVideoMP4 = ref(ChangeVideoUrlFormat(LOGO_VIDEO_URL, "mp4"));
 
 var Introduction = new Map()
 Introduction.set(LANG.TW, [
-  "本展演時間預計100分鐘，前60分鐘為現場音樂演出呈現，後40分鐘為香水體驗時間。", 
-  "", 
-  "現場音樂演出呈現包含四首音樂，並分別在台前展示主體香水，現場將限量販售一本20元的節目冊，其中包含每一首音樂搭配的試香紙，想同時體驗嗅覺感受的朋友們歡迎購買！", 
+  "本展演時間預計120分鐘，前60分鐘為現場音樂演出呈現，後60分鐘為香水體驗時間。", 
   "", 
   "演出期間如遇身體不適，請與工作人員反應，並依照指示離場。"
 ])
 Introduction.set(LANG.EN, [
-  "The total duration of this performance is approximately 100 minutes, consisting of a 60-minute live musical performance followed by a 40-minute perfume experience session", 
+  "The total duration of this performance is approximately 120 minutes, consisting of a 60-minute live musical performance followed by a 60-minute perfume experience session.", 
   "", 
-  "The live performance features four musical pieces, during which the featured perfumes will be showcased on stage. A limited-edition program booklet will be available for purchase at NT$20. Each booklet includes scent strips corresponding to each piece of music. We invite guests who wi", 
-  "", 
-  "If you feel unwell during the performance, please notify our staff immediately and follow their guidance to exit the venue"
+  "If you feel unwell during the performance, please notify our staff immediately and follow their guidance to exit the venue."
 ])
 
 var VoteRules = new Map()
 VoteRules.set(LANG.TW, [
-  "每一首音樂開始前將會進行觀眾投票，您的選擇將會影響故事主角的決定以及後續的劇情走向，請把握投票時間儘速做出抉擇！", 
-  "", 
-  "“ 停留還是遠走，請選擇 ”", 
+  "每一首音樂開始前將會進行限時觀眾投票，您的選擇將會影響故事主角的決定以及後續的劇情走向！", 
   "", 
   "請務必協助將手機及電子產品轉為靜音模式，以維護眾人的觀展體驗品質。演出期間不開放攝影錄音，請好好放鬆聽覺、視覺及嗅覺，享受時走時停的人生步調。"
 ])
 VoteRules.set(LANG.EN, [
-  "Before each musical piece begins, an audience vote will be held. Your choices will influence the protagonist’s decisions and the direction of the narrative. Please cast your vote promptly within the allotted time!", 
+  "Before each musical piece begins, an audience vote will be held. Your choices will influence the protagonist’s decisions and the direction of the narrative!", 
   "", 
-  "To ensure a high-quality experience for everyone, please switch your mobile phones and electronic devices to silent mode. Photography and audio recording are strictly prohibited during the performance. We invite you to relax your senses—sight, sound, and smell—and embrace the ebb and flow of life’s journey.", 
-  "", 
-  "“ To stay, or to go —— that is the question. ”"
+  "To ensure a high-quality experience for everyone, please switch your mobile phones and electronic devices to silent mode. Photography and audio recording are strictly prohibited during the performance. We invite you to relax your senses—sight, sound, and smell—and embrace the ebb and flow of life’s journey."
 ])
 
 // Scroll Mask

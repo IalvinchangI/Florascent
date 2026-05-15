@@ -67,8 +67,8 @@
         "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song0_background_vertical_xra4de.jpg"
       },
       "description": {
-        "en": "Red roses, white jasmine.\nClumps here, blossoms there,\nblooming in full, truly beautiful.",
-        "zh-TW": "春天到，百花開，\n紅薔薇，白茉莉。\n這屏幾欉，彼屏幾蕊，\n開得真齊，真正美。"
+        "en": "Spring descends, a hundred blooms ascend\nClumps here, blossoms there,\nblooming in full, true beauty.\n\nLyrics by Liao Han-chen\nComposed by Teng Yu-hsien",
+        "zh-TW": "春天到，百花開，\n紅薔薇，白茉莉。\n這屏幾欉，彼屏幾蕊，\n開得真齊，真正美。\n\n詞／廖漢臣\n曲／鄧雨賢"
       },
       "index": 0,
       "options": [
@@ -105,7 +105,7 @@
       ],
       "question": [
         {
-          "en": "As I grow older,\nIt's time to choose my future.\nIn this fast-paced society,\nWhich path should I take?\nNo matter which direction I turn,\nthe “first choice” seems to be silently holding me hostage...",
+          "en": "As I grow older,\nI find myself standing at the edge of choice\n,where paths diverge into unseen futures.\nIn a world that shifts, cruel and unyielding—I wonder which road is mine to take.\nYet, whichever way I turn,\nthat so-called “first choice” lingers—a quiet captor, binding me in expectations not my own.",
           "zh-TW": "隨著年紀慢慢成長，\n我也要開始選擇未來的科系了。\n在這個變遷殘酷的社會裡，\n究竟什麼才是最好的選擇？\n但不管選擇走哪條路，\n「第一志願」好像默默地在綁架我..."
         }
       ],
@@ -126,8 +126,8 @@
         "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song1_background_vertical_hscxx6.jpg"
       },
       "description": {
-        "en": "June jasmine scents the hills.\nA girl alone in her room.\nBlooms wait to be picked.\nNo one knows her heart.",
-        "zh-TW": "六月茉莉滿山香，\n單身娘仔守空房，\n好花開透人來採，\n娘仔十八誰人知。"
+        "en": "June jasmine scents the hills.\nA girl alone in her room.\nBlooms wait to be picked.\nNo one knows her heart.\nJune jasmine scents the hills,\n A girl sits lonely in her room.\n The blossoms have opened wide, Ready for the harvest—\n Yet, who will notice a girl in her prime?\n\nLyrics by Hsu Ping-ting\nMusic Collected by Hsu Shih",
+        "zh-TW": "六月茉莉滿山香，\n單身娘仔守空房，\n好花開透人來採，\n娘仔十八誰人知。\n\n詞／許丙丁\n採曲／許石"
       },
       "index": 1,
       "options": [
@@ -164,7 +164,7 @@
       ],
       "question": [
         {
-          "en": "After graduation,\nI have the knowledge and skills from years of study,\nthe diligence and passion of youth. Yet, facing a blank future,\neverything in my hands seems like nothing at all.\nI need to find something to hold onto, to find a place where I truly belong in this world...",
+          "en": "After graduation,\nI have the knowledge and skills from years of study,\nthe diligence and passion of youth. Yet, facing a blank future,\neverything  holding  in my hands seems like nothing at all.\nI search, almost urgently, for something to lean on—\nsomething steady enough to claim as my own,\nso that, in this vast and shifting world,\nI might eventually  find a place to stand.",
           "zh-TW": "大學畢業後，\n我擁有學習多年的知識和能力、\n年輕人的勤奮和熱血。\n但面對空白的未來，\n我手中握住的似乎什麼都不是，\n需要趕快找到可以依靠的事物，\n才能在這個世界找到立足點..."
         }
       ],
@@ -185,8 +185,8 @@
         "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song2_background_vertical_w9q2t1.jpg"
       },
       "description": {
-        "en": "Flower in a rainy night,\nFallen in the wind and rain.\nNo one sees the daily sorrow\nBlown down by the storm.",
-        "zh-TW": "雨夜花雨夜花，\n受風雨吹落地，\n無人看見暝日怨嗟，\n花謝落土不再回。"
+        "en": "Flower in a rainy night,\nFallen in the wind and rain.\nNo one sees the daily sorrow\nUnseen, they sigh through endless days and nights;\nBlown down by the storm.\nFallen to dust, they are lost forever.\n\nLyrics by Chou Tien-wang\nComposed by Teng Yu-hsien",
+        "zh-TW": "雨夜花雨夜花，\n受風雨吹落地，\n無人看見暝日怨嗟，\n花謝落土不再回。\n\n詞／周添旺\n曲／鄧雨賢"
       },
       "index": 2,
       "options": [
@@ -212,7 +212,7 @@
           },
           "id": "2-2",
           "regretText": {
-            "en": "Truth is cruel;silence is out of love.\nBefore an unchangeable fate,\nIs honesty a virtue, or just more pain? Let them live the last days in peace.",
+            "en": "Truth is a blade, while a white lie is a lingering embrace.\n Before a destiny that draws near and will not turn,\n Is facing reality an act of honesty,\n Or merely another form of torment?\n On this final journey,\n let him live in the light of a carefree joy.",
             "zh-TW": "真相是殘酷的，善意的謊言是不捨\n在步步逼近且無法改變的命運前\n面對現實究竟是誠實\n還是另一種折磨？\n最後的路程讓他無憂慮地快樂生活吧"
           },
           "title": {
