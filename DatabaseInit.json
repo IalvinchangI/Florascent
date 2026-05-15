@@ -66,9 +66,19 @@
         "horizontal": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song0_background_horizontal_ferujf.jpg",
         "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song0_background_vertical_xra4de.jpg"
       },
+      "author": {
+        "Lyrics": {
+          "en": "Lyrics by Liao Han-chen",
+          "zh-TW": "詞／廖漢臣"
+        },
+        "Composer": {
+          "en": "Composed by Teng Yu-hsien",
+          "zh-TW": "曲／鄧雨賢"
+        }
+      }, 
       "description": {
-        "en": "Spring descends, a hundred blooms ascend\nClumps here, blossoms there,\nblooming in full, true beauty.\n\nLyrics by Liao Han-chen\nComposed by Teng Yu-hsien",
-        "zh-TW": "春天到，百花開，\n紅薔薇，白茉莉。\n這屏幾欉，彼屏幾蕊，\n開得真齊，真正美。\n\n詞／廖漢臣\n曲／鄧雨賢"
+        "en": "Spring descends, a hundred blooms ascend\nClumps here, blossoms there,\nblooming in full, true beauty.",
+        "zh-TW": "春天到，百花開，\n紅薔薇，白茉莉。\n這屏幾欉，彼屏幾蕊，\n開得真齊，真正美。"
       },
       "index": 0,
       "options": [
@@ -125,9 +135,19 @@
         "horizontal": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song1_background_horizontal_j5hkcj.jpg",
         "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song1_background_vertical_hscxx6.jpg"
       },
+      "author": {
+        "Lyrics": {
+          "en": "Lyrics by Hsu Ping-ting",
+          "zh-TW": "詞／許丙丁"
+        },
+        "Composer": {
+          "en": "Music Collected by Hsu Shih",
+          "zh-TW": "採曲／許石"
+        }
+      }, 
       "description": {
-        "en": "June jasmine scents the hills.\nA girl alone in her room.\nBlooms wait to be picked.\nNo one knows her heart.\nJune jasmine scents the hills,\n A girl sits lonely in her room.\n The blossoms have opened wide, Ready for the harvest—\n Yet, who will notice a girl in her prime?\n\nLyrics by Hsu Ping-ting\nMusic Collected by Hsu Shih",
-        "zh-TW": "六月茉莉滿山香，\n單身娘仔守空房，\n好花開透人來採，\n娘仔十八誰人知。\n\n詞／許丙丁\n採曲／許石"
+        "en": "June jasmine scents the hills.\nA girl alone in her room.\nBlooms wait to be picked.\nNo one knows her heart.\nJune jasmine scents the hills,\n A girl sits lonely in her room.\n The blossoms have opened wide, Ready for the harvest—\n Yet, who will notice a girl in her prime?",
+        "zh-TW": "六月茉莉滿山香，\n單身娘仔守空房，\n好花開透人來採，\n娘仔十八誰人知。"
       },
       "index": 1,
       "options": [
@@ -184,9 +204,19 @@
         "horizontal": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song2_background_horizontal_kws4lo.jpg",
         "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song2_background_vertical_w9q2t1.jpg"
       },
+      "author": {
+        "Lyrics": {
+          "en": "Lyrics by Chou Tien-wang",
+          "zh-TW": "詞／周添旺"
+        },
+        "Composer": {
+          "en": "Composed by Teng Yu-hsien",
+          "zh-TW": "曲／鄧雨賢"
+        }
+      }, 
       "description": {
-        "en": "Flower in a rainy night,\nFallen in the wind and rain.\nNo one sees the daily sorrow\nUnseen, they sigh through endless days and nights;\nBlown down by the storm.\nFallen to dust, they are lost forever.\n\nLyrics by Chou Tien-wang\nComposed by Teng Yu-hsien",
-        "zh-TW": "雨夜花雨夜花，\n受風雨吹落地，\n無人看見暝日怨嗟，\n花謝落土不再回。\n\n詞／周添旺\n曲／鄧雨賢"
+        "en": "Flower in a rainy night,\nFallen in the wind and rain.\nNo one sees the daily sorrow\nUnseen, they sigh through endless days and nights;\nBlown down by the storm.\nFallen to dust, they are lost forever.",
+        "zh-TW": "雨夜花雨夜花，\n受風雨吹落地，\n無人看見暝日怨嗟，\n花謝落土不再回。"
       },
       "index": 2,
       "options": [
@@ -245,6 +275,16 @@
         "horizontal": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song3_background_horizontal_q1ht0y.jpg",
         "vertical": "https://res.cloudinary.com/dhbxvo9za/image/upload/f_auto/q_auto/song3_background_vertical_jncqz5.jpg"
       },
+      "author": {
+        "Lyrics": {
+          "en": null,
+          "zh-TW": null
+        },
+        "Composer": {
+          "en": null,
+          "zh-TW": null
+        }
+      }, 
       "description": {
         "en": "Finale",
         "zh-TW": "終曲"
