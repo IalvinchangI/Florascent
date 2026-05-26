@@ -126,7 +126,7 @@ img {
 .default-font {
   font-size: clamp(14px, 3vmin, 80px);
   line-height: 1.6;
-  font-family: 'Times New Roman', serif;
+  font-family: 'Times New Roman', 'Noto Sans TC', serif;
   letter-spacing: 2px;
   color: #000000;
   font-weight: normal;

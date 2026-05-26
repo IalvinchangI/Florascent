@@ -579,6 +579,7 @@ watch(() => props.songData?.index, (newId) => {
   opacity: 0; /* 預設為全透明 */
 
   width: var(--base-width);
+  transform: translate(-50%, -50%);
   
   /* 在同位置閃爍，閃爍時鐘建有幾幀長方形會變長 */
   /* 動畫名稱 | 時長 | 無限循環 | 線性 */
