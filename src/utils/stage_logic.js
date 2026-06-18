@@ -1,6 +1,6 @@
 import { db } from '@/firebase';
 import { ref as dbRef, get } from 'firebase/database';
-import { Stage, STAGELIST_CACHE_KEY, STAGELIST_CACHE_TIME_KEY, CACHE_TTL, RESULT_TOTAL_TIMING } from '@/constants';
+import { Stage, STAGELIST_CACHE_KEY, STAGELIST_CACHE_TIME_KEY, CACHE_TTL, RESULT_TOTAL_TIMING, INTRO_TOTAL_TIMING } from '@/constants';
 
 export async function GetStageList(output, useCache = true) {
   // check cache
@@ -52,7 +52,7 @@ export async function GetStageList(output, useCache = true) {
 }
 
 export function IsAutoAdvanceStage(stage) {
-  return stage === Stage.Vote || stage === Stage.Result;
+  return stage === Stage.Intro || stage === Stage.Vote || stage === Stage.Result;
 }
 
 /**
@@ -124,6 +124,10 @@ export function GetEndTimeFromData(currentSongData, currentStage) {
   let temp = 0; // in ms
 
   switch (currentStage) {
+    case Stage.Intro:
+      temp = INTRO_TOTAL_TIMING;
+      break;
+      
     case Stage.Vote:
       temp = currentSongData["voteTime"] * 1000;
       break;

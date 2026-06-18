@@ -20,7 +20,7 @@
         ref="scrollBox" @scroll="handleScroll" :style="maskStyles"
       >
         
-        <div class="text-section info-text default-font relative-text-width-wrapper">
+        <div class="text-section info-text default-font relative-text-width-wrapper" :class="lang">
           <div class="title relative-title">{{ (lang === LANG.EN) ? "Event Information" : "活動說明" }}</div>
           <div v-if="role === ROLE.PROJECTOR">
             <p v-for="(line, index) in Introduction.get(LANG.TW)" :key="index" class="default-font relative-text">{{ line }}&nbsp;</p>
@@ -30,7 +30,7 @@
           </div>
         </div>
 
-        <div class="text-section rules-text default-font relative-text-width-wrapper">
+        <div class="text-section rules-text default-font relative-text-width-wrapper" :class="lang">
           <div class="title relative-title">{{ (lang === LANG.EN) ? "Voting Rules" : "投票規則" }}</div>
           <div v-if="role === ROLE.PROJECTOR">
             <p v-for="(line, index) in VoteRules.get(LANG.TW)" :key="index" class="default-font relative-text">{{ line }}&nbsp;</p>
@@ -117,8 +117,11 @@ onMounted(async () => {
   margin-bottom: 0;
 }
 .text-section {
-  /*text-align: justify;*/
+  text-align: left;
   line-height: 2;
+}
+.text-section.zh-TW {
+  text-align: justify;
 }
 .text-section p {
   margin: 0;
