@@ -241,7 +241,7 @@ onMounted(async () => {
 }
 .projector .text-section p {
   font-size: clamp(18px, 6cqh, 120px);
-  margin: 0 2rem;
+  margin: 6cqh 6cqw 0 6cqw;
 }
 
 .projector:not(.has-image) .text-section {
