@@ -60,7 +60,7 @@ export const RESULT_TRANSITION_TIMING = {
   FADE_TO_BLACK: 2000     
 };
 export const RESULT_TOTAL_TIMING = Object.values(RESULT_TRANSITION_TIMING).reduce((sum, value) => sum + value, 0);
-export const INTRO_TOTAL_TIMING = 10 * 1000;
+export const INTRO_TOTAL_TIMING = 20 * 1000;
 
 export const ORIGINAL_CONTORL_SIGNAL = {
   "currentSongIndex": 0,
