@@ -5,7 +5,6 @@ import { Stage, STAGELIST_CACHE_KEY, STAGELIST_CACHE_TIME_KEY, CACHE_TTL, RESULT
 export async function GetStageList(output, useCache = true) {
   // check cache
   if (useCache === false) {
-    console.log("[stageList] Do not use cache");
     sessionStorage.removeItem(STAGELIST_CACHE_KEY);
     sessionStorage.removeItem(STAGELIST_CACHE_TIME_KEY);
   } else {
@@ -15,11 +14,8 @@ export async function GetStageList(output, useCache = true) {
     if (cachedData && cacheTimestamp) {
       const isExpired = (Date.now() - parseInt(cacheTimestamp, 10)) > CACHE_TTL;
       if (!isExpired) {
-        console.log("[stageList] Use cache");
         output.value = JSON.parse(cachedData);
         return;
-      } else {
-        console.log("[stageList] Cache Expired");
       }
     }
   }
@@ -35,7 +31,6 @@ export async function GetStageList(output, useCache = true) {
       // 成功抓到新資料後，重新寫入 sessionStorage
       sessionStorage.setItem(STAGELIST_CACHE_KEY, JSON.stringify(output.value));
       sessionStorage.setItem(STAGELIST_CACHE_TIME_KEY, Date.now().toString());
-      console.log("[stageList] load data from database");
     } else {
       console.warn("[stageList] 資料庫中找不到 stageList 節點");
       output.value = [];

@@ -208,7 +208,6 @@ export async function SetControlSignal({
       endTime, 
       voteResult
     });
-    console.log("Firebase controlSignal 更新成功！");
   } catch (error) {
     console.error("Firebase 更新失敗：", error);
   }

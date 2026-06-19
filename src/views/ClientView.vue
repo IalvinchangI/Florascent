@@ -96,10 +96,8 @@ const start = (lang) => {
 
   // get songData & controlSignal
   GetSongData(songData, !(QUERY_NOCACHE in route.query)).then(() => {
-    console.log(songData);
     disableControlSignalDetail.value = ConfigOnControlSignalChange(controlSignal, () => { isLoading.value = false })
   }).then(() => {
-    console.log(controlSignal);
     ConfigCurrentSongIndex(controlSignal, currentSongIndex);
     ConfigCurrentStage(controlSignal, currentStage);
     ConfigCurrentRoute(controlSignal, currentRoute);
@@ -110,14 +108,12 @@ const start = (lang) => {
     });
     ConfigVoteResult(controlSignal, voteResult);
   }).then(() => {
-    console.log(currentSongIndex, currentStage, currentRoute, displayTime, voteResult);
     preloadAssets();
   });
 }
 
 const uploadVote = (option) => {
   UploadVoteData(option);
-  console.log("Vote ID:", option.id);
 };
 
 

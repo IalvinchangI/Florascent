@@ -20,7 +20,6 @@ export async function UploadVoteData(option) {
 
   try {
     await push(voteRef, payload);
-    console.log(`[Vote] 成功投給選項: ${payload.optionID}`);
   } catch (error) {
     console.error("[Vote] 投票上傳失敗:", error);
     return 1;

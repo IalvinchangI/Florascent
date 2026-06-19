@@ -32,7 +32,6 @@ export async function ResetNode(path, defaultValue = null) {
   
   try {
     await set(nodeRef, defaultValue);
-    console.log(`[ResetNode] 節點 '${path}' 已成功重置！`);
   } catch (error) {
     console.error(`[ResetNode] 重置節點 '${path}' 失敗:`, error);
   }
