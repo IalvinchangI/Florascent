@@ -43,4 +43,7 @@ __screenshots__/
 # Else
 __temp/
 .firebase/*.cache
-assets/
+assets/images/*
+assets/videos/*
+!assets/images/background_vertical.png
+!assets/images/background_horizontal.png
