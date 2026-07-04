@@ -1,7 +1,9 @@
 ﻿# 走走停停 —— 從臺灣經典歌謠裡走來的「她」
 
 *一場結合音樂、香水、選擇的現場互動展演*
+
 *An interactive live performance of music, fragrance, and choice.*
+
 *To stay, or to go —— that is the question.*
 
 
